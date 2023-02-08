@@ -9,12 +9,17 @@ html
     nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
       .container-fluid
         a.navbar-brand(href="#") Navbar
-        button.navbar-toggler(data-bs-toggle="collapse", data-bs-target="#navbarNavAltMarkup", aria-controls="navbarNavAltMarkup", aria-expanded="false", aria-label="Toggle navigation")
+        button.navbar-toggler(type="button"
+          data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup" aria-expanded="false"
+          aria-label="Toggle navigation")
           span.navbar-toggler-icon
-    .collapse.navbar-collapse(id="navbarNavAltMarkup")
-      .navbar-nav
-        a.nav-link.active(aria-current="page" href="#") Home
-        a.nav-link(href="#") Features
-        a.nav-link(href="#") Pricing
+        .collapse.navbar-collapse(id="navbarNavAltMarkup")
+          .navbar-nav
+            a.nav-link.active(aria-current="page" href="#") Home
+            a.nav-link(href="#") Features
+            a.nav-link(href="#") Pricing
 
-    block content
+    .container
+      block content
+
