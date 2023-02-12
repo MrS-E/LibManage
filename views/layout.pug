@@ -19,6 +19,10 @@ html
             a.nav-link.active(aria-current="page" href="#") Home
             a.nav-link(href="#") Features
             a.nav-link(href="#") Pricing
+        form.form-inline.my-2.my-lg-0(method="post" action="/logout")
+          span.nav-text.text-white Angemeldet als #{user}
+          button.btn.btn-outline-success.my-2.my-sm-0(type="submit" value="Abmelden" style="margin-right: 1vw; margin-left: 10px;") Abmelden
+
 
     .container
       block content

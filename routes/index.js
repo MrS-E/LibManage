@@ -15,7 +15,8 @@ router.get('/', function(req, res, next){
 });
 router.get('/home', home.index)
 router.get('/login', login.login)
-router.post('/login', login.login_verify)
+router.post('/login', login.verify)
+router.post('/logout', login.end)
 router.get('/register', register.register)
 router.post('/register', register.registering)
 module.exports = router;

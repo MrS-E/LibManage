@@ -1,3 +1,25 @@
 extends auth_layout
 
 block content
+    form.form-signin.mt-5(method="post" action="/register")
+        h1.h3.mb-3.font-weight-normal Login
+        .row
+            .col-6
+                label.sr-only(for="firstname") Vorname
+                input.form-control(placeholder="Vorname" required type="text" id="firstname" name="firstname")
+            .col-6
+                label.sr-only(for="lastname") Nachname
+                input.form-control(placeholder="Nachname" required type="text" id="lastname" name="lastname")
+        label.sr-only(for="email") Email
+        input.form-control(placeholder="Email address" autofocus type="email" id="email" name="email")
+        label.sr-only(for="password") Passwort
+        input.form-control(placeholder="Password" required type="password" id="password" name="password")
+        label.sr-only(for="password2") Passwort wiederholen
+        input.form-control(placeholder="Password wiederholen" required type="password" id="password2" name="password2")
+        p.mt-5.mb-3 #{error}
+
+        //.checkbox.mb-3
+            label
+                input( type="checkbox" value="remember-me")
+        input.btn.btn-lg.btn-primary.btn-block(type="submit" value="Login")
+
