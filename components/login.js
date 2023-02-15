@@ -1,25 +1,38 @@
+const user = require('../src/models/user');
+const sha512 = require('crypto-js/sha512');
+
 exports.login = function (req, res, next) {
     res.render('auth/login');
 }
 
 exports.verify = function (req, res, next){
-    console.log("here");
     let email = req.body.email;
-    let password = req.body.password;
-    //todo check if user is in db
-    if(email && password){
-        req.session.loggedin = true;
-        req.session.username = email;
-        res.redirect('/home');
-    }else{
-        res.send({error:'Please enter Username and Password!'});
-        res.end();
-    }
+    let password = sha512(req.body.password).toString();
+
+    user
+        .find({
+            email: email   // search query
+        })
+        .then(doc => {
+            console.log(doc)
+            if(doc[0].password===password){
+                req.session.loggedin = true;
+                req.session.username = email;
+                res.redirect('/home');
+            }else{
+                res.render('auth/login', {error: "Anmeldedaten waren inkorrekt. Bitte versuchen Sie es noch einmal."})
+            }
+        })
+        .catch(err => {
+            console.error(err)
+            res.render('auth/login', {error: "Etwas ist schiefgelaufen"})
+        })
 }
 
 exports.end = function (req, res, next){
     if (req.session) {
         req.session.destroy();
         res.redirect('/');
+        res.end();
     }
 }
