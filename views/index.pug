@@ -1,5 +1,11 @@
 extends layout
+include ./components/book
 
 block content
-    h1= title
-    p Welcome to #{title}
+    h1 Home
+    p Willkommen zurück #{name}
+    h2.mt-5 Bücher der Woche
+    .row.mt-2
+        each book in books
+            .col-3
+                +book(book)

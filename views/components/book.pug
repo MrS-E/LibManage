@@ -1,0 +1,11 @@
+mixin book(book)
+    .row(onclick="")
+        .col-6
+            img(src=book.img, alt=book.img_desc)
+        .col-6
+            p
+                strong #{book.title}
+                br
+                strong #{book.author}
+            span
+                #{book.small_desc}
