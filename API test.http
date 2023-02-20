@@ -1,0 +1,19 @@
+###Login
+POST localhost:3000/login
+Content-Type: application/json
+
+{
+  "email": "asdf@asf.ch",
+  "password": "1234"
+}
+
+###Register
+POST localhost:3000/user/add
+Content-Type: application/json
+
+{
+  "firstname": "asdf",
+  "lastname": "qwertz",
+  "email": "asdf@asf.ch",
+  "password": "1234"
+}
