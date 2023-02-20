@@ -1,11 +1,13 @@
 mixin book(book)
     .row(onclick="")
         .col-6
-            img(src=book.img, alt=book.img_desc)
+            if book.img
+                img.img-rounded.img-thumbnail(src=book.img, alt=book.img_desc)
+            else
+                img.img-rounded.img-thumbnail(src="/image/no_img.png", alt="kein bild verfügbar")
         .col-6
             p
                 strong #{book.title}
                 br
-                strong #{book.author}
-            span
-                #{book.small_desc}
+                span #{book.author}
+            span #{book.small_desc}
