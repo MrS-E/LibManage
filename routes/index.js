@@ -3,6 +3,7 @@ var router = express.Router();
 const login = require('../components/login');
 const home = require('../components/home');
 const register = require('../components/register');
+const liste = require('../components/liste');
 
 /* GET home page. */
 router.get('/', function(req, res, next){
@@ -13,8 +14,9 @@ router.get('/', function(req, res, next){
 
     }
 });
-router.get('/home', home.index)
-router.get('/login', login.login)
+router.get('/home', home.view)
+router.get('/login', login.view)
 router.post('/logout', login.end)
-router.get('/register', register.register)
+router.get('/register', register.view)
+router.get('/liste', liste.view)
 module.exports = router;

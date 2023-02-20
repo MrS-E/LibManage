@@ -1,4 +1,4 @@
-exports.index = function (req, res, next){
+exports.view = function (req, res, next){
  if(req.session.loggedin) {
   const books = [{ //todo add db question
    title: "",

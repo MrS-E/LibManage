@@ -2,7 +2,7 @@ const user = require('../src/models/user');
 const sha512 = require('crypto-js/sha512');
 
 
-exports.register = function(req, res, next){
+exports.view = function(req, res, next){
     res.render('auth/register');
 }
 exports.add = function (req, res, next){

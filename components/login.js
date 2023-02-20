@@ -1,7 +1,7 @@
 const user = require('../src/models/user');
 const sha512 = require('crypto-js/sha512');
 
-exports.login = function (req, res, next) {
+exports.view = function (req, res, next) {
     res.render('auth/login');
 }
 
