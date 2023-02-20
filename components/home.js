@@ -9,7 +9,7 @@ exports.view = function (req, res, next){
        object.find().limit(4).skip(skip<0?0:skip)
            .then((doc)=>{
             console.log(doc);
-            res.render('index', {title: 'Express', user: req.session.username, name:'', books: doc})
+            res.render('index', {user: req.session.username, name:req.session.name, books: doc})
            })
   })
  }else{

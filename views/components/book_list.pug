@@ -1,0 +1,6 @@
+mixin book_list(books)
+    include ./book
+    .row.mt-2
+        each book in books
+            .col-3
+                +book(book)

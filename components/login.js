@@ -18,6 +18,7 @@ exports.verify = function (req, res, next){
             if(doc[0].password===password){
                 req.session.loggedin = true;
                 req.session.username = email;
+                req.session.name = doc[0].firstName + " " + doc[0].lastName;
                 res.redirect('/home');
             }else{
                 res.render('auth/login', {error: "Anmeldedaten waren inkorrekt. Bitte versuchen Sie es noch einmal."})

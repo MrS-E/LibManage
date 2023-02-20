@@ -1,9 +1,16 @@
 extends layout
+include ./components/book_list
 
 block content
-    .row.mt-5
+    h1 Liste
+    .row
         .col-10
             input.form-control(placeholder="search" type="text" id="search")
         .col-2
             button.btn.btn-primary(id="search_btn") Search
+    .row.mt-2
+        each books in book_list
+            +book_list(books)
+
+
     script(src='/javascripts/liste.js')
