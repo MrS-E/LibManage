@@ -17,3 +17,6 @@ Content-Type: application/json
   "email": "asdf@asf.ch",
   "password": "1234"
 }
+
+###public folder
+GET localhost:3000/javascripts/liste.js

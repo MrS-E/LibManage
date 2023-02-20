@@ -1,7 +1,7 @@
 //This code was copied from https://www.freecodecamp.org/news/introduction-to-mongoose-for-mongodb-d2a7aa593c57/
 const mongoose = require('mongoose');
 
-const server = 'localhost:27017'; // REPLACE WITH YOUR DB SERVER
+const server = '127.0.0.1:27017'; // REPLACE WITH YOUR DB SERVER
 const database = 'bibliothek';      // REPLACE WITH YOUR DB NAME
 
 class Database {
