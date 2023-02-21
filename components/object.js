@@ -16,6 +16,9 @@ exports.find = function (req, res, next){
 }
 
 exports.detail = function (req, res, next){
-    const term = req.query.id;
-    objects.find({})
+    const term = req.params.id;
+    objects.find({id: term})
+        .then((doc)=>{
+            res.render('object', {book: doc})
+        })
 }

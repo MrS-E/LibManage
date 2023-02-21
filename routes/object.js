@@ -8,5 +8,6 @@ router.get('/', function(req, res, next) {
 });
 router.get('/all', object.all);
 router.get('/search', object.find);
+router.get('/detail/:id', object.detail);
 
 module.exports = router;
