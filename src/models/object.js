@@ -10,6 +10,7 @@ const object = new mongoose.Schema(
         keywords: { type: [String]},
         year: {type: Date},
         blurb: {type: String},
+        small_desc: {type: String},
         img:{ type: String},
         img_desc:{type: String}
     },

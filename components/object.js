@@ -19,6 +19,6 @@ exports.detail = function (req, res, next){
     const term = req.params.id;
     objects.find({id: term})
         .then((doc)=>{
-            res.render('object', {book: doc})
+            res.send(doc)
         })
 }

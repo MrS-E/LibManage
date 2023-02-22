@@ -7,9 +7,10 @@ var logger = require('morgan');
 const database = require('./src/datebase');
 
 var indexRouter = require('./routes/index');
-let usersRouter = require('./routes/user');
-let lendRouter = require('./routes/lend');
-let objectRouter = require('./routes/object');
+const usersRouter = require('./routes/user');
+const lendRouter = require('./routes/lend');
+
+const objetApiRouter = require('./routes/api/object');
 
 var app = express();
 
@@ -33,8 +34,9 @@ console.log(express.static(path.join(__dirname, 'public')))
 app.use('/', indexRouter);
 app.use('/user', usersRouter);
 app.use('/lend', lendRouter);
-app.use('/object', objectRouter);
-//app.use('/admin', )
+
+app.use('/api/object', objetApiRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
