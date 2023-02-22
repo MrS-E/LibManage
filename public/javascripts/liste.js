@@ -38,21 +38,21 @@ function list_books(books){
     return out
 }
 
-function book(book){ //TODO remove redundancy
+function book(book){
     if(!book.img) book.img = "/image/no_img.png"
     if(!book.img_desc) book.img_desc = "kein bild verfügbar"
     if(!book.small_desc) book.small_desc = ""
     if(!book.author) book.author = ""
     if(!book.title) book.title= ""
-        return (
-            "<div class='row' onclick='window.location.replace(\"/object/" + book.id + "\")'>" +
-            "<div class='col-6'>" +
-            "<img class='img-thumbnail img-rounded' src=\'"+book.img+"\' alt=\'"+book.img_desc+"\'/>" +
-            "</div>" +
-            "<div class='col-6'>" +
-            "<p><strong>"+book.title+"</strong><br/><span>"+book.author+"</span></p>" +
-            "<span>"+book.small_desc+"</span>" +
-            "</div>" +
-            "</div>"
-        )
+    return (
+        "<div class='row' onclick='window.location.replace(\"/object/" + book.id + "\")'>" +
+        "<div class='col-6'>" +
+        "<img class='img-thumbnail img-rounded' src=\'"+book.img+"\' alt=\'"+book.img_desc+"\'/>" +
+        "</div>" +
+        "<div class='col-6'>" +
+        "<p><strong>"+book.title+"</strong><br/><span>"+book.author+"</span></p>" +
+        "<span>"+book.small_desc+"</span>" +
+        "</div>" +
+        "</div>"
+    )
 }
