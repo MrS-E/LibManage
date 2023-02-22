@@ -11,7 +11,6 @@ router.get('/', function(req, res, next){
         res.redirect('/login');
     }else{
         res.redirect('/home');
-
     }
 });
 router.get('/home', home.view)
@@ -19,4 +18,5 @@ router.get('/login', login.view)
 router.post('/logout', login.end)
 router.get('/register', register.view)
 router.get('/liste', liste.view)
+router.get('/liste/:id', liste.object)
 module.exports = router;

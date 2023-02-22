@@ -1,3 +1,20 @@
 extends layout
 
 block content
+    .row
+        .col-4
+            img.img-rounded(src=book.img, alt=book.img_desc)
+        .col-8
+            h1 #{book.title}
+            h3 #{book.author}
+            p
+                strong ISBN:
+                #{book.isbn}
+            p
+                strong Verlag:
+                #{book.publisher}
+            .row
+                .col-2.rounded.border.border-light
+                    each keyword in book.keywords
+                        p #{keyword}
+            p #{book.blurb}

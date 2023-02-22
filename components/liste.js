@@ -12,3 +12,14 @@ exports.view = function (req, res, next) {
         res.redirect('/login')
     }
 }
+
+exports.object = function (req, res, next){
+    if (req.session.loggedin) {
+        objects.findOne({id: req.params.id})
+            .then((doc)=>{
+                res.render('object', {book: doc})
+            })
+    }else{
+        res.redirect('/login')
+    }
+}
