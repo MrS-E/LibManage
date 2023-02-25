@@ -12,6 +12,9 @@ block content
             button.btn.btn-secondary.rounded.m-1.p-1(id="back") Zurück
             h1 #{book.title}
             h3 #{book.author}
+            p
+                strong Typ:
+                span #{book.typ}
             if book.isbn
                 p
                     strong ISBN:

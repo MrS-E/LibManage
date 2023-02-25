@@ -8,12 +8,13 @@ const object = new mongoose.Schema(
         publisher:{type: String},
         isbn: { type: String},
         keywords: { type: [String]},
+        typ: {type: String, required: true, enum:['E-Book', 'Buch', 'Zeitschrift', 'CD', 'DVD', 'E-Audio', 'E-Video'], default: 'Buch'},
         year: {type: Date},
         blurb: {type: String},
         small_desc: {type: String},
         img:{ type: String},
         img_desc:{type: String},
-        rent: {type: Array}
+        history: {type: [{user: {type: String, required: true}, start:{type: Date, required: true}, end:{type: Date}}]}
     },
     { collection: 'object' }
 )

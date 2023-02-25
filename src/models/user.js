@@ -7,7 +7,8 @@ const user = new mongoose.Schema(
         lastName: { type: String},
         email: { type: String, required: true },
         password: { type: String, required: true },
-        history: {type: Array}
+        history: {type: [{book: {type: String, required: true}, start: {type: Date, required: true}, end: {type: Date}}]}
+
         },
     { collection: 'users' }
 )
