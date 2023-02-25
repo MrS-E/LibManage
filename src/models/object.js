@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const object = new mongoose.Schema(
     {
-        id:{type: String, required: true},
+        _id:{type: String, required: true},
         title: { type: String, required: true},
         author: { type: String},
         publisher:{type: String},
@@ -12,7 +12,8 @@ const object = new mongoose.Schema(
         blurb: {type: String},
         small_desc: {type: String},
         img:{ type: String},
-        img_desc:{type: String}
+        img_desc:{type: String},
+        rent: {type: Array}
     },
     { collection: 'object' }
 )

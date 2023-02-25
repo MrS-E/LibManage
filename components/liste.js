@@ -15,7 +15,7 @@ exports.view = function (req, res, next) {
 
 exports.object = function (req, res, next){
     if (req.session.loggedin) {
-        objects.findOne({id: req.params.id})
+        objects.findOne({_id: req.params.id})
             .then((doc)=>{
                 res.render('sites/object', {user: req.session.username, active: 'liste', book: doc})
             })

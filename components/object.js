@@ -17,7 +17,7 @@ exports.find = function (req, res, next){
 
 exports.detail = function (req, res, next){
     const term = req.params.id;
-    objects.find({id: term})
+    objects.find({_id: term})
         .then((doc)=>{
             res.send(doc)
         })

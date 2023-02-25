@@ -1,5 +1,5 @@
 mixin book(book)
-    .row(onclick="window.location.replace('/liste/"+ book.id+"')" id=book.id)
+    .row(onclick="window.location.replace('/liste/"+ book._id+"')" id=book._id)
         .col-6
             if book.img
                 img.img-rounded.img-thumbnail(src=book.img, alt=book.img_desc)
