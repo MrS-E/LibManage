@@ -6,3 +6,9 @@ exports.view = function(req, res, next){
         res.redirect('/login')
     }
 }
+exports.lend = function (req, res, next){
+
+}
+exports.return = function (req, res, next){
+
+}

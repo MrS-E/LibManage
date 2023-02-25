@@ -1,3 +1,28 @@
 extends ../layout
 
 block content
+    .row.mt-4
+        h1 Ausleihen
+        h4 Nutzer
+        p
+            strong Name:
+            span #{name}
+        p
+            strong Email:
+            span #{user}
+        h4 Buch
+        table
+            thead
+                th
+                    td Titel
+                    td Autor
+                    td Verlag
+                    td ISBN
+            tbody
+                tr
+                    td #{book.title}
+                    td #{book.author}
+                    td #{book.publisher}
+                    td #{book.isbn}
+        form(method='put' action='/lend/'+book.id)
+            button.btn.btn-primary(type='submit') Ausleihen
