@@ -18,7 +18,7 @@ exports.verify = function (req, res, next){
             if(doc[0].password===password){
                 req.session.loggedin = true;
                 req.session.username = email;
-                req.session.id = doc[0]._id;
+                req.session.userid = doc[0]._id;
                 req.session.name = doc[0].firstName + " " + doc[0].lastName;
                 res.redirect('/home');
             }else{
