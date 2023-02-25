@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const object = require('../../components/object')
+const object = require('../components/object')
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {

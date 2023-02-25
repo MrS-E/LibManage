@@ -10,7 +10,7 @@ var indexRouter = require('./routes/index');
 const usersRouter = require('./routes/user');
 const lendRouter = require('./routes/lend');
 
-const objetApiRouter = require('./routes/api/object');
+const objetApiRouter = require('./routes/object');
 
 var app = express();
 
@@ -34,8 +34,7 @@ console.log(express.static(path.join(__dirname, 'public')))
 app.use('/', indexRouter);
 app.use('/user', usersRouter);
 app.use('/lend', lendRouter);
-
-app.use('/api/object', objetApiRouter);
+app.use('/object', objetApiRouter);
 
 
 // catch 404 and forward to error handler
