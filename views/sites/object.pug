@@ -9,7 +9,7 @@ block content
             else
                 img.img-rounded.img-fluid(src='/image/no_img.png' alt='kein Bild')
         .col-8
-            button.btn-secondary.rounded.m-1.p-1(id="back") Zurück
+            button.btn.btn-secondary.rounded.m-1.p-1(id="back") Zurück
             h1 #{book.title}
             h3 #{book.author}
             if book.isbn
@@ -24,5 +24,7 @@ block content
                 p
                     each keyword in book.keywords
                         spant.text-center.m-1.p-1.rounded.border.border-secondary.bg-secondary-subtle #{keyword}
+            form(action='/lend/'+book.id method='get')
+                button.btn.btn-primary(type='submit') Ausleihen
             p #{book.blurb}
         script(src='/javascripts/objects.js')
