@@ -18,7 +18,8 @@ html
           span.navbar-toggler-icon
         .collapse.navbar-collapse(id="navbarNavAltMarkup")
           .navbar-nav
-            if active==='home' //- TODO make active attribute replacement nicer
+            if active==='home'
+              //- TODO make active attribute replacement nicer
               a.nav-link.active(aria-current="page" href="/") Home
               a.nav-link(href="/liste") Liste
               a.nav-link(href="/ausgeliehen") Ausgeliehen
