@@ -2,12 +2,14 @@ extends ../layout
 
 block content
     .row.mt-4
+
         .col-4
             if book.img
                 img.img-rounded.img-fluid(src=book.img, alt=book.img_desc)
             else
                 img.img-rounded.img-fluid(src='/image/no_img.png' alt='kein Bild')
         .col-8
+            button.btn-secondary.rounded.m-1.p-1(id="back") Zurück
             h1 #{book.title}
             h3 #{book.author}
             if book.isbn
@@ -23,3 +25,4 @@ block content
                     each keyword in book.keywords
                         spant.text-center.m-1.p-1.rounded.border.border-secondary.bg-secondary-subtle #{keyword}
             p #{book.blurb}
+        script(src='/javascripts/objects.js')
