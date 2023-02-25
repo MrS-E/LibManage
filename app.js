@@ -4,12 +4,12 @@ let session = require('express-session');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const database = require('./src/datebase');
+const schedule = require("node-schedule");
+require('./src/datebase');
 
 var indexRouter = require('./routes/index');
 const usersRouter = require('./routes/user');
 const lendRouter = require('./routes/lend');
-
 const objetApiRouter = require('./routes/object');
 
 var app = express();
@@ -51,6 +51,11 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+schedule.scheduleJob('0 0 0 * * *', () => { //runs every 24h at 0:0
+  console.log("SCHEDULE JOB STARTED");
+  console.log("SCHEDULE JOB FINISHED")
 });
 
 module.exports = app;
