@@ -3,6 +3,10 @@ extends auth_layout
 block content
     form.form-signin.mt-5(method="post" action="/user/add")
         h1.h3.mb-3.font-weight-normal Login
+        select(name="anrede")
+            option(value="Herr") Herr
+            option(value="Frau") Frau
+            option(value="") Andere/Keine Angabe
         .row
             .col-6
                 label.sr-only(for="firstname") Vorname

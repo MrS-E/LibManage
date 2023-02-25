@@ -14,6 +14,7 @@ exports.add = function (req, res, next){
                     if (doc === 0) {
                         let nutzer = new user({
                             _id: (count + 1).toString(),
+                            salutation: req.body.anrede,
                             firstName: req.body.firstname,
                             lastName: req.body.lastname,
                             email: req.body.email,

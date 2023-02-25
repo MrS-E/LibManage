@@ -10,16 +10,16 @@ exports.verify = function (req, res, next){
     let password = sha512(req.body.password).toString();
 
     user
-        .find({
+        .findOne({
             email: email   // search query
         })
         .then(doc => {
             console.log(doc)
-            if(doc[0].password===password){
+            if(doc.password===password){
                 req.session.loggedin = true;
                 req.session.username = email;
-                req.session.userid = doc[0]._id;
-                req.session.name = doc[0].firstName + " " + doc[0].lastName;
+                req.session.userid = doc._id;
+                req.session.name = doc.salutation?doc.salutation:"" +" "+doc.firstName?doc.firstName:"" + " " + doc.lastName?doc.lastName:"";
                 res.redirect('/home');
             }else{
                 res.render('auth/login', {error: "Anmeldedaten waren inkorrekt. Bitte versuchen Sie es noch einmal."})
