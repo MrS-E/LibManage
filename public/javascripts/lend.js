@@ -1,6 +1,6 @@
 for(let d of document.getElementsByClassName('read')){
     d.addEventListener('click', (e)=>{
-
+        //todo reading
     })
 }
 
