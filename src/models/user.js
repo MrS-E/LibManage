@@ -8,8 +8,8 @@ const user = new mongoose.Schema(
         lastName: { type: String, required: true},
         email: { type: String, required: true },
         password: { type: String, required: true },
-        history: {type: [{book: {type: String, required: true}, start: {type: Date, required: true}, end: {type: Date}}]}
-
+        history: {type: [{book: {type: String, required: true}, start: {type: Date, required: true}, end: {type: Date}}]},
+        role: {type: String, enum:['admin','user','worker'], default: 'user', required: true}
         },
     { collection: 'users' }
 )
