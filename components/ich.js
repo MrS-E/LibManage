@@ -1,12 +1,18 @@
 const object = require('../src/models/object')
 const returner = require('../src/models/returns')
+const user = require('../src/models/user')
 
 exports.view = function (req, res, next){
     if(req.session.loggedin) {
-        object.find()
-            .then((doc) => {
-            res.render('sites/ich', {user: req.session.username, role: req.session.role, render: 'lend', books: doc})
-        })
+        user.findOne({_id: req.session.userid})
+            .then(async (doc) => {
+                const books = []
+                for (let d of doc.history) {
+                    books.push(await object.findOne({_id: d.book}))
+                }
+                res.render('sites/ich', {user: req.session.username, role: req.session.role, render: 'lend', books: books
+                })
+            })
     }else{
         res.redirect('/login')
     }
@@ -30,17 +36,31 @@ exports.history = function (req, res, next){
 
 exports.return = function (req, res, next){
     if(req.session.userid) {
-        let _return = new returner({
-            user_id: req.session.userid,
-            book_id: req.body.id
-        })
-        _return.save()
-            .then(doc => {
-                res.redirect('/ich')
-            })
-            .catch(err => {
-                console.log(err)
-                res.redirect('/ich')
+        //console.log('return')
+        object.findOne({_id: req.body.id })
+            .then((doc)=>{
+                if(doc.typ !== ('E-Book' || 'E-Audio' || 'E-Video' || 'E-Paper')){
+                    let _return = new returner({
+                        user_id: req.session.userid,
+                        book_id: req.body.id
+                    })
+                    _return.save()
+                        .then(() => {
+                            res.send('return ticket submitted')
+                        })
+                        .catch(err => {
+                            console.log(err)
+                            res.send('return ticket submit did not go well')
+                        })
+                }else{
+                    //console.log("e-medium")
+                    user.updateOne({_id: req.session.userid, "history.book": req.body.id}, {$set:{"history.$.end": new Date()}})
+                        .then(()=>res.send('e-medium returned'))
+                        .catch(err=> {
+                            console.log(err)
+                            res.send('return did not go well')
+                        })
+                }
             })
     }
 }

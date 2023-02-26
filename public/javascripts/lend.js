@@ -17,5 +17,11 @@ for(let d of document.getElementsByClassName('return')){
                 id: e.target.id
             })
         })
+            .then(
+           res=>{
+               console.log(res)
+               window.location.reload()
+           }
+        )
     })
 }
