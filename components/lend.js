@@ -5,7 +5,7 @@ exports.view = function(req, res, next){
     if(req.session.loggedin) {
         object.findOne({_id: req.params.id})
             .then((doc)=>{
-                if(doc.typ===('E-Book' || 'E-Audio' || 'E-Video')){
+                if(doc.typ===('E-Book' || 'E-Audio' || 'E-Video' || 'E-Paper')){
                     res.render('sites/lend', {user: req.session.username, name: req.session.name, book: doc, can_be_rented: true})
                 }else{
                     if(typeof(doc.history[doc.history.length-1].end) === Date || doc.history.length === 0){
