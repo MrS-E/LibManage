@@ -7,12 +7,6 @@ var logger = require('morgan');
 const schedule = require("node-schedule");
 require('./src/datebase');
 
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/user');
-const lendRouter = require('./routes/lend');
-const objetApiRouter = require('./routes/object');
-const adminRouter = require('./routes/admin');
-
 var app = express();
 
 // view engine setup
@@ -32,12 +26,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 console.log(express.static(path.join(__dirname, 'public')))
 
-app.use('/', indexRouter);
-app.use('/admin', adminRouter);
-app.use('/user', usersRouter);
-app.use('/lend', lendRouter);
-app.use('/object', objetApiRouter);
-
+app.use('/', require('./routes/index'));
+app.use('/admin', require('./routes/admin'));
+app.use('/user', require('./routes/user'));
+app.use('/lend', require('./routes/lend'));
+app.use('/object', require('./routes/object'));
+app.use('/liste', require('./routes/liste'));
+app.use('/ich', require('./routes/ich'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
