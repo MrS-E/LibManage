@@ -45,7 +45,7 @@ function book(book){
     if(!book.author) book.author = ""
     if(!book.title) book.title= ""
     return (
-        "<div class='row' onclick='window.location.replace(\"/liste/" + book.id + "\")'>" +
+        "<div class='row' onclick='window.location.replace(\"/liste/" + book._id + "\")'>" +
         "<div class='col-6'>" +
         "<img class='img-thumbnail img-rounded' src=\'"+book.img+"\' alt=\'"+book.img_desc+"\'/>" +
         "</div>" +

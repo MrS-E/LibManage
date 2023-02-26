@@ -1,0 +1,32 @@
+mixin ausgeliehen(books)
+    table
+        thead
+            th
+                td Bild
+                td Titel
+                td Autor
+                td Verlag
+                td ISBN
+                td Tools
+        tbody
+            each book in books
+                tr
+                    td
+                        if book.img
+                            img.img-rounded.img-thumbnail(src=book.img alt=book.img_desc)
+                        else
+                            img.img-rounded.img-thumbnail(src="/image/no_img.png", alt = "kein bild verfügbar")
+                    td
+                        span #{book.title}
+                    td
+                        span #{book.author}
+                    td
+                        span #{book.publisher}
+                    td
+                        span #{book.isbn}
+                    td
+                        if book.typ === (E - Book || E - Paper)
+                            button.btn(class="read" id=book._id) Lesen
+                        else if book.typ === (E - Audio || E - Video)
+                            button.btn(class="read" id=book._id) Abspielen
+                        button.btn(class="return" id=book._id) Zurückgeben

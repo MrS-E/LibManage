@@ -1,0 +1,25 @@
+mixin history(books)
+    table
+        thead
+            th
+                td Bild
+                td Titel
+                td Autor
+                td Verlag
+                td ISBN
+        tbody
+            each book in books
+                tr(onclick="window.location.replace('/liste/" + book._id + "')")
+                    td
+                        if book.img
+                            img.img-rounded.img-thumbnail(src=book.img alt=book.img_desc)
+                        else
+                            img.img-rounded.img-thumbnail(src="/image/no_img.png", alt = "kein bild verfügbar")
+                    td
+                        span #{book.title}
+                    td
+                        span #{book.author}
+                    td
+                        span #{book.publisher}
+                    td
+                        span #{book.isbn}
