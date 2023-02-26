@@ -2,7 +2,7 @@ const user = require('../src/models/user')
 const object = require('../src/models/object')
 
 exports.view = function(req, res, next){
-    if(req.session.loggedin) {
+    if(req.session.loggedin) { //TODO check is already rented by you
         object.findOne({_id: req.params.id})
             .then((doc)=>{
                 if(doc.typ===('E-Book' || 'E-Audio' || 'E-Video' || 'E-Paper')){
@@ -26,7 +26,7 @@ exports.view = function(req, res, next){
 }
 exports.lend = async function (req, res, next){
     console.log(req.session.userid, ' ', req.params.id)
-        const d = new Date()
+        const d = new Date().toISOString().split('T')[0]
     await user.updateOne({_id: req.session.userid}, {$push: {history: {book: req.params.id, start: d, end: null}}})
         .catch(err=>{
             console.error(err)

@@ -61,12 +61,13 @@ exports.return = function (req, res, next){
                         })
                 }else{
                     //console.log("e-medium")
-                    user.updateOne({_id: req.session.userid, "history.book": req.body.id}, {$set:{"history.$.end": new Date()}})
+                    user.updateOne({_id: req.session.userid, "history.book": req.body.id}, {$set:{"history.$.end": new Date().toISOString().split('T')[0]}})
                         .then(()=>res.send('e-medium returned'))
                         .catch(err=> {
                             console.log(err)
                             res.send('return did not go well')
                         })
+                    object.updateOne({_id: req.body.id, "history.user":req.session.userid}, {$set:{"history.$.end": new Date().toISOString().split('T')[0]}})
                 }
             })
     }
