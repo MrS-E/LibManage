@@ -1,3 +1,24 @@
 extends ../layout
+include ../components/ich/ausgeliehen
+include ../components/ich/history
+include ../components/ich/settings
 
 block content
+    h1 Ich
+    .row
+        .col-2
+            a.btn-toolbar(href="/ich") Ausgeliehen
+            a.btn-toolbar(href="/ich/history") Vergangenheit
+            a.btn-toolbar(href="/ich/settings") Einstellungen
+            if role==='admin'
+                a.btn-toolbar(href="/returns") Rückgaben
+                a.btn-toolbar(href="/admin") Admin
+            else if role==='worker'
+                a.btn-toolbar(href="/returns") Rückgaben
+        .col-10
+            if render==='lend'
+                +ausgeliehen(books)
+            else if render==='history'
+                +history(books)
+            else if render==='settings'
+                +settings(user)

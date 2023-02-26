@@ -21,4 +21,8 @@ router.get('/register', register.view);
 router.get('/liste', liste.view);
 router.get('/liste/:id', liste.object);
 router.get('/ich', ich.view);
+router.get('/ich/settings', ich.settings);
+router.get('/ich/history', ich.history);
+router.get('/returns')
+router.get('/admin')
 module.exports = router;
