@@ -18,32 +18,16 @@ html
           span.navbar-toggler-icon
         .collapse.navbar-collapse(id="navbarNavAltMarkup")
           .navbar-nav
-            if active==='home'
-              //- TODO make active attribute replacement nicer
-              a.nav-link.active(aria-current="page" href="/") Home
-              a.nav-link(href="/liste") Liste
-              a.nav-link(href="/ausgeliehen") Ausgeliehen
-            else if active==='liste'
-              a.nav-link(href="/") Home
-              a.nav-link.active(aria-current="page" href="/liste") Liste
-              a.nav-link(href="/ausgeliehen") Ausgeliehen
-            else if active==='lend'
-              a.nav-link(href="/") Home
-              a.nav-link(href="/liste") Liste
-              a.nav-link.active(aria-current="page" href="/ausgeliehen") Ausgeliehen
-            else
-              a.nav-link(href="/") Home
-              a.nav-link(href="/liste") Liste
-              a.nav-link(href="/ausgeliehen") Ausgeliehen
-            if admin&&active==='admin'
-              a.navlink.active(aria-current="page" href="/admin") Admin
-            else if admin
-              a.navlink(href="/admin") Admin
+            a.nav-link.active(aria-current="page" id="home" href="/") Home
+            a.nav-link(id="liste" href="/liste") Liste
+            a.nav-link(id="ich" href="/ich") Ich
+            if admin
+              a.navlink(id="admin" href="/admin") Admin
         form.form-inline.my-2.my-lg-0(method="post" action="/logout")
           span.nav-text.text-white Angemeldet als #{user}
           button.btn.btn-outline-success.my-2.my-sm-0(type="submit" value="Abmelden" style="margin-right: 1vw; margin-left: 10px;") Abmelden
 
-
+    script(src='/javascripts/navbar.js')
     .container.mt-1
       block content
 
