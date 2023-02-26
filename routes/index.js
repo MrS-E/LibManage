@@ -5,6 +5,7 @@ const home = require('../components/home');
 const register = require('../components/register');
 const liste = require('../components/liste');
 const ich = require('../components/ich');
+const admin = require('../components/admin')
 
 /* GET home page. */
 router.get('/', function(req, res, next){
@@ -28,7 +29,7 @@ router.get('/ich', ich.view);
 router.get('/ich/settings', ich.settings);
 router.get('/ich/history', ich.history);
 
-/*GET special pages*/
+/*GET worker pages*/
 router.get('/returns')
-router.get('/admin')
+
 module.exports = router;

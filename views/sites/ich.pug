@@ -2,6 +2,7 @@ extends ../layout
 include ../components/ich/ausgeliehen
 include ../components/ich/history
 include ../components/ich/settings
+include ../components/ich/admin/objects
 
 block content
     h1 Ich
@@ -29,4 +30,5 @@ block content
                 +settings(user)
             else if render==='user'
             else if render==='object'
+                +objects(books)
             else if render==='return'

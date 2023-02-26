@@ -1,0 +1,36 @@
+mixin objects(books)
+    h1 Objekt Verwaltung
+    .row-cols-5
+        .col-1
+            form(action="/admin/new" method="get")
+                button.btn.btn-primary(type="submit") Hinzufügen
+        .col-4
+            form(action="/admin" method="get")
+                input(type="text" name="search" placeholder="Search")
+                button.btn-primary.btn(type="submit") Suchen
+    .row
+        table
+            thead
+                th
+                    td Titel
+                    td Autor
+                    td Verlag
+                    td ISBN
+                    td Verwaltung
+            tbody
+                each book in books
+                    tr
+                        td
+                        td
+                            span #{book.title}
+                        td
+                            span #{book.author}
+                        td
+                            span #{book.publisher}
+                        td
+                            span #{book.isbn}
+                        td
+                            form(action="/admin/"+book._id medthod="delete")
+                                button.btn(type="submit") Löschen
+                            form(action="/admin/"+book._id method="put")
+                                button.btn(type="submit") Bearbeiten

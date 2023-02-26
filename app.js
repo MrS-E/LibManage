@@ -7,13 +7,11 @@ var logger = require('morgan');
 const schedule = require("node-schedule");
 require('./src/datebase');
 
-var indexRouter = require('./routes/index');
+const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/user');
 const lendRouter = require('./routes/lend');
 const objetApiRouter = require('./routes/object');
-const {object} = require("./components/liste");
-const returner = require("./src/models/returns");
-const user = require("./src/models/user");
+const adminRouter = require('./routes/admin');
 
 var app = express();
 
@@ -35,6 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 console.log(express.static(path.join(__dirname, 'public')))
 
 app.use('/', indexRouter);
+app.use('/admin', adminRouter);
 app.use('/user', usersRouter);
 app.use('/lend', lendRouter);
 app.use('/object', objetApiRouter);
