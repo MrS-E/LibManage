@@ -12,7 +12,12 @@ block content
             a.btn-toolbar(href="/ich/settings") Einstellungen
             if role==='admin'
                 a.btn-toolbar(href="/returns") Rückgaben
-                a.btn-toolbar(href="/admin") Admin
+                h6 Admin Tools
+                .row-cols-3
+                    .col-1
+                    .col-2
+                        a.btn-toolbar(href="/admin") Objekt Verwaltung
+                        a.btn-toolbar(href="/admin") Nutzer Verwaltung
             else if role==='worker'
                 a.btn-toolbar(href="/returns") Rückgaben
         .col-10
@@ -22,3 +27,6 @@ block content
                 +history(books)
             else if render==='settings'
                 +settings(user)
+            else if render==='user'
+            else if render==='object'
+            else if render==='return'
