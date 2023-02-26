@@ -20,7 +20,7 @@ exports.view = function (req, res, next){
 
 exports.settings = function (req, res, next){
     if(req.session.loggedin) {
-        res.render('sites/ich', {user: req.session.username, role: req.session.role})
+        res.render('sites/ich', {user: req.session.username, role: req.session.role, render: 'settings'})
     }else{
         res.redirect('/login')
     }
@@ -28,7 +28,7 @@ exports.settings = function (req, res, next){
 
 exports.history = function (req, res, next){
     if(req.session.loggedin) {
-        res.render('sites/ich', {user: req.session.username, role: req.session.role})
+        res.render('sites/ich', {user: req.session.username, role: req.session.role, render: 'history'})
     }else{
         res.redirect('/login')
     }

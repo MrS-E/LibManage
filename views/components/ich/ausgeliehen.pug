@@ -25,9 +25,9 @@ mixin ausgeliehen(books)
                     td
                         span #{book.isbn}
                     td
-                        if book.typ === (E - Book || E - Paper)
+                        if book.typ === ('E-Book' || 'E-Audio')
                             button.btn(class="read" id=book._id) Lesen
-                        else if book.typ === (E - Audio || E - Video)
+                        else if book.typ === ('E-Video' || 'E-Paper')
                             button.btn(class="read" id=book._id) Abspielen
                         button.btn(class="return" id=book._id) Zurückgeben
     script(src="/javascripts/lend.js")
