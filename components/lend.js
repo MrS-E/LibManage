@@ -6,12 +6,12 @@ exports.view = function(req, res, next){
         object.findOne({_id: req.params.id})
             .then((doc)=>{
                 if(doc.typ===('E-Book' || 'E-Audio' || 'E-Video')){
-                    res.render('sites/lend', {user: req.session.username, name: req.session.name, active: 'liste', book: doc, can_be_rented: true})
+                    res.render('sites/lend', {user: req.session.username, name: req.session.name, book: doc, can_be_rented: true})
                 }else{
                     if(typeof(doc.history[doc.history.length-1].end) === Date || doc.history.length === 0){
-                        res.render('sites/lend', {user: req.session.username, name: req.session.name, active: 'liste', book: doc, can_be_rented: true})
+                        res.render('sites/lend', {user: req.session.username, name: req.session.name, book: doc, can_be_rented: true})
                     }else{
-                        res.render('sites/lend', {user: req.session.username, name: req.session.name, active: 'liste', book: doc, can_be_rented: false})
+                        res.render('sites/lend', {user: req.session.username, name: req.session.name, book: doc, can_be_rented: false})
                     }
                 }
             })
