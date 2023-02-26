@@ -8,7 +8,7 @@ exports.view = function (req, res, next){
             .then(async (doc) => {
                 const books = []
                 for (let d of doc.history) {
-                    books.push(await object.findOne({_id: d.book}))
+                    if(!d.end) books.push(await object.findOne({_id: d.book}))
                 }
                 res.render('sites/ich', {user: req.session.username, role: req.session.role, render: 'lend', books: books
                 })
@@ -28,7 +28,14 @@ exports.settings = function (req, res, next){
 
 exports.history = function (req, res, next){
     if(req.session.loggedin) {
-        res.render('sites/ich', {user: req.session.username, role: req.session.role, render: 'history'})
+        user.findOne({_id: req.session.userid})
+            .then(async (doc) => {
+                const books = []
+                for (let d of doc.history) {
+                    books.push(await object.findOne({_id: d.book}))
+                }
+                res.render('sites/ich', {user: req.session.username, role: req.session.role, render: 'history', books: books})
+            })
     }else{
         res.redirect('/login')
     }
