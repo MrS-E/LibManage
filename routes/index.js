@@ -4,6 +4,7 @@ const login = require('../components/login');
 const home = require('../components/home');
 const register = require('../components/register');
 const liste = require('../components/liste');
+const ich = require('../components/ich');
 
 /* GET home page. */
 router.get('/', function(req, res, next){
@@ -13,10 +14,11 @@ router.get('/', function(req, res, next){
         res.redirect('/home');
     }
 });
-router.get('/home', home.view)
-router.get('/login', login.view)
-router.post('/logout', login.end)
-router.get('/register', register.view)
-router.get('/liste', liste.view)
-router.get('/liste/:id', liste.object)
+router.get('/home', home.view);
+router.get('/login', login.view);
+router.post('/logout', login.end);
+router.get('/register', register.view);
+router.get('/liste', liste.view);
+router.get('/liste/:id', liste.object);
+router.get('/ich', ich.view);
 module.exports = router;
