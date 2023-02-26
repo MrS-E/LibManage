@@ -12,7 +12,4 @@ switch(window.location.href.split('/')[3]){
     case 'ich':
         document.getElementById('ich').classList.toggle("active")
         break;
-    case 'admin':
-        document.getElementById('admin').classList.toggle("active")
-        break;
 }

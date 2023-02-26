@@ -20,6 +20,7 @@ exports.verify = function (req, res, next){
                 req.session.username = email;
                 req.session.userid = doc._id;
                 req.session.name = doc.salutation?doc.salutation:"" +" "+doc.firstName?doc.firstName:"" + " " + doc.lastName?doc.lastName:"";
+                req.session.role = doc.role;
                 res.redirect('/home');
             }else{
                 res.render('auth/login', {error: "Anmeldedaten waren inkorrekt. Bitte versuchen Sie es noch einmal."})
