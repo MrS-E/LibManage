@@ -13,7 +13,7 @@ exports.add = function (req, res, next){
                 .then(doc => {
                     if (doc === 0) {
                         let nutzer = new user({
-                            _id: (count + 1).toString(),
+                            _id: (count + 1).toString(), //fixme it's a problem if user is deleted
                             salutation: req.body.anrede,
                             firstName: req.body.firstname,
                             lastName: req.body.lastname,
