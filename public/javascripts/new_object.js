@@ -13,3 +13,7 @@ const form = {
     read: document.querySelector("input[name='read']"),
 }
 console.log(form);
+
+form.isbn.addEventListener('change', (e)=>{
+
+})
