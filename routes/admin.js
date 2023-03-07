@@ -4,9 +4,9 @@ const admin = require('../components/admin')
 
 router.get('/', admin.view);
 router.get('/?search', admin.search);
-router.get('/new')
+router.get('/new', admin.new)
 router.delete('/:id')
 router.put('/:id')
-router.post('/')
+router.post('/', admin.add)
 
 module.exports = router;

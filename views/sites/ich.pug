@@ -3,6 +3,7 @@ include ../components/ich/ausgeliehen
 include ../components/ich/history
 include ../components/ich/settings
 include ../components/ich/admin/objects
+include ../components/ich/admin/new_object
 
 block content
     h1 Ich
@@ -31,4 +32,6 @@ block content
             else if render==='user'
             else if render==='object'
                 +objects(books)
+            else if render==='new'
+                +new_object
             else if render==='return'

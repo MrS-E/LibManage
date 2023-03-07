@@ -26,3 +26,17 @@ exports.search = function (req, res, next){
         res.redirect('/login')
     }
 }
+
+exports.new = function (req, res, next){
+    if(req.session.loggedin && req.session.role==='admin'){
+        res.render('sites/ich', {user: req.session.username, role: req.session.role, render: 'new'})
+    }else if(req.session.loggedin){
+        res.send('Sie sind kein Administrator und so nicht genehmigt diesen Bereich der Webseite aufzusuchen.')
+    }else{
+        res.redirect('/login')
+    }
+}
+
+exports.add = function (req, res, next){
+
+}
