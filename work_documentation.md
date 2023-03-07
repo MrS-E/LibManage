@@ -1,6 +1,7 @@
 # Work Documentation
 ## Express
 Source: <br>
+[YouTube Crash Course](https://www.youtube.com/watch?v=Oe421EPjeBE)
 
 ## MongoDB
 Source: <br>
@@ -13,3 +14,11 @@ Source: <br>
 
 ## Other
 [Barcode Reader](https://www.npmjs.com/package/javascript-barcode-reader)
+
+## ISBN Search
+https://isbnsearch.org <br>
+https://www.bookfinder.com <br>
+https://isbndb.com/ <br>
+https://library.nyu.edu/about/collections/search-collections/ -> not that useful, but best search<br>
+http://www.bookfinder4u.com <br>
+https://www.amazon.com/advanced-search/books -> not that good as the search by the new york library <br>
