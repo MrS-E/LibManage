@@ -1,2 +1,16 @@
 mixin new_object
     .row
+        h1 Neues Objekt
+        form(action='/admin', methode=post)
+            input.form-control(type="text" name="title")
+            input.form-control(type="text" name="author")
+            input.form-control(type="text" name="publisher")
+            input.form-control(type="text" name="isbn")
+            input.form-control(type="text" name="keywords")
+
+            input.form-control(type="year" name="year")
+            textarea.form-control(name="blurb")
+            textarea.form-control(name="small_desc")
+            input.form-control(type="file" name="img")
+            input.form-control(type="text" name="img_desc")
+            input.form-control(type="file" name="read")

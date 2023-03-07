@@ -38,5 +38,11 @@ exports.new = function (req, res, next){
 }
 
 exports.add = function (req, res, next){
-
+    if(req.session.loggedin && req.session.role==='admin'){
+        console.log(req.body)
+    }else if(req.session.loggedin){
+        res.send('Sie sind kein Administrator und so nicht genehmigt diesen Bereich der Webseite aufzusuchen.')
+    }else{
+        res.redirect('/login')
+    }
 }

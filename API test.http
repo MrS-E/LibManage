@@ -29,3 +29,23 @@ Content-Type: application/json
   "email": "a.k@gmail.co",
   "password": "123"
 }
+
+###add_books
+POST  localhost:3000/admin
+Content-Type: application/json
+
+{
+  "title":"adf",
+  "author": "adfs",
+  "publisher": "af",
+  "isbn": "sadf",
+  "keywords": "fa",
+  "typ": "df",
+  "year": "adf",
+  "blurb": "afd",
+  "small_desc": "af ",
+  "img": "",
+  "img_desc": "",
+  "history": "",
+  "read": ""
+}
