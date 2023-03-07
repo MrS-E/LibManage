@@ -14,9 +14,9 @@ mixin history(books)
                     td
                     td
                         if book.img
-                            img.img-rounded.img-thumbnail(src=book.img alt=book.img_desc)
+                            img.img-rounded.img-thumbnail(src=book.img alt=book.img_desc style="height: 20vh")
                         else
-                            img.img-rounded.img-thumbnail(src="/image/no_img.png", alt = "kein bild verfügbar")
+                            img.img-rounded.img-thumbnail(src="/image/no_img.png", alt = "kein bild verfügbar" style="height: 20vh")
                     td
                         span #{book.title}
                     td
