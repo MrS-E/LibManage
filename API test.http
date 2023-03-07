@@ -40,12 +40,11 @@ Content-Type: application/json
   "publisher": "af",
   "isbn": "sadf",
   "keywords": "fa",
-  "typ": "df",
-  "year": "adf",
+  "type": "Buch",
+  "year": "1970",
   "blurb": "afd",
   "small_desc": "af ",
   "img": "",
   "img_desc": "",
-  "history": "",
   "read": ""
 }
