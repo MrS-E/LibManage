@@ -23,6 +23,10 @@ block content
                 p
                     strong Verlag:
                     span  #{book.publisher}
+            if book.page
+                p
+                    strong Seitenanzahl:
+                    span #{book.page}
             .row
                 p
                     each keyword in book.keywords

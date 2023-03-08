@@ -31,5 +31,7 @@ mixin ausgeliehen(books)
                             button.btn(class="read" id=book._id) Lesen
                         else if book.typ === ('E-Video' || 'E-Paper')
                             button.btn(class="read" id=book._id) Abspielen
+                        else
+                            p #{book.standort}
                         button.btn(class="return" id=book._id) Zurückgeben
     script(src="/javascripts/lend.js")

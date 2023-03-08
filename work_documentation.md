@@ -22,3 +22,4 @@ https://isbndb.com/ <br>
 https://library.nyu.edu/about/collections/search-collections/ -> not that useful, but best search<br>
 http://www.bookfinder4u.com <br>
 https://www.amazon.com/advanced-search/books -> not that good as the search by the new york library <br>
+https://www.buchhaus.ch/de/buecher -> best but bad to use <br>

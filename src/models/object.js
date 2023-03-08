@@ -15,7 +15,9 @@ const object = new mongoose.Schema(
         img:{ type: String},
         img_desc:{type: String},
         history: {type: [{user: {type: String, required: true}, start:{type: Date, required: true}, end:{type: Date}}]},
-        read: {type: String}
+        read: {type: String},
+        page: {type: Number},
+        standort: {type: String}
     },
     { collection: 'object' }
 )
