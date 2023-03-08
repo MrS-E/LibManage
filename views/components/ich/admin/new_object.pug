@@ -2,19 +2,19 @@ mixin new_object
     .row
         h1 Neues Objekt
         form(action='/admin', methode=post)
-            label(for="title") Title
+            label.mt-1(for="title") Title
             input.form-control(type="text" name="title" required)
-            label(for="author") Autor
+            label.mt-1(for="author") Autor
             input.form-control(type="text" name="author")
-            label(for="publisher") Verlag
+            label.mt-1(for="publisher") Verlag
             input.form-control(type="text" name="publisher")
-            label(for="isbn") ISBN
+            label.mt-1(for="isbn") ISBN
             input.form-control(type="text" name="isbn")
-            label(for="keywords") Schlüsselbegriffe
+            label.mt-1(for="keywords") Schlüsselbegriffe
                 span
                     small    (Begriffe separatist mit ",")
             input.form-control(type="text" name="keywords")
-            label(for="type") Typ des Medium
+            label.mt-1(for="type") Typ des Medium
             select.form-control(name="type" required)
                 option(value="Buch") Buch
                 option(value="Zeitschrift") Zeitschrift
@@ -24,19 +24,19 @@ mixin new_object
                 option(value="E-Paper") E-Paper
                 option(value="E-Audio") E-Audio
                 option(value="E-Video") E-Video
-            label(for="year") Erscheinungsjahr
+            label.mt-1(for="year") Erscheinungsjahr
             input.form-control(type="number" name="year" min="1000" value="2000")
-            label(for="page") Seitenzahl
+            label.mt-1(for="page") Seitenzahl
             input.form-control(type="number" name="page" value="0")
-            label(for="blurb") Klappentext
+            label.mt-1(for="blurb") Klappentext
             textarea.form-control(name="blurb")
-            label(for="small_desc") Kurzbeschreibung
+            label.mt-1(for="small_desc") Kurzbeschreibung
             textarea.form-control(name="small_desc")
-            label(for="img") Titelbild
+            label.mt-1(for="img") Titelbild
             input.form-control(type="file" name="img" accept="image/*")
-            label(for="img_desc") Beschreibung Titelbild
+            label.mt-1(for="img_desc") Beschreibung Titelbild
             input.form-control(type="text" name="img_desc")
-            label(for="read") Medium
+            label.mt-1(for="read") Medium
             input.form-control(type="file" name="read")
             button.form-control.btn.btn-primary.mt-2(type="submit") Objekt hinzufügen
         script(src="/javascripts/new_object.js")
