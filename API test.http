@@ -48,3 +48,6 @@ Content-Type: application/json
   "img_desc": "",
   "read": ""
 }
+
+###test google picture
+GET http://books.google.com/books/content?id=7-IaogEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api
