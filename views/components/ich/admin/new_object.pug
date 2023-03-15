@@ -1,7 +1,7 @@
 mixin new_object
     .row
         h1 Neues Objekt
-        form(action='/admin', methode=post)
+        form(action='/admin', method="post")
             label.mt-1(for="title") Title
             input.form-control(type="text" name="title" required)
             label.mt-1(for="author") Autor
@@ -34,10 +34,12 @@ mixin new_object
             textarea.form-control(name="small_desc")
             label.mt-1(for="img") Titelbild
             img.mb-1.img-fluid.img-thumbnail.rounded.form-control(id="image" src="" alt="noch kein Bild")
+            input(type="text" name="img_base64" style="display:none")
             input.form-control(type="file" name="img" accept="image/*")
             label.mt-1(for="img_desc") Beschreibung Titelbild
             input.form-control(type="text" name="img_desc")
             label.mt-1(for="read") Medium
             input.form-control(type="file" name="read")
             button.form-control.btn.btn-primary.mt-2(type="submit") Objekt hinzufügen
+
         script(src="/javascripts/new_object.js")

@@ -53,7 +53,7 @@ exports.add = function (req, res, next){
                     year: req.body.year,
                     blurb: req.body.blurb,
                     small_desc: req.body.small_desc,
-                    img: req.body.img, //TODO safe image external and safe only the path
+                    img: req.body.img_base64, //TODO safe image external and safe only the path
                     img_desc: req.body.img_desc,
                     history: [],
                     read: req.body.read //todo same as with the image

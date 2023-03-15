@@ -10,6 +10,7 @@ const form = {
     small_desc: document.querySelector("textarea[name='small_desc']"),
     img: document.querySelector("input[name='img']"),
     img_show: document.getElementById("image"),
+    img_base64: document.querySelector("input[name='img_base64']"),
     img_desc: document.querySelector("input[name='img_desc']"),
     read: document.querySelector("input[name='read']"),
     page: document.querySelector("input[name='page']")
@@ -57,8 +58,10 @@ form.img.addEventListener('change', (e)=>{
         console.log(reader.result)
         console.log(form.img)
         form.img_show.src = reader.result
+        form.img_base64.value = reader.result
     }
     reader.onerror = (err) => {
         console.error(err)
     }
+
 })
