@@ -9,11 +9,11 @@ const form = {
     blurb: document.querySelector("textarea[name='blurb']"),
     small_desc: document.querySelector("textarea[name='small_desc']"),
     img: document.querySelector("input[name='img']"),
+    img_show: document.getElementById("image"),
     img_desc: document.querySelector("input[name='img_desc']"),
     read: document.querySelector("input[name='read']"),
     page: document.querySelector("input[name='page']")
 }
-console.log(form);
 
 form.isbn.addEventListener('change', (e)=>{
     //978-3-8668-0192-9
@@ -38,6 +38,7 @@ form.isbn.addEventListener('change', (e)=>{
                 form.author.value = data.items[0].volumeInfo.authors[0]
                 form.publisher.value = data.items[0].volumeInfo.publisher
                 form.year.value = data.items[0].volumeInfo.publishedDate.split('-')[0]
+                //form.img_show.src = data.items[0].volumeInfo.imageLinks.thumbnail
                 form.blurb.value = data.items[0].volumeInfo.description
                 form.img_desc.value = data.items[0].volumeInfo.title + " Titlebild"
                 form.small_desc.value = data.items[0].searchInfo.textSnippet
@@ -46,5 +47,18 @@ form.isbn.addEventListener('change', (e)=>{
                     form.keywords.value += d + ", "
                 }
             });
+    }
+})
+
+form.img.addEventListener('change', (e)=>{
+    let reader = new FileReader()
+    reader.readAsDataURL(e.target.files[0])
+    reader.onload = () => {
+        console.log(reader.result)
+        console.log(form.img)
+        form.img_show.src = reader.result
+    }
+    reader.onerror = (err) => {
+        console.error(err)
     }
 })

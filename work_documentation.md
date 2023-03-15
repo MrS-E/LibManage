@@ -13,7 +13,9 @@ Source: <br>
 [Free Code Camp](https://www.freecodecamp.org/news/introduction-to-mongoose-for-mongodb-d2a7aa593c57/)
 
 ## Other
-[Barcode Reader](https://www.npmjs.com/package/javascript-barcode-reader)
+[Barcode Reader](https://www.npmjs.com/package/javascript-barcode-reader) <br>
+[WebP Converter](https://www.npmjs.com/package/webp-converter) <br>
+[WebP Compressor](https://www.npmjs.com/package/imagemin-webp) <br>
 
 ## ISBN Search
 https://isbnsearch.org <br>

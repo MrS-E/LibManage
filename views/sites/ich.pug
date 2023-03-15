@@ -12,16 +12,11 @@ block content
             a.btn-toolbar(href="/ich") Ausgeliehen
             a.btn-toolbar(href="/ich/history") Vergangenheit
             a.btn-toolbar(href="/ich/settings") Einstellungen
-            if role==='admin'
-                a.btn-toolbar(href="/returns") Rückgaben
-                h6 Admin Tools
-                .row-cols-3
-                    .col-1
-                    .col-2
-                        a.btn-toolbar(href="/admin") Objekt Verwaltung
-                        a.btn-toolbar(href="/admin") Nutzer Verwaltung
-            else if role==='worker'
-                a.btn-toolbar(href="/returns") Rückgaben
+            if(role==='admin'||role==='worker')
+                a.dropdown-item(href="/returns") Rückgaben
+                if role==='admin'
+                    a.dropdown-item(href="/admin") Objekte
+                    a.dropdown-item(href="/admin") Nutzer
         .col-10
             if render==='lend'
                 +ausgeliehen(books)
