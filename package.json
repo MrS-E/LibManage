@@ -18,7 +18,8 @@
     "morgan": "~1.9.1",
     "node-schedule": "^2.1.1",
     "pug": "2.0.0-beta11",
-    "validator": "^13.9.0"
+    "validator": "^13.9.0",
+    "webp-converter": "^2.3.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
