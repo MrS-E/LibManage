@@ -7,7 +7,7 @@ const form = {
     type: document.querySelector("select[name='type']"),
     year: document.querySelector("input[name='year']"),
     blurb: document.querySelector("textarea[name='blurb']"),
-    small_desc: document.querySelector("textarea[name='small_desc']"),
+    //small_desc: document.querySelector("textarea[name='small_desc']"),
     img: document.querySelector("input[name='img']"),
     img_show: document.getElementById("image"),
     img_base64: document.querySelector("input[name='img_base64']"),
@@ -42,7 +42,7 @@ form.isbn.addEventListener('change', (e)=>{
                 //form.img_show.src = data.items[0].volumeInfo.imageLinks.thumbnail
                 form.blurb.value = data.items[0].volumeInfo.description
                 form.img_desc.value = data.items[0].volumeInfo.title + " Titlebild"
-                form.small_desc.value = data.items[0].searchInfo.textSnippet
+                //form.small_desc.value = data.items[0].searchInfo.textSnippet
                 form.page.value = data.items[0].volumeInfo.pageCount
                 for(let d of data.items[0].volumeInfo.categories){
                     form.keywords.value += d + ", "
