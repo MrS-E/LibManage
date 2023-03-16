@@ -15,7 +15,7 @@ Source: <br>
 ## Other
 [Barcode Reader](https://www.npmjs.com/package/javascript-barcode-reader) <br>
 [WebP Converter](https://www.npmjs.com/package/webp-converter) <br>
-[WebP Compressor](https://www.npmjs.com/package/imagemin-webp) <br>
+[WebP Compressor](https://www.npmjs.com/package/imagemin-webp) -> nicht benötigt weil webp converter dies bereits besitzt<br>
 
 ## ISBN Search
 https://isbnsearch.org <br>
