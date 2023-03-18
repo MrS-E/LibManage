@@ -7,13 +7,13 @@ exports.view = function(req, res, next){
 }
 exports.add = function (req, res, next){
     if(req.body.password === req.body.password2) {
-       user.count()
+       user.findOne().sort({_id: -1})
             .then((count)=> {
             user.count({email: req.body.email})
                 .then(doc => {
                     if (doc === 0) {
                         let nutzer = new user({
-                            _id: (count + 1).toString(), //fixme it's a problem if user is deleted
+                            _id: ((count?count._id:0) + 1).toString(),
                             salutation: req.body.anrede,
                             firstName: req.body.firstname,
                             lastName: req.body.lastname,
