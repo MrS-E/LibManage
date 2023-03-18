@@ -39,12 +39,12 @@ exports.new = function (req, res, next){
 
 exports.add = function (req, res, next){
     if(req.session.loggedin && req.session.role==='admin'){
-        console.log(req.body)
-            objects.count()
+        //objects.count()
+        objects.findOne().sort({_id: -1})
             .then((count)=> {
+                console.log(count?count._id:0)
                 let object = new objects({
-                    _id: (count+1), //fixme selbes problem wie bei user, löschen von book -> id doppelt -> mongodb nicht fröhlich
-                    title:req.body.title,
+                    _id: (parseInt(count?count._id:0)+1),
                     author: req.body.author,
                     publisher: req.body.publisher,
                     isbn: req.body.isbn,
@@ -53,10 +53,10 @@ exports.add = function (req, res, next){
                     year: req.body.year,
                     blurb: req.body.blurb,
                     small_desc: req.body.small_desc,
-                    img: req.body.img_base64, //TODO safe image external and safe only the path
+                    img: req.body.img_base64,
                     img_desc: req.body.img_desc,
                     history: [],
-                    read: req.body.read //todo same as with the image
+                    read: req.body.read //todo same as with the image, safe to storage
                 })
                 object.save()
                     .then(doc => {
@@ -73,4 +73,8 @@ exports.add = function (req, res, next){
     }else{
         res.redirect('/login')
     }
+}
+
+exports.delete =async function (req,res,next){
+    res.send(await objects.deleteOne({_id:req.params.id}))
 }

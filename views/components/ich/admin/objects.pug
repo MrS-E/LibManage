@@ -19,7 +19,7 @@ mixin objects(books)
                     td Verwaltung
             tbody
                 each book in books
-                    tr
+                    tr(id="book_"+book._id)
                         td
                         td
                             span #{book.title}
@@ -30,7 +30,7 @@ mixin objects(books)
                         td
                             span #{book.isbn}
                         td
-                            form(action="/admin/"+book._id medthod="delete")
-                                button.btn(type="submit") Löschen
-                            form(action="/admin/"+book._id method="put")
+                            button.btn.delete_btn(id=book._id) Löschen
+                            form(action="/admin/edit/"+book._id method="get")
                                 button.btn(type="submit") Bearbeiten
+        script(src="/javascripts/objects.js")
