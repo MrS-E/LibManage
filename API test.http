@@ -49,5 +49,8 @@ Content-Type: application/json
   "read": ""
 }
 
+### delete book
+DELETE localhost:3000/admin/2
+
 ###Logout
 POST localhost:3000/logout
