@@ -49,5 +49,5 @@ Content-Type: application/json
   "read": ""
 }
 
-###test google picture
-GET http://books.google.com/books/content?id=7-IaogEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api
+###Logout
+POST localhost:3000/logout

@@ -37,6 +37,7 @@ form.isbn.addEventListener('change', (e)=>{
             .then((data) => {
                 form.title.value = data.items[0].volumeInfo.title?data.items[0].volumeInfo.title:""
                 //form.author.value = data.items[0].volumeInfo.authors[0]
+                form.author.value = ""
                 for(let d=0; d < data.items[0].volumeInfo.authors.length; d++){
                     form.author.value += data.items[0].volumeInfo.authors[d]
                     if(d+1 !== data.items[0].volumeInfo.authors.length){
@@ -45,11 +46,13 @@ form.isbn.addEventListener('change', (e)=>{
                 }
                 form.publisher.value = data.items[0].volumeInfo.publisher?data.items[0].volumeInfo.publisher:""
                 form.year.value = data.items[0].volumeInfo.publishedDate?data.items[0].volumeInfo.publishedDate.split('-')[0]:""
-                //form.img_show.src = data.items[0].volumeInfo.imageLinks.thumbnail
+                form.img_show.src = data.items[0].volumeInfo.imageLinks.thumbnail
+                form.img_base64.value = data.items[0].volumeInfo.imageLinks.thumbnail
                 form.blurb.value = data.items[0].volumeInfo.description?data.items[0].volumeInfo.description:""
                 form.img_desc.value = data.items[0].volumeInfo.title?data.items[0].volumeInfo.title + " Titelbild":""
                 //form.small_desc.value = data.items[0].searchInfo.textSnippet
                 form.page.value = data.items[0].volumeInfo.pageCount?data.items[0].volumeInfo.pageCount:""
+                form.keywords.value=""
                 for(let d=0; d < data.items[0].volumeInfo.categories.length; d++){
                     form.keywords.value += data.items[0].volumeInfo.categories[d]
                     if(d+1 !== data.items[0].volumeInfo.categories.length){
@@ -71,6 +74,17 @@ form.img.addEventListener('change', (e)=>{
     }
     reader.onerror = (err) => {
         console.error(err)
+    }
+
+})
+
+form.type.addEventListener('change', (e)=>{
+    if(form.type.options[form.type.selectedIndex].value.toString().split('-')[0] === 'E'){
+        document.querySelector("label[for='read']").removeAttribute('style')
+        form.read.removeAttribute('style')
+    }else{
+        document.querySelector("label[for='read']").setAttribute('style', 'display:none;"')
+        form.read.setAttribute('style', 'display:none;"')
     }
 
 })
