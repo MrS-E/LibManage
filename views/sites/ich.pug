@@ -10,14 +10,15 @@ block content
     h1 Ich
     .row
         .col-2
-            a.btn-toolbar(href="/ich") Ausgeliehen
-            a.btn-toolbar(href="/ich/history") Vergangenheit
-            a.btn-toolbar(href="/ich/settings") Einstellungen
-            if(role==='admin'||role==='worker')
-                a.dropdown-item(href="/returns") Rückgaben
-                if role==='admin'
-                    a.dropdown-item(href="/admin") Objekte
-                    a.dropdown-item(href="/admin") Nutzer
+            nav.nav.flex-column
+                a#ich_ich.nav-link(href="/ich") Ausgeliehen
+                a#ich_history.nav-link(href="/ich/history") Vergangenheit
+                a#ich_settings.nav-link(href="/ich/settings") Einstellungen
+                if(role==='admin'||role==='worker')
+                    a#ich_returns.nav-link(href="/returns") Rückgaben
+                    if role==='admin'
+                        a#ich_admin.nav-link(href="/admin") Objekte
+                        a#ich_user.nav-link(href="/user") Nutzer
         .col-10
             if render==='lend'
                 +ausgeliehen(books)
@@ -33,3 +34,4 @@ block content
             else if render==='edit'
                 +edit_object(book)
             else if render==='return'
+    script(src="/javascripts/ich.js")

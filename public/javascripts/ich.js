@@ -1,0 +1,1 @@
+document.querySelector("#ich_"+window.location.href.split('/')[window.location.href.split('/').length-1].split('?')[0]).classList.remove("nav-link")
