@@ -8,11 +8,12 @@ const form = {
     year: document.querySelector("input[name='year']"),
     blurb: document.querySelector("textarea[name='blurb']"),
     //small_desc: document.querySelector("textarea[name='small_desc']"),
-    img: document.querySelector("input[name='img']"),
+    img: document.querySelector("input#img"),
     img_show: document.getElementById("image"),
     img_base64: document.querySelector("input[name='img_base64']"),
     img_desc: document.querySelector("input[name='img_desc']"),
-    read: document.querySelector("input[name='read']"),
+    read: document.querySelector("input#read"),
+    read_base64: document.querySelector("input[name='read_base64']"),
     page: document.querySelector("input[name='page']"),
     position: document.querySelector("input[name='position']")
 }
@@ -76,7 +77,18 @@ form.img.addEventListener('change', (e)=>{
     reader.onerror = (err) => {
         console.error(err)
     }
+})
 
+form.read.addEventListener('change', (e)=>{
+    let reader = new FileReader()
+    reader.readAsDataURL(e.target.files[0])
+    reader.onload = () => {
+        console.log(reader.result)
+        form.read_base64.value = reader.result
+    }
+    reader.onerror = (err) => {
+        console.error(err)
+    }
 })
 
 form.type.addEventListener('change', (e)=>{
@@ -89,10 +101,8 @@ form.type.addEventListener('change', (e)=>{
     }else{
         document.querySelector("label[for='read']").setAttribute('style', 'display:none;"')
         form.read.setAttribute('style', 'display:none;"')
-        form.read.value=null
-        form.read.files=null
+        form.read_base64.value=null
         document.querySelector("label[for='position']").removeAttribute('style')
         form.position.removeAttribute('style')
     }
-
 })

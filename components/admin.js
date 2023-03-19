@@ -1,4 +1,5 @@
 const objects = require("../src/db/models/object");
+const files = require("../src/db/models/files")
 
 exports.view = function(req, res, next){
     if(req.session.loggedin && req.session.role==='admin'){
@@ -57,9 +58,23 @@ exports.add = function (req, res, next){
                     img: req.body.img_base64, //todo convert to webp for better storage usage
                     img_desc: req.body.img_desc,
                     history: [],
-                    //read: req.body.read, //todo safe to storage
+                    read: !!req.body.read_base64,
                     position: req.body.position?req.body.position:null
                 })
+                if(req.body.read_base64){
+                    console.log(object._id)
+                    let file = new files({
+                        book_id: object._id,
+                        file: req.body.read_base64
+                    })
+                    file.save()
+                        .then(doc => {
+                        console.log(doc)
+                    })
+                        .catch(err => {
+                            console.error(err)
+                        })
+                }
                 object.save()
                     .then(doc => {
                         console.log(doc)
