@@ -28,7 +28,7 @@ exports.verify = function (req, res, next){
         })
         .catch(err => {
             console.error(err)
-            res.render('auth/login', {error: "Etwas ist schiefgelaufen"})
+            res.sendStatus(401).render('auth/login', {error: "Etwas ist schiefgelaufen"})
         })
 }
 

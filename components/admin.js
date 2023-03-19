@@ -7,7 +7,7 @@ exports.view = function(req, res, next){
                 res.render('sites/ich', {user: req.session.username, role: req.session.role, render: 'object', books:doc})
             })
     }else if(req.session.loggedin){
-        res.send('Sie sind kein Administrator und so nicht genehmigt diesen Bereich der Webseite aufzusuchen.')
+        res.sendStatus(401).send('Sie sind kein Administrator und so nicht genehmigt diesen Bereich der Webseite aufzusuchen.')
     }else{
         res.redirect('/login')
     }
@@ -21,7 +21,7 @@ exports.search = function (req, res, next){
                 res.render('sites/ich', {user: req.session.username, role: req.session.role, render: 'object', books:doc})
             })
     }else if(req.session.loggedin){
-        res.send('Sie sind kein Administrator und so nicht genehmigt diesen Bereich der Webseite aufzusuchen.')
+        res.sendStatus(401).send('Sie sind kein Administrator und so nicht genehmigt diesen Bereich der Webseite aufzusuchen.')
     }else{
         res.redirect('/login')
     }
@@ -31,7 +31,7 @@ exports.new = function (req, res, next){
     if(req.session.loggedin && req.session.role==='admin'){
         res.render('sites/ich', {user: req.session.username, role: req.session.role, render: 'new'})
     }else if(req.session.loggedin){
-        res.send('Sie sind kein Administrator und so nicht genehmigt diesen Bereich der Webseite aufzusuchen.')
+        res.sendStatus(401).send('Sie sind kein Administrator und so nicht genehmigt diesen Bereich der Webseite aufzusuchen.')
     }else{
         res.redirect('/login')
     }
@@ -56,7 +56,7 @@ exports.add = function (req, res, next){
                     img: req.body.img_base64,
                     img_desc: req.body.img_desc,
                     history: [],
-                    read: req.body.read //todo same as with the image, safe to storage
+                    read: req.body.read //todo safe to storage
                 })
                 object.save()
                     .then(doc => {
@@ -69,12 +69,17 @@ exports.add = function (req, res, next){
                     })
             })
     }else if(req.session.loggedin){
-        res.send('Sie sind kein Administrator und so nicht genehmigt diesen Bereich der Webseite aufzusuchen.')
+        res.sendStatus(401).send('Sie sind kein Administrator und so nicht genehmigt diesen Bereich der Webseite aufzusuchen.')
     }else{
         res.redirect('/login')
     }
 }
 
 exports.delete =async function (req,res,next){
-    res.send(await objects.deleteOne({_id:req.params.id}))
+    if(req.session.loggedin && req.session.role==='admin') {
+        res.send(await objects.deleteOne({_id: req.params.id}))
+    }
+    else{
+        res.sendStatus(401).send({error: "You are not an admin", deletedCount: 0})
+    }
 }
