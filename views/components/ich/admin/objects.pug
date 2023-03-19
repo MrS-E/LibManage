@@ -9,7 +9,7 @@ mixin objects(books)
                 input(type="text" name="search" placeholder="Search")
                 button.btn-primary.btn(type="submit") Suchen
     .row
-        table
+        table.table.table-hover.table-condensed
             thead
                 th
                     td Titel
@@ -33,4 +33,5 @@ mixin objects(books)
                             button.btn.delete_btn(id=book._id) Löschen
                             form(action="/admin/edit/"+book._id method="get")
                                 button.btn(type="submit") Bearbeiten
+                                //- TODO function for edit
         script(src="/javascripts/objects.js")
