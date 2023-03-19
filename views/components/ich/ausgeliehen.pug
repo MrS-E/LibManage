@@ -27,10 +27,14 @@ mixin ausgeliehen(books)
                     td
                         span #{book.isbn}
                     td
-                        if book.typ === ('E-Book' || 'E-Audio')
+                        //- span #{book.typ}
+                        if book.typ === 'E-Paper' || book.typ === 'E-Book'
                             button.btn(class="read" id=book._id) Lesen
-                        else if book.typ === ('E-Video' || 'E-Paper')
+                            br
+                            //- todo maybe form with get to use session for better security instead of using event listener
+                        else if book.typ === 'E-Video' || book.typ ===  'E-Audio'
                             button.btn(class="read" id=book._id) Abspielen
+                            br
                         else
                             p #{book.standort}
                         button.btn(class="return" id=book._id) Zurückgeben

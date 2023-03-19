@@ -1,6 +1,6 @@
 for(let d of document.getElementsByClassName('read')){
     d.addEventListener('click', (e)=>{
-        //todo reading
+        //todo reading (ask function "components/ich/read)
     })
 }
 
@@ -19,7 +19,7 @@ for(let d of document.getElementsByClassName('return')){
         })
             .then(
            res=>{
-               console.log(res)
+               //console.log(res)
                window.location.reload()
            }
         )

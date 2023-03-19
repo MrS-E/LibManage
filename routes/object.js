@@ -7,6 +7,7 @@ const ich = require('../components/ich')
 router.get('/', function(req, res, next) {
     res.send('respond with data about objects');
 });
+//todo make routing better (remove all suburls use /, /?find,/:id instead)
 router.get('/all', object.all);
 router.get('/search', object.find);
 router.get('/detail/:id', object.detail);
