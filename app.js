@@ -5,7 +5,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const schedule = require("node-schedule");
-require('./src/datebase');
+require('./src/db/datebase');
 
 var app = express();
 
@@ -52,9 +52,9 @@ app.use(function(err, req, res, next) {
 
 schedule.scheduleJob('0 0 0 * * *', () => { //runs every 24h at 0:0
   console.log("SCHEDULE JOB STARTED");
-  const user_model = require('./src/models/user')
-  const object_model = require('./src/models/object')
-  const return_model = require('./src/models/returns')
+  const user_model = require('./src/db/models/user')
+  const object_model = require('./src/db/models/object')
+  const return_model = require('./src/db/models/returns')
 
   console.log("SCANNING FOR OVERDUE BOOKS")
   user_model.find({"history.end": null, "history.start": {$lt:new Date(new Date().getDate() - 30).toISOString().split('T')[0]}})

@@ -1,6 +1,6 @@
-const object = require('../src/models/object')
-const returner = require('../src/models/returns')
-const user = require('../src/models/user')
+const object = require('../src/db/models/object')
+const returner = require('../src/db/models/returns')
+const user = require('../src/db/models/user')
 
 exports.view = function (req, res, next){
     if(req.session.loggedin) {

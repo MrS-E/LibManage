@@ -1,4 +1,4 @@
-const user = require('../src/models/user');
+const user = require('../src/db/models/user');
 const sha512 = require('crypto-js/sha512');
 
 exports.view = function (req, res, next) {

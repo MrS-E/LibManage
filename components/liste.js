@@ -1,4 +1,4 @@
-const objects = require('../src/models/object')
+const objects = require('../src/db/models/object')
 
 exports.view = function (req, res, next) {
     if (req.session.loggedin) {

@@ -1,5 +1,5 @@
-const user = require('../src/models/user')
-const object = require('../src/models/object')
+const user = require('../src/db/models/user')
+const object = require('../src/db/models/object')
 
 exports.view = function(req, res, next){
     if(req.session.loggedin) { //TODO check is already rented by you
