@@ -14,11 +14,14 @@ block content
                 a#ich_ich.nav-link(href="/ich") Ausgeliehen
                 a#ich_history.nav-link(href="/ich/history") Vergangenheit
                 a#ich_settings.nav-link(href="/ich/settings") Einstellungen
+                    //todo settings
                 if(role==='admin'||role==='worker')
                     a#ich_returns.nav-link(href="/returns") Rückgaben
+                        //todo rückgaben for worker
                     if role==='admin'
                         a#ich_admin.nav-link(href="/admin") Objekte
                         a#ich_user.nav-link(href="/user") Nutzer
+                            //todo nutzer for admin
         .col-10
             if render==='lend'
                 +ausgeliehen(books)

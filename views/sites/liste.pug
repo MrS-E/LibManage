@@ -8,6 +8,7 @@ block content
             input.form-control(placeholder="search" type="text" id="search")
         .col-2
             button.btn.btn-primary(id="search_btn" type="submit") Search
+        //todo filter
     .row.mt-2(id="books")
         each books in book_list
             +book_list(books)
