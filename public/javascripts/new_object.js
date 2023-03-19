@@ -13,7 +13,8 @@ const form = {
     img_base64: document.querySelector("input[name='img_base64']"),
     img_desc: document.querySelector("input[name='img_desc']"),
     read: document.querySelector("input[name='read']"),
-    page: document.querySelector("input[name='page']")
+    page: document.querySelector("input[name='page']"),
+    position: document.querySelector("input[name='position']")
 }
 
 form.isbn.addEventListener('change', (e)=>{
@@ -82,9 +83,16 @@ form.type.addEventListener('change', (e)=>{
     if(form.type.options[form.type.selectedIndex].value.toString().split('-')[0] === 'E'){
         document.querySelector("label[for='read']").removeAttribute('style')
         form.read.removeAttribute('style')
+        document.querySelector("label[for='position']").setAttribute('style', 'display:none;"')
+        form.position.setAttribute('style', 'display:none;"')
+        form.position.value=null
     }else{
         document.querySelector("label[for='read']").setAttribute('style', 'display:none;"')
         form.read.setAttribute('style', 'display:none;"')
+        form.read.value=null
+        form.read.files=null
+        document.querySelector("label[for='position']").removeAttribute('style')
+        form.position.removeAttribute('style')
     }
 
 })

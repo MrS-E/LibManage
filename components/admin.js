@@ -56,7 +56,8 @@ exports.add = function (req, res, next){
                     img: req.body.img_base64,
                     img_desc: req.body.img_desc,
                     history: [],
-                    read: req.body.read //todo safe to storage
+                    //read: req.body.read, //todo safe to storage
+                    position: req.body.position?req.body.position:null
                 })
                 object.save()
                     .then(doc => {

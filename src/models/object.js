@@ -17,7 +17,7 @@ const object = new mongoose.Schema(
         history: {type: [{user: {type: String, required: true}, start:{type: Date, required: true}, end:{type: Date}}]},
         read: {type: String},
         page: {type: Number},
-        standort: {type: String}
+        position: {type: String}
     },
     { collection: 'object' }
 )
