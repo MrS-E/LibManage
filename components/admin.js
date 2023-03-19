@@ -1,4 +1,4 @@
-const objects = require("../src/models/object");
+const objects = require("../src/db/models/object");
 
 exports.view = function(req, res, next){
     if(req.session.loggedin && req.session.role==='admin'){
@@ -45,6 +45,7 @@ exports.add = function (req, res, next){
                 console.log(count?count._id:0)
                 let object = new objects({
                     _id: (parseInt(count?count._id:0)+1),
+                    title: req.body.title,
                     author: req.body.author,
                     publisher: req.body.publisher,
                     isbn: req.body.isbn,
@@ -53,7 +54,7 @@ exports.add = function (req, res, next){
                     year: req.body.year,
                     blurb: req.body.blurb,
                     small_desc: req.body.small_desc,
-                    img: req.body.img_base64,
+                    img: req.body.img_base64, //todo convert to webp for better storage usage
                     img_desc: req.body.img_desc,
                     history: [],
                     //read: req.body.read, //todo safe to storage
@@ -62,11 +63,11 @@ exports.add = function (req, res, next){
                 object.save()
                     .then(doc => {
                         console.log(doc)
-                        res.redirect('/admin');
+                        res.redirect('/admin')
                     })
                     .catch(err => {
                         console.error(err)
-                        res.redirect('/admin');
+                        res.redirect('/admin')
                     })
             })
     }else if(req.session.loggedin){

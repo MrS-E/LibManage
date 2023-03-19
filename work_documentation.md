@@ -15,7 +15,6 @@ Source: <br>
 ## Other
 [Barcode Reader](https://www.npmjs.com/package/javascript-barcode-reader) <br>
 [WebP Converter](https://www.npmjs.com/package/webp-converter) <br>
-[WebP Compressor](https://www.npmjs.com/package/imagemin-webp) -> nicht benötigt weil webp converter dies bereits besitzt<br>
 
 ## ISBN Search
 https://isbnsearch.org <br>
@@ -25,3 +24,8 @@ https://library.nyu.edu/about/collections/search-collections/ -> not that useful
 http://www.bookfinder4u.com <br>
 https://www.amazon.com/advanced-search/books -> not that good as the search by the new york library <br>
 https://www.buchhaus.ch/de/buecher -> best but bad to use <br>
+
+# Email
+[Stackoverflow](https://stackoverflow.com/questions/14678447/is-there-a-nodejs-equivalent-to-phps-mail-function)<br>
+[Nodemailer](https://nodemailer.com/about/)<br>
+[why smtp](https://nodemailer.com/usage/why-smtp/)<br>
