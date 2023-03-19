@@ -4,6 +4,7 @@ include ../components/ich/history
 include ../components/ich/settings
 include ../components/ich/admin/objects
 include ../components/ich/admin/new_object
+include ../components/ich/admin/edit_object
 
 block content
     h1 Ich
@@ -29,4 +30,6 @@ block content
                 +objects(books)
             else if render==='new'
                 +new_object
+            else if render==='edit'
+                +edit_object(book)
             else if render==='return'

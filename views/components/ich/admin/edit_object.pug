@@ -1,0 +1,25 @@
+mixin edit_object(book)
+    .row
+        h1 Objekt Abändern
+        div
+            label.mt-1(for="title") Title
+            input.form-control(type="text" name="title" required value=book.title)
+            label.mt-1(for="author") Autor
+            input.form-control(type="text" name="author" value=book.author)
+            label.mt-1(for="publisher") Verlag
+            input.form-control(type="text" name="publisher" value=book.publisher)
+            label.mt-1(for="keywords") Schlüsselbegriffe
+                span
+                    small    (Begriffe separatist mit ",")
+            input.form-control(type="text" name="keywords" value=book.keywords)
+            label.mt-1(for="year") Erscheinungsjahr
+            input.form-control(type="number" name="year" min="1000" value=book.year)
+            label.mt-1(for="page") Seitenzahl
+            input.form-control(type="number" name="page" value=book.page)
+            label.mt-1(for="blurb") Klappentext
+            textarea.form-control(name="blurb" value=book.blurb)
+            if book.typ === ('Buch'||'Zeitschrift'||'CD'||'DVD')
+                label.mt-1(for="position") Standort
+                input.form-control(type="text" name="position" value=book.position)
+            button#submit.form-control.btn.btn-primary.mt-2 Objekt speichern
+            script(src="/javascripts/edit_object.js")

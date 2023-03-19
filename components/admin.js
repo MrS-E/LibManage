@@ -71,16 +71,60 @@ exports.add = function (req, res, next){
             })
     }else if(req.session.loggedin){
         res.sendStatus(401).send('Sie sind kein Administrator und so nicht genehmigt diesen Bereich der Webseite aufzusuchen.')
-    }else{
-        res.redirect('/login')
     }
 }
 
-exports.delete =async function (req,res,next){
+exports.delete = async function (req, res, next){
     if(req.session.loggedin && req.session.role==='admin') {
         res.send(await objects.deleteOne({_id: req.params.id}))
     }
     else{
         res.sendStatus(401).send({error: "You are not an admin", deletedCount: 0})
+    }
+}
+
+exports.view_edit = function(req, res, next){
+    if(req.session.loggedin && req.session.role==='admin'){
+        objects.findOne({_id: req.params.id})
+            .then((doc)=>{
+                let file = {
+                    _id:doc._id,
+                    title:doc.title,
+                    author:doc.author,
+                    publisher:doc.publisher,
+                    keywords:"",
+                    year:"",
+                    typ: doc.typ,
+                    blurb:doc.blurb,
+                    page:doc.page,
+                    position:doc.position
+                }
+                for(let d=0; d < doc.keywords.length; d++){
+                    file.keywords += doc.keywords[d]
+                    if(d+1 !== doc.keywords.length){
+                        file.keywords += ", "
+                    }
+                }
+                file.year = doc.year.toString().split(' ')[3]
+                console.log(file)
+                res.render('sites/ich', {user: req.session.username, role: req.session.role, render: 'edit', book:file})
+            })
+    } else if(req.session.loggedin){
+        res.sendStatus(401).send('Sie sind kein Administrator und so nicht genehmigt diesen Bereich der Webseite aufzusuchen.')
+    } else{
+        res.redirect('/login')
+    }
+}
+
+exports.edit = function (req, res,next) {
+    if (req.session.loggedin && req.session.role === 'admin') {
+        console.log(req.params.id)
+        console.log(req.body)
+        objects.updateOne({_id:req.params.id}, {$set: req.body})
+            .then((doc)=>{
+                res.send(doc)
+            })
+    } else if (req.session.loggedin) {
+        res.sendStatus(401).send('Sie sind kein Administrator und so nicht genehmigt diesen Bereich der Webseite aufzusuchen.')
     }
 }
