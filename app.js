@@ -26,6 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 console.log(express.static(path.join(__dirname, 'public')))
 
+//todo make api route
 app.use('/', require('./routes/index'));
 app.use('/admin', require('./routes/admin'));
 app.use('/user', require('./routes/user'));
