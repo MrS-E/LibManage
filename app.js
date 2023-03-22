@@ -26,7 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 console.log(express.static(path.join(__dirname, 'public')))
 
-//todo make api route
+//todo make api route (complete split between render and api access)
 app.use('/', require('./routes/index'));
 app.use('/admin', require('./routes/admin'));
 app.use('/user', require('./routes/user'));
