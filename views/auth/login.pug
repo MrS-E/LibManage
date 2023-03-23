@@ -1,7 +1,7 @@
 extends auth_layout
 
 block content
-    form.form-signin.mt-5(method="post" action="/user/verify")
+    form.form-signin.mt-5(method="post" action="/api/user/verify")
         h1.h3.mb-3.font-weight-normal Login
         label.sr-only(for="email") Email
         input.form-control(placeholder="Email address" autofocus type="email" id="email" name="email")

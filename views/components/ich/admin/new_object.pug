@@ -1,7 +1,7 @@
 mixin new_object
     .row
         h1 Neues Objekt
-        form(action='/admin', method="post")
+        form(action='/api/admin', method="post")
             label.mt-1(for="title") Title
             input.form-control(type="text" name="title" required)
             label.mt-1(for="author") Autor
