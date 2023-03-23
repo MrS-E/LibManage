@@ -1,9 +1,32 @@
-const user = require('../src/db/models/user')
-const object = require('../src/db/models/object')
+const objects = require('../../src/db/models/object')
 
-exports.view = function(req, res, next){
+exports.view = function (req, res) {
+    if (req.session.loggedin) {
+        objects.find()
+            .then((doc)=>{
+                doc = doc.reduce((r, e, i) => (i % 4 ? r[r.length - 1].push(e) : r.push([e])) && r, []); // from https://stackoverflow.com/questions/38048497/group-array-values-in-group-of-3-objects-in-each-array-using-underscore-js
+                console.log(doc)
+                res.render('sites/liste', {user: req.session.username, book_list: doc})
+            })
+    }else{
+        res.redirect('/login')
+    }
+}
+
+exports.object = function (req, res){
+    if (req.session.loggedin) {
+        objects.findOne({_id: req.params.id})
+            .then((doc)=>{
+                res.render('sites/object', {user: req.session.username, book: doc})
+            })
+    }else{
+        res.redirect('/login')
+    }
+}
+
+exports.lend = function(req, res){
     if(req.session.loggedin) { //TODO check is already rented by you
-        object.findOne({_id: req.params.id})
+        objects.findOne({_id: req.params.id})
             .then((doc)=>{
                 if(doc.typ===('E-Book' || 'E-Audio' || 'E-Video' || 'E-Paper')){
                     res.render('sites/lend', {user: req.session.username, name: req.session.name, book: doc, can_be_rented: true})
@@ -23,22 +46,4 @@ exports.view = function(req, res, next){
     else{
         res.redirect('/login')
     }
-}
-exports.lend = async function (req, res, next){
-    console.log(req.session.userid, ' ', req.params.id)
-        const d = new Date().toISOString().split('T')[0]
-    await user.updateOne({_id: req.session.userid}, {$push: {history: {book: req.params.id, start: d, end: null}}})
-        .catch(err=>{
-            console.error(err)
-            res.redirect('/liste')
-        })
-    await object.updateOne({_id: req.params.id}, {$push: {history: {user: req.session.userid, start: d, end: null}}})
-        .catch(err=>{
-            console.error(err)
-            res.redirect('/liste')
-        })
-    res.redirect("/home")
-}
-exports.return = function (req, res, next){
- //todo return function for books
 }

@@ -27,13 +27,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 console.log(express.static(path.join(__dirname, 'public')))
 
 //todo make api route (complete split between render and api access)
-app.use('/', require('./routes/index'));
-app.use('/admin', require('./routes/admin'));
-app.use('/user', require('./routes/user'));
-app.use('/lend', require('./routes/lend'));
-app.use('/object', require('./routes/object'));
-app.use('/liste', require('./routes/liste'));
-app.use('/ich', require('./routes/ich'));
+//view
+app.use('/', require('./routes/view/index'));
+app.use('/admin', require('./routes/view/admin'));
+app.use('/lend', require('./routes/view/lend'));
+app.use('/liste', require('./routes/view/liste'));
+app.use('/ich', require('./routes/view/ich'));
+//api
+app.use('/api/admin', require('./routes/api/admin'))
+app.use('/api/object', require('./routes/api/object'))
+app.use('/api/user', require('./routes/api/user'))
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -41,7 +44,7 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function(err, req, res) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
