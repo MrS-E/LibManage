@@ -176,7 +176,14 @@ exports.read = function (req, res){
                 for (let d of doc.history) {
                     if (!d.end && d.book === book) {
                         files.findOne({book_id:book})
-                            .then((doc)=>res.send({file:doc.file}))
+                            .then((doc)=>{
+                            object.findOne({_id:book})
+                                .then((obj)=>{
+                                    const author = obj.author.split(',')[0].split(' ')
+                                    res.send({file:doc.file, name: obj.author.split(',')[0].split(' ').length===2?(author[1]+", " + author[0] + " - " + obj.title):(obj.author?(author[0] + " - " + obj.title):obj.title )})
+                                })
+                                .catch((err)=>{console.log(err);res.sendStatus(500).send({file:null, error: "Internal Server Error"})})
+                            })
                             .catch((err)=>{console.log(err);res.sendStatus(500).send({file:null, error: "Internal Server Error"})})
                         break;
                     }

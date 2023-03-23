@@ -8,5 +8,6 @@ router.get('/search', object.find);
 router.get('/detail/:id', object.detail);
 router.post('/lend/:id', object.lend);
 router.put('/return', object.return);
+router.get('/read/:id', object.read)
 
 module.exports = router;

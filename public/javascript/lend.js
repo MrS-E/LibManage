@@ -1,6 +1,16 @@
 for(let d of document.getElementsByClassName('read')){
     d.addEventListener('click', (e)=>{
-        //todo reading (ask function "components/ich/read)
+        const book = e.target.id
+        fetch('/api/object/read/'+book, {method:"get"})
+            .then((response)=>response.json())
+            .then((res)=>{
+                console.log(res.file)
+                //window.open(res.file+(res.file.split('/')[1].split(';')[0].split('+')[0], '_blank').focus();
+                const a = document.createElement("a")
+                a.href = res.file
+                a.download = res.name +"."+ res.file.split('/')[1].split(';')[0].split('+')[0]
+                a.click()
+            })
     })
 }
 
