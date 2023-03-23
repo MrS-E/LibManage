@@ -31,7 +31,6 @@ mixin ausgeliehen(books)
                         if book.typ === 'E-Paper' || book.typ === 'E-Book'
                             button.btn(class="read" id=book._id) Lesen
                             br
-                            //- todo maybe form with get to use session for better security instead of using event listener
                         else if book.typ === 'E-Video' || book.typ ===  'E-Audio'
                             button.btn(class="read" id=book._id) Abspielen
                             br
