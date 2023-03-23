@@ -16,7 +16,7 @@ block content
                 a#ich_settings.nav-link(href="/ich/settings") Einstellungen
                     //todo settings
                 if(role==='admin'||role==='worker')
-                    a#ich_returns.nav-link(href="/returns") Rückgaben
+                    a#ich_returns.nav-link(href="/ich/returns") Rückgaben
                         //todo rückgaben for worker
                     if role==='admin'
                         a#ich_admin.nav-link(href="/admin") Objekte
@@ -37,4 +37,4 @@ block content
             else if render==='edit'
                 +edit_object(book)
             else if render==='return'
-    script(src="/javascripts/ich.js")
+    script(src="/javascript/ich.js")

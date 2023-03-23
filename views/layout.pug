@@ -5,8 +5,9 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
     //- https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css
     link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    link( rel="icon" href="/image/book.ico")
     //- https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js
-    script(src='/javascripts/bootstrap.js')
+    script(src='/javascript/bootstrap.js')
   body
     nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
       .container-fluid
@@ -25,7 +26,7 @@ html
           span.nav-text.text-white Angemeldet als #{user}
           button.btn.btn-outline-success.my-2.my-sm-0(type="submit" value="Abmelden" style="margin-right: 1vw; margin-left: 10px;") Abmelden
 
-    script(src='/javascripts/navbar.js')
+    script(src='/javascript/navbar.js')
     .container.mt-1
       block content
 
