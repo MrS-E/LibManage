@@ -56,7 +56,7 @@ exports.return = function (req, res){
                     _return.save()
                         .then(() => {
                             user.updateOne({_id: req.session.userid, "history.book": req.body.id, "history.end": null}, {$set: {"history.$.end": new Date().toISOString()}})
-                                //.then(doc=>console.log(doc))
+                                .then(doc=>console.log(doc))
                             res.send('return ticket submitted')
                         })
                         .catch(err => {
@@ -67,8 +67,9 @@ exports.return = function (req, res){
                     console.log("e-medium")
                     user.updateOne({_id: req.session.userid, "history.book": req.body.id, "history.end": null}, {$set: {"history.$.end": new Date().toISOString()}})
                         .then(()=>{
-                            object.updateOne({_id: req.body.id, "history.user": req.session.userid, "history.end": null}, {$set: {"history.$.end": new Date().toISOString()}})
-                                .then(() => {
+                            object.updateOne({_id: req.body.id, "history.user": req.session.userid, "history.end": null}, {$set: {"history.$.end": new Date().toISOString()}}) //fixme Why doesn't this work when the same command works fine on the user?
+                                .then((doc) => {
+                                    console.log(doc)
                                     res.send('e-medium returned')
                                 })
                                 .catch(err => {

@@ -14,7 +14,7 @@ const object = new mongoose.Schema(
         //small_desc: {type: String},
         img:{ type: String},
         img_desc:{type: String},
-        history: {type: [{user: {type: String, required: true}, start:{type: Date, required: true}, end:{type: Date}}]},
+        history: {type: [{user: {type: String, required: true}, start:{type: Date, required: true}, end:{type: Date, default:null}}]},
         read: {type: Boolean},
         page: {type: Number},
         position: {type: String}
