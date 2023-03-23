@@ -167,3 +167,22 @@ exports.edit = function (req, res) {
         res.sendStatus(401).send('Sie sind kein Administrator und so nicht genehmigt diesen Bereich der Webseite aufzusuchen.')
     }
 }
+
+exports.read = function (req, res){
+    if(req.session.loggedin) {
+        const book = req.params.id
+        user.findOne({_id: req.session.userid})
+            .then((doc) => {
+                for (let d of doc.history) {
+                    if (!d.end && d.book === book) {
+                        files.findOne({book_id:book})
+                            .then((doc)=>res.send({file:doc.file}))
+                            .catch((err)=>{console.log(err);res.sendStatus(500).send({file:null, error: "Internal Server Error"})})
+                        break;
+                    }
+                }
+            })
+    } else {
+        res.sendStatus(401)
+    }
+}
