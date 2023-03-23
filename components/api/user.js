@@ -24,7 +24,7 @@ exports.add = function (req, res){
                                 })
                                 .catch(err => {
                                     console.error(err)
-                                    res.redirect('/register?error="Etwas hat nicht funktioniert, versuchen Sie es später noch einmal."')
+                                    res.sendStatus(500).redirect('/register?error="Etwas hat nicht funktioniert, versuchen Sie es später noch einmal."')
                                 })
                         } else {
                             res.sendStatus(403).redirect('/register?error="Nutzer existiert bereits"')
@@ -32,7 +32,7 @@ exports.add = function (req, res){
                     })
                     .catch(err => {
                         console.error(err)
-                        res.redirect('/register?error="Etwas hat nicht funktioniert, versuchen Sie es später noch einmal."')
+                        res.sendStatus(500).redirect('/register?error="Etwas hat nicht funktioniert, versuchen Sie es später noch einmal."')
                     })
             })
     }else{
@@ -63,7 +63,7 @@ exports.verify = function (req, res){
         })
         .catch(err => {
             console.error(err)
-            res.sendStatus(400).redirect('/home?error="Etwas ist schiefgelaufen"');
+            res.sendStatus(500).redirect('/home?error="Etwas ist schiefgelaufen"');
         })
 }
 

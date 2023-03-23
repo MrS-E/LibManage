@@ -40,7 +40,7 @@ exports.lend = function(req, res){
             })
             .catch((err)=>{
                 console.log(err)
-                res.redirect('/liste/'+req.params.id)
+                res.sendStatus(500).redirect('/liste/'+req.params.id)
             })
     }
     else{

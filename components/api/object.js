@@ -33,12 +33,12 @@ exports.lend = async function (req, res){
     await user.updateOne({_id: req.session.userid}, {$push: {history: {book: req.params.id, start: d, end: null}}})
         .catch(err=>{
             console.error(err)
-            res.redirect('/liste')
+            res.sendStatus(500).redirect('/liste')
         })
     await object.updateOne({_id: req.params.id}, {$push: {history: {user: req.session.userid, start: d, end: null}}})
         .catch(err=>{
             console.error(err)
-            res.redirect('/liste')
+            res.sendStatus(500).redirect('/liste')
         })
     res.redirect("/home")
 }
@@ -62,7 +62,7 @@ exports.return = function (req, res) {
                         })
                         .catch(err => {
                             console.log(err)
-                            res.send('return ticket submit did not go well')
+                            res.sendStatus(500).send('return ticket submit did not go well')
                         })
                 } else {
                     console.log("e-medium")
@@ -75,12 +75,12 @@ exports.return = function (req, res) {
                                 })
                                 .catch(err => {
                                     console.log(err)
-                                    res.send('return did not go well')
+                                    res.sendStatus(500).send('return did not go well')
                                 })
                         })
                         .catch(err => {
                             console.log(err)
-                            res.send('return did not go well')
+                            res.sendStatus(500).send('return did not go well')
                         })
                 }
             })
@@ -138,7 +138,7 @@ exports.add = function (req, res){
                     })
                     .catch(err => {
                         console.error(err)
-                        res.redirect('/admin')
+                        res.sendStatus(500).redirect('/admin')
                     })
             })
     }else if(req.session.loggedin){
@@ -183,6 +183,6 @@ exports.read = function (req, res){
                 }
             })
     } else {
-        res.sendStatus(401)
+        res.sendStatus(401).redirect('/login')
     }
 }
