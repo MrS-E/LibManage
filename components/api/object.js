@@ -44,31 +44,42 @@ exports.lend = async function (req, res){
 
 exports.return = function (req, res){
     if(req.session.userid) {
-        //console.log('return')
+        console.log('return')
         object.findOne({_id: req.body.id })
-            .then((doc)=>{
-                if(doc.typ !== ('E-Book' || 'E-Audio' || 'E-Video' || 'E-Paper')){
+            .then( (doc) => {
+                if (doc.typ.split('-')[0] !== 'E') {
+                    console.log('book')
                     let _return = new returner({
                         user_id: req.session.userid,
                         book_id: req.body.id
                     })
                     _return.save()
                         .then(() => {
+                            user.updateOne({_id: req.session.userid, "history.book": req.body.id, "history.end": null}, {$set: {"history.$.end": new Date().toISOString()}})
+                                //.then(doc=>console.log(doc))
                             res.send('return ticket submitted')
                         })
                         .catch(err => {
                             console.log(err)
                             res.send('return ticket submit did not go well')
                         })
-                }else{
-                    //console.log("e-medium")
-                    user.updateOne({_id: req.session.userid, "history.book": req.body.id}, {$set:{"history.$.end": new Date().toISOString().split('T')[0]}})
-                        .then(()=>res.send('e-medium returned'))
-                        .catch(err=> {
+                } else {
+                    console.log("e-medium")
+                    user.updateOne({_id: req.session.userid, "history.book": req.body.id, "history.end": null}, {$set: {"history.$.end": new Date().toISOString()}})
+                        .then(()=>{
+                            object.updateOne({_id: req.body.id, "history.user": req.session.userid, "history.end": null}, {$set: {"history.$.end": new Date().toISOString()}})
+                                .then(() => {
+                                    res.send('e-medium returned')
+                                })
+                                .catch(err => {
+                                    console.log(err)
+                                    res.send('return did not go well')
+                                })
+                        })
+                        .catch(err => {
                             console.log(err)
                             res.send('return did not go well')
                         })
-                    object.updateOne({_id: req.body.id, "history.user":req.session.userid}, {$set:{"history.$.end": new Date().toISOString().split('T')[0]}})
                 }
             })
     }

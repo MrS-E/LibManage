@@ -28,10 +28,10 @@ exports.lend = function(req, res){
     if(req.session.loggedin) { //TODO check is already rented by you
         objects.findOne({_id: req.params.id})
             .then((doc)=>{
-                if(doc.typ===('E-Book' || 'E-Audio' || 'E-Video' || 'E-Paper')){
+                if(doc.typ.split('-')[0] === 'E'){
                     res.render('sites/lend', {user: req.session.username, name: req.session.name, book: doc, can_be_rented: true})
                 }else{
-                    if(doc.history.length === 0 || typeof(doc.history[doc.history.length-1].end) === Date){
+                    if(doc.history.length === 0 || doc.history[doc.history.length-1].end){
                         res.render('sites/lend', {user: req.session.username, name: req.session.name, book: doc, can_be_rented: true})
                     }else{
                         res.render('sites/lend', {user: req.session.username, name: req.session.name, book: doc, can_be_rented: false})

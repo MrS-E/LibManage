@@ -27,7 +27,7 @@ block content
                     td #{book.isbn}
         .row.mt-4
         if can_be_rented
-            form(method='post' action='/lend/'+book._id)
+            form(method='post' action='/api/object/lend/'+book._id)
                 button.btn.btn-primary(type='submit') Ausleihen
         else
             p.border-2.bg-warning.border-danger.rounded Dieses Werk ist bereits ausgeliehen, da es sich nicht um ein E-Medium handelt, kann es nicht mehrfach zur gleichen Zeit ausgeliehen werden.
