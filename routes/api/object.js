@@ -7,6 +7,6 @@ router.get('/all', object.all);
 router.get('/search', object.find);
 router.get('/detail/:id', object.detail);
 router.post('/lend/:id', object.lend);
-router.put('/lend/:id', object.return);
+router.put('/return', object.return);
 
 module.exports = router;

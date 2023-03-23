@@ -1,5 +1,5 @@
 ###Register check if not working
-POST localhost:3000/user/add
+POST localhost:3000/api/user/add
 Content-Type: application/json
 
 {
@@ -10,7 +10,7 @@ Content-Type: application/json
 }
 
 ###Register Test User
-POST localhost:3000/user/add
+POST localhost:3000/api/user/add
 Content-Type: application/json
 
 {
@@ -22,7 +22,7 @@ Content-Type: application/json
 }
 
 ###Login
-POST localhost:3000/user/verify
+POST localhost:3000/api/user/verify
 Content-Type: application/json
 
 {
@@ -31,7 +31,7 @@ Content-Type: application/json
 }
 
 ###add_books
-POST  localhost:3000/admin
+POST  localhost:3000/api/admin
 Content-Type: application/json
 
 {
@@ -50,7 +50,7 @@ Content-Type: application/json
 }
 
 ### delete book
-DELETE localhost:3000/admin/2
+DELETE localhost:3000/api/admin/2
 
 ###Logout
-POST localhost:3000/logout
+POST localhost:3000/api/logout

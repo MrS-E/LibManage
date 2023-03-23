@@ -7,8 +7,8 @@ for(let d of document.getElementsByClassName('read')){
 for(let d of document.getElementsByClassName('return')){
     d.addEventListener('click', (e)=>{
         console.log(e.target)
-        fetch('/object/return', {
-            method: 'post',
+        fetch('/api/object/return', {
+            method: 'put',
             headers:{
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -18,8 +18,7 @@ for(let d of document.getElementsByClassName('return')){
             })
         })
             .then(
-           res=>{
-               //console.log(res)
+                ()=>{
                window.location.reload()
            }
         )

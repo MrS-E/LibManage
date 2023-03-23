@@ -2,7 +2,7 @@
 document.getElementById("search_btn").addEventListener('click', ()=> {
     const term = document.getElementById("search").value;
     if (term !== "") {
-        fetch('/object/search?find=' + term)
+        fetch('/api/object/search?find=' + term)
             .then(res => res.json())
             .then(doc => {
                 console.log(doc)
@@ -10,7 +10,7 @@ document.getElementById("search_btn").addEventListener('click', ()=> {
             })
             .catch((err) => console.error(err))
     }else{
-        fetch('/object/all')
+        fetch('/api/object/all')
             .then(res => res.json())
             .then(doc => {
                     console.log(doc)
