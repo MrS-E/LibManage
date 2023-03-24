@@ -1,6 +1,8 @@
-const objects = require("../../src/db/models/object");
+const objects = require("../../src/db/models/object")
+const returns = require("../../src/db/models/returns")
+const users = require("../../src/db/models/user")
 
-exports.view = function(req, res){
+exports.object = function(req, res){
     if(req.session.loggedin && req.session.role==='admin'){
         objects.find()
             .then((doc)=> {
@@ -66,6 +68,26 @@ exports.edit = function(req, res){
     } else if(req.session.loggedin){
         res.sendStatus(401).send('Sie sind kein Administrator und so nicht genehmigt diesen Bereich der Webseite aufzusuchen.')
     } else{
+        res.redirect('/login')
+    }
+}
+
+exports.returns = function (req, res){
+    if(req.session.loggedin && (req.session.role==='admin' || req.session.role==='worker')){
+        returns.find()
+            .then(async (doc)=> {
+                const books_to_return = [];
+                for(let d of doc){
+                    const obj = await objects.findOne({_id: d.book_id})
+                    const user = await users.findOne({_id:d.user_id})
+                    console.log(d)
+                    books_to_return.push({book: obj, user:user, returned_date: new Date(d.returned).toISOString().split('T')[0].split('-'),returned_time:new Date(d.returned).toISOString().split('T')[1].split('.')[0]})
+                }
+                res.render('sites/ich', {user: req.session.username, role: req.session.role, render: 'return', returns:books_to_return})
+            })
+    }else if(req.session.loggedin){
+        res.sendStatus(401).send('Sie sind kein Mitarbeiter/Administrator und so nicht genehmigt diesen Bereich der Webseite aufzusuchen.')
+    }else{
         res.redirect('/login')
     }
 }

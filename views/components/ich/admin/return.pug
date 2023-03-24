@@ -1,0 +1,16 @@
+mixin return(returns)
+    h1 Rückgaben
+    each gabe in returns
+        .row.border.rounded
+            h5 #{gabe.book.title} von #{gabe.book.author}
+            p
+                span Ausgeliehen von: #{gabe.user.firstName} #{gabe.user.lastName}
+                br
+                span Zurück gegeben am #{gabe.returned_date[2]}.#{gabe.returned_date[1]}.#{gabe.returned_date[0]} um #{gabe.returned_time}
+            form(method="post" action="/api/object/confirm/"+gabe.book._id)
+                label(for="place") Standort
+                input.form-control(name="place" type="text" value=gabe.book.position)
+                button.mt-1.form-control.btn.btn-primary(type="submit") Rückgabe bestätigen
+
+
+

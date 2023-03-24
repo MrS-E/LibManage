@@ -9,5 +9,6 @@ router.get('/detail/:id', object.detail);
 router.post('/lend/:id', object.lend);
 router.put('/return', object.return);
 router.get('/read/:id', object.read)
+router.post('/confirm/:id', object.return_confirmation)
 
 module.exports = router;

@@ -29,7 +29,7 @@ exports.detail = function (req, res){
 
 exports.lend = async function (req, res){
     console.log(req.session.userid, ' ', req.params.id)
-    const d = new Date().toISOString().split('T')[0]
+    const d = new Date().toISOString()
     await user.updateOne({_id: req.session.userid}, {$push: {history: {book: req.params.id, start: d, end: null}}})
         .catch(err=>{
             console.error(err)
@@ -52,7 +52,8 @@ exports.return = function (req, res) {
                     console.log('book')
                     let _return = new returner({
                         user_id: req.session.userid,
-                        book_id: req.body.id
+                        book_id: req.body.id,
+                        returned: new Date().toISOString()
                     })
                     _return.save()
                         .then(() => {
@@ -190,6 +191,17 @@ exports.read = function (req, res){
                 }
             })
     } else {
-        res.sendStatus(401).redirect('/login')
+        res.sendStatus(401)
+    }
+}
+
+exports.return_confirmation = function (req, res){
+    if(req.session.loggedin && (req.session.role==='admin' || req.session.role==='worker')) {
+        const book = req.params.id
+        returner.deleteOne({book_id: book}).then(doc => console.log(doc))
+        object.updateOne({_id: book, history: {$elemMatch: {end: null}}}, {$set: {"history.$.end": new Date().toISOString(), position: req.body.place}}).then(doc => console.log(doc))
+        res.redirect("/ich/returns")
+    }else{
+        res.sendStatus(401).send('Sie sind kein Mitarbeiter/Administrator und so nicht genehmigt diesen Bereich der Webseite aufzusuchen.')
     }
 }

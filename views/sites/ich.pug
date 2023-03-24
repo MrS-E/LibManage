@@ -5,6 +5,7 @@ include ../components/ich/settings
 include ../components/ich/admin/objects
 include ../components/ich/admin/new_object
 include ../components/ich/admin/edit_object
+include ../components/ich/admin/return
 
 block content
     h1 Ich
@@ -37,4 +38,5 @@ block content
             else if render==='edit'
                 +edit_object(book)
             else if render==='return'
+                +return(returns)
     script(src="/javascript/ich.js")
