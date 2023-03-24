@@ -1,24 +1,31 @@
 //Search
+fetch_books("");
 document.getElementById("search_btn").addEventListener('click', ()=> {
     const term = document.getElementById("search").value;
+    fetch_books(term);
+})
+
+function fetch_books(term){
     if (term !== "") {
-        fetch('/api/object/search?find=' + term)
+        console.log("search")
+        fetch('/api/object/?find=' + term)
             .then(res => res.json())
             .then(doc => {
-                console.log(doc)
+                //console.log(doc)
                 document.getElementById("books").innerHTML = list_books(doc);
             })
             .catch((err) => console.error(err))
     }else{
-        fetch('/api/object/all')
+        console.log("all")
+        fetch('/api/object/')
             .then(res => res.json())
             .then(doc => {
-                    console.log(doc)
-                    document.getElementById("books").innerHTML = list_books(doc);
+                //console.log(doc)
+                document.getElementById("books").innerHTML = list_books(doc);
             })
             .catch((err) => console.error(err))
     }
-})
+}
 
 function list_books(books){
     books = books.reduce((r, e, i) => (i % 4 ? r[r.length - 1].push(e) : r.push([e])) && r, []); // from https://stackoverflow.com/questions/38048497/group-array-values-in-group-of-3-objects-in-each-array-using-underscore-js
@@ -30,7 +37,7 @@ function list_books(books){
         for(let y=0; y<books[x].length; y++){
             console.log(books[x][y])
             out += "<div class='col-3'>"
-            out += book(books[x][y])
+            out += gen_book(books[x][y])
             out += "</div>"
         }
         out += "</div>"
@@ -38,7 +45,7 @@ function list_books(books){
     return out
 }
 
-function book(book){
+function gen_book(book){
     if(!book.img) book.img = "/image/no_img.png"
     if(!book.img_desc) book.img_desc = "kein bild verfügbar"
     if(!book.small_desc) book.small_desc = ""
