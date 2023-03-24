@@ -2,14 +2,76 @@ extends ../layout
 include ../components/book_list
 
 block content
+    style .accordion-body{max-height:12vh; overflow-y: scroll}
     h1 Liste
     .row
         .col-10
-            input.form-control(placeholder="search" type="text" id="search")
+            input.form-control#search(placeholder="search" type="text")
         .col-2
-            button.btn.btn-primary(id="search_btn" type="submit") Search
+            button.btn.btn-primary#search_btn(type="submit") Search
         //todo filter
-    .row.mt-2(id="books")
+    .row.mt-2
+        .col-3
+            .accordion#KategorieAccordion
+                .accordion-item
+                    h2.accordion-header#headingOne
+                        button.accordion-button(type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne") Kategorie
+                    .accordion-collapse.collapse#collapseOne(aria-labelledby="headingOne" data-bs-parent="#KategorieAccordion")
+                        .accordion-body
+                            input.kategorie#Buch(type="checkbox")
+                            label.ps-1(for="Buch")  Buch
+                            br
+                            input.kategorie#Zeitschrift(type="checkbox")
+                            label.ps-1(for="Zeitschrift")  Zeitschrift
+                            br
+                            input.kategorie#Kassette(type="checkbox")
+                            label.ps-1(for="Kassette")  Kassette
+                            br
+                            input.kategorie#CD(type="checkbox")
+                            label.ps-1(for="CD")  CD
+                            br
+                            input.kategorie#DVD(type="checkbox")
+                            label.ps-1(for="DVD")  DVD
+                            br
+                            input.kategorie#E-Book(type="checkbox")
+                            label.ps-1(for="E-Book")  E-Book
+                            br
+                            input.kategorie#E-Paper(type="checkbox")
+                            label.ps-1(for="E-Paper")  E-Paper
+                            br
+                            input.kategorie#E-Audio(type="checkbox")
+                            label.ps-1(for="E-Audio")  E-Audio
+                            br
+                            input.kategorie#E-Video(type="checkbox")
+                            label.ps-1(for="E-Video")  E-Video
+        .col-3
+            .accordion#SchlusselAccordion
+                .accordion-item
+                    h2.accordion-header#headingTwo
+                        button.accordion-button(type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo") Schlüsselwörter
+                    .accordion-collapse.collapse#collapseTwo(aria-labelledby="headingTwo" data-bs-parent="#SchlusselAccordion")
+                        .accordion-body
+
+        .col-3
+            .accordion#YearAccordion
+                .accordion-item
+                    h2.accordion-header#headingThree
+                        button.accordion-button(type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree") Erscheinungsjahr
+                    .accordion-collapse.collapse#collapseThree(aria-labelledby="headingThree" data-bs-parent="#YearAccordion")
+                        .accordion-body
+                            label.pe-1(for="min") Min:
+                            input.year#min(type="number" min="1000" value="1000")
+                            label.pe-1(for="max") Max:
+                            input.year.mt-1#max(type="number", min="1000")
+        .col-3
+            .accordion#SortAccordion
+                .accordion-item
+                    h2.accordion-header#headingFour
+                        button.accordion-button(type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour") Reihung
+                    .accordion-collapse.collapse#collapseFour(aria-labelledby="headingFour" data-bs-parent="#SortAccordion")
+                        .accordion-body
+                            p sadfsadfasdf
+    .row.mt-2#books
         each books in book_list
             +book_list(books)
 

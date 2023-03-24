@@ -8,7 +8,7 @@ const object = new mongoose.Schema(
         publisher:{type: String},
         isbn: { type: String},
         keywords: { type: [String]},
-        typ: {type: String, required: true, enum:['E-Book', 'Buch', 'Zeitschrift', 'E-Paper', 'CD', 'DVD', 'E-Audio', 'E-Video'], default: 'Buch'},
+        typ: {type: String, required: true, enum:['E-Book', 'Buch', 'Zeitschrift', 'E-Paper', 'CD', 'DVD', 'E-Audio', 'E-Video', 'Kassette'], default: 'Buch'},
         year: {type: Date},
         blurb: {type: String},
         //small_desc: {type: String},
