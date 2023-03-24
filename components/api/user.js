@@ -24,19 +24,19 @@ exports.add = function (req, res){
                                 })
                                 .catch(err => {
                                     console.error(err)
-                                    res.sendStatus(500).redirect('/register?error="Etwas hat nicht funktioniert, versuchen Sie es später noch einmal."')
+                                    res.redirect('/register?error="Etwas hat nicht funktioniert, versuchen Sie es später noch einmal."')
                                 })
                         } else {
-                            res.sendStatus(403).redirect('/register?error="Nutzer existiert bereits"')
+                            res.redirect('/register?error="Nutzer existiert bereits"')
                         }
                     })
                     .catch(err => {
                         console.error(err)
-                        res.sendStatus(500).redirect('/register?error="Etwas hat nicht funktioniert, versuchen Sie es später noch einmal."')
+                        res.redirect('/register?error="Etwas hat nicht funktioniert, versuchen Sie es später noch einmal."')
                     })
             })
     }else{
-        res.sendStatus(400).redirect('/register?error="Bitte geben Sie zweimal das selbe Passwort an."')
+        res.redirect('/register?error="Bitte geben Sie zweimal das selbe Passwort an."')
     }
 }
 
@@ -58,12 +58,12 @@ exports.verify = function (req, res){
                 req.session.role = doc.role;
                 res.redirect('/home');
             }else{
-                res.sendStatus(401).redirect('/home?error="Anmeldedaten waren inkorrekt. Bitte versuchen Sie es noch einmal."')
+                res.redirect('/home?error="Anmeldedaten waren inkorrekt. Bitte versuchen Sie es noch einmal."')
             }
         })
         .catch(err => {
             console.error(err)
-            res.sendStatus(500).redirect('/home?error="Etwas ist schiefgelaufen"');
+            res.redirect('/home?error="Etwas ist schiefgelaufen"');
         })
 }
 
