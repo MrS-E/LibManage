@@ -70,7 +70,18 @@ block content
                         button.accordion-button(type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour") Reihung
                     .accordion-collapse.collapse#collapseFour(aria-labelledby="headingFour" data-bs-parent="#SortAccordion")
                         .accordion-body
-                            p sadfsadfasdf
+                            select.sort.form-control
+                                option(value="title") Titel
+                                option(value="author") Autor
+                                option(value="year") Jahr
+                                option(value="added") Hinzugefügt
+                            br
+                            .float-start
+                                input.sort#alph(type="radio" checked name="sort")
+                                label.ps-1(for="alph") A-Z
+                            .float-end
+                                input.sort#revalph(type="radio" name="sort")
+                                label.ps-1(for="revalph") Z-A
     .row.mt-2#books
         each books in book_list
             +book_list(books)
