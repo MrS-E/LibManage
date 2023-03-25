@@ -31,7 +31,8 @@ exports.history = function (req, res){
             .then(async (doc) => {
                 const books = []
                 for (let d of doc.history) {
-                    books.push(await object.findOne({_id: d.book}))
+                    const obj = await object.findOne({_id: d.book})
+                    if(obj) books.push(obj)
                 }
                 res.render('sites/ich', {user: req.session.username, role: req.session.role, render: 'history', books: books})
             })
