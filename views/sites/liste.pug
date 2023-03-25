@@ -76,10 +76,10 @@ block content
                                 option(value="year") Jahr
                             br
                             .float-start
-                                input.sort#alph(type="radio" checked name="sort")
+                                input.sort#alph(type="radio" checked name="sort" value="norm")
                                 label.ps-1(for="alph") A-Z
                             .float-end
-                                input.sort#revalph(type="radio" name="sort")
+                                input.sort#revalph(type="radio" name="sort" value="rev")
                                 label.ps-1(for="revalph") Z-A
     .row.mt-2#books
         each books in book_list

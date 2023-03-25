@@ -1,15 +1,24 @@
 setup()
 let objects = []
+let aktuell = []
 const sort = {
-    type: "author",
+    type: "title",
     reverse: false
 }
 
 document.getElementsByClassName("kategorie")
 document.getElementsByClassName("schlussel")
 document.getElementsByClassName("year")
-document.querySelectorAll(".sort[name='sort']")
-document.querySelector("select.sort")
+for(let el of document.querySelectorAll(".sort[name='sort']")){
+    el.addEventListener('change', ()=>{
+        document.querySelector('.sort[name="sort"]:checked').value === "norm"?sort.reverse=false:sort.reverse=true
+        show_sort(aktuell)
+    })
+}
+document.querySelector("select.sort").addEventListener('change', (e)=>{
+    sort.type= e.target.value
+    show_sort(aktuell)
+})
 document.getElementById("search_btn").addEventListener('click', search)
 document.getElementById('search').addEventListener("click", (e)=>{
     e.target.value = "";
@@ -23,22 +32,20 @@ function setup(){
                 write_keywords(doc)
                 document.getElementById("max").value = new Date().toISOString().split('-')[0]
                 objects = doc
+                aktuell = doc
             })
             .catch((err) => console.error(err))
 }
-function show_sort(books){
+async function show_sort(books){
     //todo sort books
-    if(document.getElementById("search").value === ""){
-        books = books.sort(function sorting(a, b) {
-            if (!sort.reverse && (a[sort.type] < b[sort.type])) return -1;
-            if (!sort.reverse && (a[sort.type] > b[sort.type])) return 1;
-            if (sort.reverse && (a[sort.type] < b[sort.type])) return 1;
-            if (sort.reverse && (a[sort.type] > b[sort.type])) return -1;
-            return 0;
-        })
-    }
-
-
+    console.log("sort")
+    books = books.sort(function sorting(a, b) {
+        if (sort.reverse && (a[sort.type] < b[sort.type])) return -1;
+        if (sort.reverse && (a[sort.type] > b[sort.type])) return 1;
+        if (!sort.reverse && (a[sort.type] < b[sort.type])) return 1;
+        if (!sort.reverse && (a[sort.type] > b[sort.type])) return -1;
+        return 0;
+    })
     //todo show only books within the filters
     write_books(books);
 }
@@ -113,9 +120,9 @@ function test(arr, sub) { // function is from https://stackoverflow.com/question
 }
 function search(){
     const term = document.getElementById("search").value;
-    const books = []
+    aktuell = []
     for(let d of objects){
-        if(test(d.keywords.concat([d.title, d.author, d.publisher, d.isbn]), term).includes(true)) books.push(d)
+        if(test(d.keywords.concat([d.title, d.author, d.publisher, d.isbn]), term).includes(true)) aktuell.push(d)
     }
-    show_sort(books)
+    show_sort(aktuell)
 }
