@@ -2,27 +2,11 @@ setup()
 let objects = []
 let aktuell = []
 const sort = {
-    type: "title",
-    reverse: false
+    sort: "title",
+    reverse: false,
+    type: [],
+    keywords: []
 }
-
-document.getElementsByClassName("kategorie")
-document.getElementsByClassName("schlussel")
-document.getElementsByClassName("year")
-for(let el of document.querySelectorAll(".sort[name='sort']")){
-    el.addEventListener('change', ()=>{
-        document.querySelector('.sort[name="sort"]:checked').value === "norm"?sort.reverse=false:sort.reverse=true
-        show_sort(aktuell)
-    })
-}
-document.querySelector("select.sort").addEventListener('change', (e)=>{
-    sort.type= e.target.value
-    show_sort(aktuell)
-})
-document.getElementById("search_btn").addEventListener('click', search)
-document.getElementById('search').addEventListener("click", (e)=>{
-    e.target.value = "";
-})
 
 function setup(){
         fetch('/api/object/')
@@ -30,20 +14,46 @@ function setup(){
             .then(doc => {
                 show_sort(doc)
                 write_keywords(doc)
+                add_eventListener()
                 document.getElementById("max").value = new Date().toISOString().split('-')[0]
                 objects = doc
                 aktuell = doc
             })
             .catch((err) => console.error(err))
 }
-async function show_sort(books){
+function show_sort(books){
     //todo sort books
+    books = Array.from(books)
+    console.log(books)
     console.log("sort")
+    //type
+    console.log(sort)
+    if(sort.type.length!==0){ //all selected categories must be
+        for(let d in books){
+            console.log(d.title, d.typ)
+            if (!sort.type.includes(d.typ)) books.splice(books.indexOf(d), 1)
+        }
+    }
+
+    //keywords
+    if(sort.keywords.length!==0){ //all keywords need to be for filled
+        for(let d of books){
+            if(!d.keywords.includes(sort.keywords.length)) books.splice(books.indexOf(d), 1)
+        }
+    }
+
+    /*if(sort.keywords.length!==0){ //only one keyword has to be for filled
+        for(let d of books){
+            if(!d.keywords.some(r=> sort.keywords.includes(r))) books.splice(books.indexOf(d), 1)
+        }
+    }*/
+
+    //sorting
     books = books.sort(function sorting(a, b) {
-        if (sort.reverse && (a[sort.type] < b[sort.type])) return -1;
-        if (sort.reverse && (a[sort.type] > b[sort.type])) return 1;
-        if (!sort.reverse && (a[sort.type] < b[sort.type])) return 1;
-        if (!sort.reverse && (a[sort.type] > b[sort.type])) return -1;
+        if (sort.reverse && (a[sort.sort] < b[sort.sort])) return -1;
+        if (sort.reverse && (a[sort.sort] > b[sort.sort])) return 1;
+        if (!sort.reverse && (a[sort.sort] < b[sort.sort])) return 1;
+        if (!sort.reverse && (a[sort.sort] > b[sort.sort])) return -1;
         return 0;
     })
     //todo show only books within the filters
@@ -86,7 +96,7 @@ async function write_books(books){
 
     document.getElementById("books").innerHTML = list_books(books);
 }
-async function write_keywords(books){
+function write_keywords(books){
     let keywords = []
     for (let d of books){
         for (let k of d.keywords){
@@ -110,6 +120,37 @@ async function write_keywords(books){
         accordion.appendChild(label)
         accordion.appendChild(document.createElement("br"))
     }
+}
+function add_eventListener(){
+    //search
+    document.getElementById("search_btn").addEventListener('click', search)
+    document.getElementById('search').addEventListener("click", (e)=>{
+        e.target.value = "";
+    })
+    //type
+    for(let el of document.getElementsByClassName("kategorie")){
+        el.addEventListener('change', (e)=>{
+            if(sort.type.includes(e.target.id)){
+                sort.type.splice(sort.type.indexOf(e.target.id), 1)
+            }else{
+                sort.type.push(e.target.id)
+            }
+            show_sort(aktuell)
+        })
+    }
+    document.getElementsByClassName("schlussel")
+    document.getElementsByClassName("year")
+    //sort
+    for(let el of document.querySelectorAll(".sort[name='sort']")){
+        el.addEventListener('change', ()=>{
+            document.querySelector('.sort[name="sort"]:checked').value === "norm"?sort.reverse=false:sort.reverse=true
+            show_sort(aktuell)
+        })
+    }
+    document.querySelector("select.sort").addEventListener('change', (e)=>{
+        sort.sort= e.target.value
+        show_sort(aktuell)
+    })
 }
 function test(arr, sub) { // function is from https://stackoverflow.com/questions/43750172/javascript-matching-strings-to-partial-matches
     sub = sub.toLowerCase();
