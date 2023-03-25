@@ -1,19 +1,16 @@
 setup()
 let objects = []
+const sort = {
+    type: "author",
+    reverse: false
+}
 
 document.getElementsByClassName("kategorie")
 document.getElementsByClassName("schlussel")
 document.getElementsByClassName("year")
 document.querySelectorAll(".sort[name='sort']")
 document.querySelector("select.sort")
-document.getElementById("search_btn").addEventListener('click', ()=> {
-    const term = document.getElementById("search").value;
-    const books = []
-    for(let d of objects){
-        if(test(d.keywords.concat([d.title, d.author, d.publisher, d.isbn]), term).includes(true)) books.push(d)
-    }
-    show_sort(books)
-})
+document.getElementById("search_btn").addEventListener('click', search)
 document.getElementById('search').addEventListener("click", (e)=>{
     e.target.value = "";
 })
@@ -31,6 +28,17 @@ function setup(){
 }
 function show_sort(books){
     //todo sort books
+    if(document.getElementById("search").value === ""){
+        books = books.sort(function sorting(a, b) {
+            if (!sort.reverse && (a[sort.type] < b[sort.type])) return -1;
+            if (!sort.reverse && (a[sort.type] > b[sort.type])) return 1;
+            if (sort.reverse && (a[sort.type] < b[sort.type])) return 1;
+            if (sort.reverse && (a[sort.type] > b[sort.type])) return -1;
+            return 0;
+        })
+    }
+
+
     //todo show only books within the filters
     write_books(books);
 }
@@ -102,4 +110,12 @@ function test(arr, sub) { // function is from https://stackoverflow.com/question
         .toLowerCase()
         .startsWith(sub.slice(0, Math.max(str.length - 1, 1)))
     );
+}
+function search(){
+    const term = document.getElementById("search").value;
+    const books = []
+    for(let d of objects){
+        if(test(d.keywords.concat([d.title, d.author, d.publisher, d.isbn]), term).includes(true)) books.push(d)
+    }
+    show_sort(books)
 }
