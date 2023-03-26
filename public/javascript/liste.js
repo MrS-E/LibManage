@@ -23,41 +23,49 @@ function setup(){
 }
 function show_sort(books){
     //todo sort books
-    books = Array.from(books)
-    console.log(books)
+    books = Array.from(books) //without that aktuell will be overwritten
     console.log("sort")
     //type
     console.log(sort)
     if(sort.type.length!==0){ //all selected categories must be
-        for(let d in books){
-            console.log(d.title, d.typ)
-            if (!sort.type.includes(d.typ)) books.splice(books.indexOf(d), 1)
+        for(let d=0 ;d < books.length; d++){
+            if (!sort.type.includes(books[d].typ)) {
+                books.splice(books.indexOf(books[d]), 1)
+                d--
+            }
         }
     }
 
     //keywords
     if(sort.keywords.length!==0){ //all keywords need to be for filled
-        for(let d of books){
-            if(!d.keywords.includes(sort.keywords.length)) books.splice(books.indexOf(d), 1)
+        for(let d=0 ;d < books.length; d++){
+            for(let key of sort.keywords) {
+                if (!(books[d].keywords.includes(key))) {
+                    books.splice(books.indexOf(books[d]), 1)
+                    d--
+                    break;
+                }
+            }
         }
     }
 
-    /*if(sort.keywords.length!==0){ //only one keyword has to be for filled
-        for(let d of books){
-            if(!d.keywords.some(r=> sort.keywords.includes(r))) books.splice(books.indexOf(d), 1)
+    /*if(sort.keywords.length!==0){ //only one keyword has to be for filled (functional)
+        for(let d=0 ;d < books.length; d++){
+            if(!books[d].keywords.some(r=> sort.keywords.includes(r))) { //from https://stackoverflow.com/questions/16312528/check-if-an-array-contains-any-element-of-another-array-in-javascript
+                books.splice(books.indexOf(books[d]), 1)
+                d--
+            }
         }
     }*/
 
     //sorting
-    books = books.sort(function sorting(a, b) {
-        if (sort.reverse && (a[sort.sort] < b[sort.sort])) return -1;
-        if (sort.reverse && (a[sort.sort] > b[sort.sort])) return 1;
-        if (!sort.reverse && (a[sort.sort] < b[sort.sort])) return 1;
-        if (!sort.reverse && (a[sort.sort] > b[sort.sort])) return -1;
-        return 0;
-    })
-    //todo show only books within the filters
-    write_books(books);
+     books.sort((a, b) => {
+         let textA = a[sort.sort].toUpperCase().replace(' ', '')
+         let textB = b[sort.sort].toUpperCase().replace(' ', '')
+         return (!sort.reverse) ? (textA < textB) ? -1 : (textA > textB) ? 1 : 0 : (textA < textB) ? 1 : (textA > textB) ? -1 : 0
+     })
+
+    write_books(books)
 }
 async function write_books(books){
     function list_books(books){
@@ -138,8 +146,18 @@ function add_eventListener(){
             show_sort(aktuell)
         })
     }
-    document.getElementsByClassName("schlussel")
-    document.getElementsByClassName("year")
+    //keywords
+    for(let el of document.getElementsByClassName("schlussel")){
+        el.addEventListener('change', (e)=>{
+            if(sort.keywords.includes(e.target.id)){
+                sort.keywords.splice(sort.keywords.indexOf(e.target.id), 1)
+            }else{
+                sort.keywords.push(e.target.id)
+            }
+            show_sort(aktuell)
+        })
+    }
+    console.log(document.getElementsByClassName("year"))
     //sort
     for(let el of document.querySelectorAll(".sort[name='sort']")){
         el.addEventListener('change', ()=>{
