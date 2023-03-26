@@ -8,7 +8,7 @@ mixin settings(user)
             span Name: #{user.lastName}
             br
             span Vorname: #{user.firstName}
-        button.btn.btn-outline-dark Ändern
+        button.btn.btn-outline-dark#profile Ändern
         //- todo button function
         hr.hr
         h4 Authentifizierung:
@@ -16,6 +16,4 @@ mixin settings(user)
             span E-Mail: #{user.email}
             br
             span Passwort: ********
-        button.btn.btn-outline-dark Ändern
-        //- todo button function
-
+        button.btn.btn-outline-dark#authentication Ändern
