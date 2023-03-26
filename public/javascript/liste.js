@@ -15,7 +15,7 @@ function setup(){
                 show_sort(doc)
                 write_keywords(doc)
                 add_eventListener()
-                document.getElementById("max").value = new Date().toISOString().split('-')[0]
+                //document.getElementById("max").value = new Date().toISOString().split('-')[0]
                 objects = doc
                 aktuell = doc
             })
