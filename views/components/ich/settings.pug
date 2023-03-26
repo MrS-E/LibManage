@@ -1,2 +1,21 @@
 mixin settings(user)
+    h3 Einstellungen
     .row
+        h4 Profil:
+        p
+            span Anrede: #{user.salutation}
+            br
+            span Name: #{user.lastName}
+            br
+            span Vorname: #{user.firstName}
+        button.btn.btn-outline-dark Ändern
+        //- todo button function
+        hr.hr
+        h4 Authentifizierung:
+        p
+            span E-Mail: #{user.email}
+            br
+            span Passwort: ********
+        button.btn.btn-outline-dark Ändern
+        //- todo button function
+

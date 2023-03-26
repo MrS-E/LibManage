@@ -19,7 +19,9 @@ exports.view = function (req, res){
 
 exports.settings = function (req, res){
     if(req.session.loggedin) {
-        res.render('sites/ich', {user: req.session.username, role: req.session.role, render: 'settings'})
+        user.findOne({_id:  req.session.userid}).then((doc)=>{
+            res.render('sites/ich', {user: req.session.username, role: req.session.role, render: 'settings', ich: doc})
+        })
     }else{
         res.redirect('/login')
     }
