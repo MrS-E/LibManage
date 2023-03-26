@@ -22,11 +22,10 @@ function setup(){
             .catch((err) => console.error(err))
 }
 function show_sort(books){
-    //todo sort books
     books = Array.from(books) //without that aktuell will be overwritten
     console.log("sort")
+
     //type
-    console.log(sort)
     if(sort.type.length!==0){ //all selected categories must be
         for(let d=0 ;d < books.length; d++){
             if (!sort.type.includes(books[d].typ)) {
@@ -48,7 +47,6 @@ function show_sort(books){
             }
         }
     }
-
     /*if(sort.keywords.length!==0){ //only one keyword has to be for filled (functional)
         for(let d=0 ;d < books.length; d++){
             if(!books[d].keywords.some(r=> sort.keywords.includes(r))) { //from https://stackoverflow.com/questions/16312528/check-if-an-array-contains-any-element-of-another-array-in-javascript
@@ -157,7 +155,6 @@ function add_eventListener(){
             show_sort(aktuell)
         })
     }
-    console.log(document.getElementsByClassName("year"))
     //sort
     for(let el of document.querySelectorAll(".sort[name='sort']")){
         el.addEventListener('change', ()=>{

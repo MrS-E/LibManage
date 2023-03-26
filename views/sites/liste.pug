@@ -9,9 +9,8 @@ block content
             input.form-control#search(placeholder="search" type="text")
         .col-2
             button.btn.btn-primary#search_btn(type="submit") Search
-        //todo filter
     .row.mt-2
-        .col-3
+        .col-4
             .accordion#KategorieAccordion
                 .accordion-item
                     h2.accordion-header#headingOne
@@ -44,7 +43,7 @@ block content
                             br
                             input.kategorie#E-Video(type="checkbox")
                             label.ps-1(for="E-Video")  E-Video
-        .col-3
+        .col-4
             .accordion#SchlusselAccordion
                 .accordion-item
                     h2.accordion-header#headingTwo
@@ -52,7 +51,7 @@ block content
                     .accordion-collapse.collapse#collapseTwo(aria-labelledby="headingTwo" data-bs-parent="#SchlusselAccordion")
                         .accordion-body
 
-        .col-3
+        //-.col-3
             .accordion#YearAccordion
                 .accordion-item
                     h2.accordion-header#headingThree
@@ -63,7 +62,7 @@ block content
                             input.year#min(type="number" min="1000" value="1000")
                             label.pe-1(for="max") Max:
                             input.year.mt-1#max(type="number", min="1000")
-        .col-3
+        .col-4
             .accordion#SortAccordion
                 .accordion-item
                     h2.accordion-header#headingFour
