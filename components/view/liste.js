@@ -26,8 +26,6 @@ exports.lend = function(req, res){
                 if(doc.typ.split('-')[0] === 'E'){
                     let rentable = true
                     for(let d of doc.history) {
-                        console.log(d)
-                        console.log(req.session.userid)
                         if(d.user == req.session.userid && d.end===null){
                             rentable = false
                             break
