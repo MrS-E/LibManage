@@ -81,7 +81,7 @@ exports.returns = function (req, res){
                     const obj = await objects.findOne({_id: d.book_id})
                     const user = await users.findOne({_id:d.user_id})
                     console.log(d)
-                    books_to_return.push({book: obj, user:user, returned_date: new Date(d.returned).toISOString().split('T')[0].split('-'),returned_time:new Date(d.returned).toISOString().split('T')[1].split('.')[0]})
+                    if(obj && user) books_to_return.push({book: obj, user:user, returned_date: new Date(d.returned).toISOString().split('T')[0].split('-'),returned_time:new Date(d.returned).toISOString().split('T')[1].split('.')[0]})
                 }
                 res.render('sites/ich', {user: req.session.username, role: req.session.role, render: 'return', returns:books_to_return})
             })

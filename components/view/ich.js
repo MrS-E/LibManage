@@ -7,7 +7,10 @@ exports.view = function (req, res){
             .then(async (doc) => {
                 const books = []
                 for (let d of doc.history) {
-                    if(!d.end) books.push(await object.findOne({_id: d.book}))
+                    if(!d.end) {
+                        const obj = await object.findOne({_id: d.book})
+                        if(obj) books.push(obj)
+                    }
                 }
                 res.render('sites/ich', {user: req.session.username, role: req.session.role, render: 'lend', books: books
                 })
