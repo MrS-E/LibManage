@@ -1,19 +1,31 @@
 mixin settings(user)
     h3 Einstellungen
     .row
-        h4 Profil:
-        p
-            span Anrede: #{user.salutation}
-            br
-            span Name: #{user.lastName}
-            br
-            span Vorname: #{user.firstName}
-        button.btn.btn-outline-dark#profile Ändern
-        //- todo button function
-        hr.hr
-        h4 Authentifizierung:
-        p
-            span E-Mail: #{user.email}
-            br
-            span Passwort: ********
-        button.btn.btn-outline-dark#authentication Ändern
+        form(method="post" action="/api/user/update")
+            h4 Profil:
+                .row
+                    .col-6
+                        span Anrede:
+                        br
+                        span Name:
+                        br
+                        span Vorname:
+                    .col-6
+                        span #{user.salutation}
+                        br
+                        input(value=user.lastName type="text" name="last_name")
+                        br
+                        input(value=user.firstName type="text" name="fist_name")
+            //- todo button function
+            hr.hr.mt-1
+            h4 Authentifizierung:        form()
+            .row.mb-1
+                .col-6
+                    span E-Mail:
+                    br
+                    span Passwort:
+                .col-6
+                    span #{user.email}
+                    br
+                    input(type="text" name="passwd")
+            button.btn.btn-outline-dark#authentication(type="submit") Ändern

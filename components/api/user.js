@@ -67,10 +67,27 @@ exports.verify = function (req, res){
         })
 }
 
-exports.end_session = function (req, res){
+exports.unverify = function (req, res){
     if (req.session) {
         req.session.destroy();
         res.redirect('/');
         res.end();
+    }
+}
+
+exports.delete = function (req,res){}
+
+exports.update = function(req, res){
+    if(req.session.loggedin){
+        user.updateOne({_id: req.session.userid}, {$set:{
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                password: sha512(req.body.passwd).toString()
+            }})
+            .then((doc)=>{
+            res.redirect('/api/user/logout')
+            })
+    }else{
+        res.redirect('/')
     }
 }

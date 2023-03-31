@@ -5,7 +5,8 @@ const user = require('../../components/api/user');
 /* GET users listing. */
 router.post('/add', user.add);
 router.post('/verify', user.verify)
-router.post('/logout', user.end_session);
+router.post('/logout', user.unverify);
+router.post('/update', user.update)
 
 
 
