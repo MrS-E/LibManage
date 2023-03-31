@@ -5,23 +5,20 @@ mixin objects(books)
             form(action="/admin/new" method="get")
                 button.btn.btn-primary(type="submit") Hinzufügen
         .col-4
-            form(action="/admin" method="get")
-                //- todo search function to admin object page
-                input(type="text" name="search" placeholder="Search")
-                button.btn-primary.btn(type="submit") Suchen
+            input#search(type="text" name="search" placeholder="Search")
+            button#search_btn.btn-primary.btn Suchen
     .row
         table.table.table-hover.table-condensed
             thead
-                th
-                    td Titel
-                    td Autor
-                    td Verlag
-                    td ISBN
-                    td Verwaltung
+                tr
+                    th Titel
+                    th Autor
+                    th Verlag
+                    th ISBN
+                    th Verwaltung
             tbody
                 each book in books
                     tr(id="book_"+book._id)
-                        td
                         td
                             span #{book.title}
                         td
