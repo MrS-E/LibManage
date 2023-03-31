@@ -133,6 +133,11 @@ function add_eventListener(){
     document.getElementById('search').addEventListener("click", (e)=>{
         e.target.value = "";
     })
+    document.getElementById('search').addEventListener("keydown", (e)=>{
+        if(e.keyCode===13){
+            search()
+        }
+    })
     //type
     for(let el of document.getElementsByClassName("kategorie")){
         el.addEventListener('change', (e)=>{
