@@ -21,13 +21,13 @@ exports.home = async function (req, res){
         const user = await users.findOne({_id:req.session.userid})
         let books = []
         const count = await object.count()
-        if(user.history.length<=0){
+        //if(user.history.length<=0){
             console.log("random")
             for(let d = 0; d<book_number; d++) {
                 const skip = Math.floor(Math.random() * (count - 4));
                 books.push(await object.findOne({_id:skip}))
             }
-        }else{
+        /*}else{ //todo search bug
             console.log("console")
             let keywords = []
             for(let d of user.history){
@@ -48,7 +48,7 @@ exports.home = async function (req, res){
                 }
             }
 
-        }
+        }*/
         console.log(books)
         res.render('sites/index', {user: req.session.username, name:req.session.name, books: books})
     }else{+
