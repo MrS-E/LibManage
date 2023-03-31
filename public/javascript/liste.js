@@ -176,7 +176,7 @@ function test(arr, sub) { // function is from https://stackoverflow.com/question
     sub = sub.toLowerCase();
     return arr.map(str => str
         .toLowerCase()
-        .startsWith(sub.slice(0, Math.max(str.length - 1, 1)))
+        .includes(sub)
     );
 }
 function search(){

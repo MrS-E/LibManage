@@ -25,7 +25,7 @@ function search(){
         sub = sub.toLowerCase();
         return arr.map(str => str
             .toLowerCase()
-            .startsWith(sub.slice(0, Math.max(str.length - 1, 1)))
+            .includes(sub)
         );
     }
     function show(books) {
