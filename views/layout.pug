@@ -9,22 +9,22 @@ html
     //- https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js
     script(src='/javascript/bootstrap.js')
   body
+    container-fluid
     nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
-      .container-fluid
-        a.navbar-brand(href="#")
-        button.navbar-toggler(type="button"
-          data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup" aria-expanded="false"
-          aria-label="Toggle navigation")
-          span.navbar-toggler-icon
-        .collapse.navbar-collapse(id="navbarNavAltMarkup")
-          .navbar-nav
-            a.nav-link.active(aria-current="page" id="home" href="/") Home
-            a.nav-link(id="liste" href="/liste") Liste
-            a.nav-link(id="ich" href="/ich") Ich
-        form.form-inline.my-2.my-lg-0(method="post" action="/api/user/logout")
-          span.nav-text.text-white Angemeldet als #{user}
-          button.btn.btn-outline-success.my-2.my-sm-0(type="submit" value="Abmelden" style="margin-right: 1vw; margin-left: 10px;") Abmelden
+      //a.navbar-brand(href="#")
+      button.navbar-toggler.ms-1(type="button"
+        data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false"
+        aria-label="Toggle navigation")
+        span.navbar-toggler-icon
+      .collapse.navbar-collapse#navbarNavAltMarkup
+        .navbar-nav
+          a.nav-link.active#home(aria-current="page" href="/") Home
+          a.nav-link#liste(href="/liste") Liste
+          a.nav-link#ich(href="/ich") Ich
+      form.form-inline.my-2.my-lg-0(method="post" action="/api/user/logout")
+        span.nav-text.text-white Angemeldet als #{user}
+        button.btn.btn-outline-success.my-2.my-sm-0(type="submit" value="Abmelden" style="margin-right: 1vw; margin-left: 10px;") Abmelden
 
     script(src='/javascript/navbar.js')
     .container.mt-1
