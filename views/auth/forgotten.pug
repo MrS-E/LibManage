@@ -1,0 +1,17 @@
+doctype html
+html
+    head
+        title="Bibliothek"
+            link(rel='stylesheet', href='/stylesheets/style.css')
+            link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+            link( rel="icon" href="/image/book.ico")
+            script(src='/javascript/bootstrap.js')
+    body
+        .container-fluid
+            h1 Passwort Wiederherstellung anfordern:
+            p Sollte der E-Mail ein Konto zugeschrieben sein, werden Sie ein E-Mail mit weiteren Wiederherstellungsinformationen erhalten.
+            //todo
+            form(method="post" action="/api/user/request")
+                label(for="mail") E-Mail Adresse eingeben:
+                input.form-control#mail(type="email" name="email")
+                button.btn.btn-primary(type="submit") Anfragen

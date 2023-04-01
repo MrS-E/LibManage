@@ -13,5 +13,6 @@ router.get('/', function(req, res){
 router.get('/home', index.home);
 router.get('/login', index.login);
 router.get('/register', index.register);
+router.get('/forgotten', index.forgotten)
 
 module.exports = router;
