@@ -16,6 +16,19 @@ exports.login = function (req, res) {
 }
 
 exports.home = async function (req, res){
+    function sorter(arr){
+        const c = {}
+        const out = []
+        for(let d of arr){
+            c[d] = c[d] ? c[d] + 1 : 1
+        }
+        arr = [...new Set(arr)]
+        for (let d of arr){
+            out.push([d, c[d]])
+        }
+        return out
+    }
+
     if(req.session.loggedin) {
         const book_number = 4
         const user = await users.findOne({_id:req.session.userid})
@@ -56,15 +69,6 @@ exports.home = async function (req, res){
     }
 }
 
-function sorter(arr){
-    const c = {}
-    const out = []
-    for(let d of arr){
-        c[d] = c[d] ? c[d] + 1 : 1
-    }
-    arr = [...new Set(arr)]
-    for (let d of arr){
-        out.push([d, c[d]])
-    }
-    return out
+exports.forgotten = function (req, res){
+    res.render('auth/forgotten')
 }
