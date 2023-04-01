@@ -17,13 +17,14 @@ Source: <br>
 [WebP Converter](https://www.npmjs.com/package/webp-converter) <br>
 
 ## ISBN Search
-https://isbnsearch.org <br>
-https://www.bookfinder.com <br>
-https://isbndb.com/ <br>
-https://library.nyu.edu/about/collections/search-collections/ -> not that useful, but best search<br>
-http://www.bookfinder4u.com <br>
-https://www.amazon.com/advanced-search/books -> not that good as the search by the new york library <br>
-https://www.buchhaus.ch/de/buecher -> best but bad to use <br>
+[ISBN Search](https://isbnsearch.org) <br>
+[Book Finder](https://www.bookfinder.com) <br>
+[ISBN Database](https://isbndb.com/) <br>
+[NewYork Library](https://library.nyu.edu/about/collections/search-collections/) -> not that useful, but best search<br>
+[Book Finder for you](http://www.bookfinder4u.com) <br>
+[Amazon](https://www.amazon.com/advanced-search/books) -> not that good as the search by the new york library <br>
+[Buch Haus](https://www.buchhaus.ch/de/buecher) -> best but bad to use <br>
+[Google Books](https://www.googleapis.com/books/v1/volumes?q=isbn:) -> good for use (api), not as good as buch haus (more or less data about books, not good with specialized data)
 
 # Email
 [Stackoverflow](https://stackoverflow.com/questions/14678447/is-there-a-nodejs-equivalent-to-phps-mail-function)<br>
