@@ -3,28 +3,50 @@ mixin settings(user)
     .row
         form(method="post" action="/api/user/update")
             h4 Profil:
-                .row
-                    .col-6
-                        span Anrede:
-                        br
-                        span Name:
-                        br
-                        span Vorname:
-                    .col-6
-                        span #{user.salutation}
-                        br
-                        input(value=user.lastName type="text" name="last_name")
-                        br
-                        input(value=user.firstName type="text" name="fist_name")
+            .row.d-none.d-sm-block.d-md-none
+                .col-sm-12
+                    span Anrede:
+                    br
+                    span #{user.salutation}
+                    br
+                    span Name:
+                    br
+                    input.form-control(value=user.lastName type="text" name="last_name")
+                    br
+                    span Vorname:
+                    br
+                    input.form-control(value=user.firstName type="text" name="fist_name")
+            .row.d-none.d-md-block
+                .col-lg-6.col-md-4
+                    span Anrede:
+                    br
+                    span Name:
+                    br
+                    span Vorname:
+                .col-lg-6.col-md-8
+                    span #{user.salutation}
+                    br
+                    input.form-control(value=user.lastName type="text" name="last_name")
+                    br
+                    input.form-control(value=user.firstName type="text" name="fist_name")
             hr.hr.mt-1
-            h4 Authentifizierung:        form()
-            .row.mb-1
-                .col-6
+            h4 Authentifizierung:
+            .row.d-none.d-sm-block.d-md-none
+                .col-sm-12
+                    span E-Mail:
+                    br
+                    span #{user.email}
+                    br
+                    span Passwort:
+                    br
+                    input.form-control(type="text" name="passwd")
+            .row.d-none.d-md-block
+                .col-lg-6.col-md-4
                     span E-Mail:
                     br
                     span Passwort:
-                .col-6
+                .col-lg-6.col-md-8
                     span #{user.email}
                     br
-                    input(type="text" name="passwd")
-            button.btn.btn-outline-dark#authentication(type="submit") Ändern
+                    input.form-control(type="text" name="passwd")
+            button.mt-2.btn.btn-outline-dark#authentication(type="submit") Ändern

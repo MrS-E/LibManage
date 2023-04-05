@@ -10,7 +10,7 @@ include ../components/ich/admin/return
 block content
     h1 Ich
     .row
-        .col-2
+        .col-lg-2.col-md-4.d-none.d-md-block
             nav.nav.flex-column
                 a#ich_ich.nav-link(href="/ich") Ausgeliehen
                 a#ich_history.nav-link(href="/ich/history") Vergangenheit
@@ -21,7 +21,19 @@ block content
                         a#ich_admin.nav-link(href="/admin") Objekte
                         a#ich_user.nav-link(href="/admin/user") Nutzer
                             //todo nutzer for admin
-        .col-10
+        .col-sm-12.d-block.d-sm-block.d-md-none
+            select.form-select#option_select
+                //todo search for a better solution
+                option(value="/ich") -- Bitte Auswählen --
+                option(value="/ich") Ausgeliehen
+                option(value="/ich/history") Vergangenheit
+                option(value="/ich/settings") Einstellungen
+                if(role==='admin'||role==='worker')
+                    option(value="/ich/returns") Rückgaben
+                    if role === 'admin'
+                        option(value="/admin") Objekte
+                        option(value="/admin/user") Nutzer
+        .col-lg-10.col-md-8.col-sm-12
             if render==='lend'
                 +ausgeliehen(books)
             else if render==='history'

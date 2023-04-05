@@ -1,18 +1,17 @@
 mixin history(books)
-    h3 Ausleih-Verlauf
+    h3.text-wrap Verlauf (Vergangenheit)
     table.table.table-hover.table-condensed
         thead
-            th
-                td Bild
-                td Titel
-                td Autor
-                td Verlag
-                td ISBN
+            tr
+                th.d-none.d-lg-block Bild
+                th Titel
+                th Autor
+                th.d-none.d-lg-block Verlag
+                th.d-none.d-sm-block ISBN
         tbody
             each book in books
                 tr(onclick="window.location.replace('/liste/" + book._id + "')")
-                    td
-                    td
+                    td.d-none.d-lg-block
                         if book.img
                             img.img-rounded.img-thumbnail(src=book.img alt=book.img_desc style="height: 20vh")
                         else
@@ -21,7 +20,7 @@ mixin history(books)
                         span #{book.title}
                     td
                         span #{book.author}
-                    td
+                    td.d-none.d-lg-block
                         span #{book.publisher}
-                    td
+                    td.d-none.d-sm-block
                         span #{book.isbn}
