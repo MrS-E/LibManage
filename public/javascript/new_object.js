@@ -33,7 +33,7 @@ form.isbn.addEventListener('change', (e)=>{
         else out += "-" + isbn_array[x]
     }
     e.target.value = out;
-    if(isbn_array.length===13){
+    if(isbn_array.length>=10){
         fetch("https://www.googleapis.com/books/v1/volumes?q=isbn:"+isbn.replaceAll('-',''),  {mode: 'cors'})
             .then((response) => response.json())
             .then((data) => {

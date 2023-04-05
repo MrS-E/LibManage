@@ -61,7 +61,7 @@ exports.edit = function(req, res){
                         file.keywords += ", "
                     }
                 }
-                file.year = doc.year.toString().split(' ')[3]
+                file.year = doc.year?doc.year.toString().split(' ')[3]:""
                 console.log(file)
                 res.render('sites/ich', {user: req.session.username, role: req.session.role, render: 'edit', book:file})
             })
