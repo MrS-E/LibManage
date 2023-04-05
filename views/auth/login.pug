@@ -1,15 +1,40 @@
-extends auth_layout
+doctype html
+html
+    head
+        title="Bibliothek"
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+        link( rel="icon" href="/image/book.ico")
+        script(src='/javascript/bootstrap.js')
+    body
+        .container.mt-4
+            //- Pills navs
+            ul.nav.nav-pills.nav-justified.mb-3
+                li.nav-item
+                    a.nav-link.active(href="") Login
+                li.nav-item
+                    a.nav-link(href="/register") Register
 
-block content
-    form.form-signin.mt-5(method="post" action="/api/user/verify")
-        h1.h3.mb-3.font-weight-normal Login
-        label.sr-only(for="email") Email
-        input.form-control(placeholder="Email address" autofocus type="email" id="email" name="email")
-        label.sr-only(for="password") Passwort
-        input.form-control(placeholder="Password" required type="password" id="password" name="password")
-        p.mt-5.mb-3 #{error}
-        //.checkbox.mb-3
-            label
-                input( type="checkbox" value="remember-me")
-        input.btn.btn-lg.btn-primary.btn-block(type="submit" value="Login")
-        a(href="/forgotten") Passwort vergessen?
+            .row
+                form(method="post" action="/api/user/verify")
+                    .text-center.mb-3
+                        p Anmeldung:
+
+                    //- Email input
+                    .form-outline.mb-4
+                        input.form-control#email(type="email" name="email" placeholder="E-Mail Adresse" autofocus required)
+                        label.form-label(for="email") Email
+
+                    //- Password input
+                    .form-outline.mb-4
+                        input#password.form-control(type="password" name="password" placeholder="Passwort" required)
+                        label.form-label(for="password") Passwort
+
+                    .row.mb-4
+                        .col-md-12.d-flex.justify-content-center
+                            a(href="/forgotten") Passwort vergessen
+
+                    //- Submit button
+                    .d-grid.text-center.mb-3
+                        button.btn.btn-primary.btn-block.mb-4(type="submit") Anmelden
+                        p.mt-5.mb-3 #{error}

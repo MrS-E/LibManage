@@ -1,29 +1,56 @@
-extends auth_layout
+doctype html
+html
+    head
+        title="Bibliothek"
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+        link( rel="icon" href="/image/book.ico")
+        script(src='/javascript/bootstrap.js')
+    body
+        .container.mt-4
+            //- Pills navs
+            ul.nav.nav-pills.nav-justified.mb-3
+                li.nav-item
+                    a.nav-link(href="/login") Login
+                li.nav-item
+                    a.nav-link.active(href="") Register
 
-block content
-    form.form-signin.mt-5(method="post" action="/api/user/add")
-        h1.h3.mb-3.font-weight-normal Login
-        select(name="anrede")
-            option(value="Herr") Herr
-            option(value="Frau") Frau
-            option(value="") Andere/Keine Angabe
-        .row
-            .col-6
-                label.sr-only(for="firstname") Vorname
-                input.form-control(placeholder="Vorname" required type="text" id="firstname" name="firstname")
-            .col-6
-                label.sr-only(for="lastname") Nachname
-                input.form-control(placeholder="Nachname" required type="text" id="lastname" name="lastname")
-        label.sr-only(for="email") Email
-        input.form-control(placeholder="Email address" autofocus type="email" id="email" name="email")
-        label.sr-only(for="password") Passwort
-        input.form-control(placeholder="Password" required type="password" id="password" name="password")
-        label.sr-only(for="password2") Passwort wiederholen
-        input.form-control(placeholder="Password wiederholen" required type="password" id="password2" name="password2")
-        p.mt-5.mb-3 #{error}
+            .row
+                form(method="post" action="/api/user/add")
+                    .text-center.mb-3
+                        p Registrierung:
 
-        //.checkbox.mb-3
-            label
-                input( type="checkbox" value="remember-me")
-        input.btn.btn-lg.btn-primary.btn-block(type="submit" value="Login")
+                    .form-outline.mb-4
+                        select.form-select(name="anrede")
+                            option(value="Herr") Herr
+                            option(value="Frau") Frau
+                            option(value="") Andere/Keine Angabe
 
+                    //- Username input
+                    .form-outline.mb-4.row
+                        .col-6
+                            input.form-control#firstname(type="text" name="firstname" placeholder="Vorname" required)
+                            label.form-label(for="firstname") Vorname
+                        .col-6
+                            input.form-control#lastname(type="text" name="lastname" placeholder="Nachname" required)
+                            label.form-label(for="lastname") Nachname
+
+                    //- Email input
+                    .form-outline.mb-4
+                        input.form-control#email(type="email" name="email" placeholder="E-Mail Adresse" required)
+                        label.form-label(for="email") Email
+
+                    //- Password input
+                    .form-outline.mb-4
+                        input.form-control#password(type="password" name="password" required)
+                        label.form-label(for="password") Passwort
+
+                    //- Repeat Password input
+                    .form-outline.mb-4
+                        input.form-control#password2(type="password" name="password2" required)
+                        label.form-label(for="password2") Passwort wiederholen
+
+                    //- Submit button
+                    .d-grid.text-center.mb-3
+                        button.btn.btn-primary.btn-block.mb-3(type="submit") Registrieren
+                        p.mt-5.mb-3 #{error}
