@@ -73,7 +73,7 @@ async function write_books(books){
         for(let x=0; x<books.length; x++){
             out += "<div class='row mt-2'>"
             for(let y=0; y<books[x].length; y++){
-                out += "<div class='col-3'>"
+                out += "<div class='col-lg-3 col-md-6 col-xs-12 mt-3'>"
                 out += gen_book(books[x][y])
                 out += "</div>"
             }
