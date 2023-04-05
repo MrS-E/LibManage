@@ -3,12 +3,12 @@ extends ../layout
 block content
     .row.mt-4
 
-        .col-md-4.col-xs-12.d-none.d-md-block
+        .col-md-4.col-sm-12.d-none.d-md-block
             if book.img
                 img.img-rounded.img-fluid(src=book.img, alt=book.img_desc)
             else
                 img.img-rounded.img-fluid(src='/image/no_img.png' alt='kein Bild')
-        .col-md-8.col-xs-12
+        .col-md-8.col-sm-12
             button.btn.btn-secondary.rounded.m-1.p-1(id="back") Zurück
             h1 #{book.title}
             h3 #{book.author}
