@@ -10,20 +10,27 @@ block content
         p
             strong Email:
             span  #{user}
-        h4 Buch
-        table
+        h4.mt-2 Buch
+        .d-block.d-sm-none
+            p
+                strong Titel:
+                span  #{book.title}
+            p
+                strong Autor:
+                span  #{book.author}
+            p
+                strong ISBN:
+                span  #{book.isbn}
+        table.d-none.d-sm-block.table
             thead
-                th
-                    td Titel
-                    td Autor
-                    td Verlag
-                    td ISBN
+                tr
+                    th Titel
+                    th Autor
+                    th ISBN
             tbody
                 tr
-                    td
                     td #{book.title}
                     td #{book.author}
-                    td #{book.publisher}
                     td #{book.isbn}
         .row.mt-4
         if can_be_rented

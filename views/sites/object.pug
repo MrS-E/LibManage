@@ -3,12 +3,12 @@ extends ../layout
 block content
     .row.mt-4
 
-        .col-4
+        .col-md-4.col-xs-12.d-none.d-md-block
             if book.img
                 img.img-rounded.img-fluid(src=book.img, alt=book.img_desc)
             else
                 img.img-rounded.img-fluid(src='/image/no_img.png' alt='kein Bild')
-        .col-8
+        .col-md-8.col-xs-12
             button.btn.btn-secondary.rounded.m-1.p-1(id="back") Zurück
             h1 #{book.title}
             h3 #{book.author}
@@ -28,7 +28,7 @@ block content
                     strong Seitenanzahl:
                     span #{book.page}
             .row
-                p
+                p.text-wrap
                     each keyword in book.keywords
                         spant.text-center.m-1.p-1.rounded.border.border-secondary.bg-secondary-subtle #{keyword}
             form(action='/lend/'+book._id method='get')

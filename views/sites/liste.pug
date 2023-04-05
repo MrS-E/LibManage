@@ -5,12 +5,12 @@ block content
     style .accordion-body{max-height:12vh; overflow-y: scroll}
     h1 Liste
     .row
-        .col-10
+        .col-md-10.col-xs-12.mt-2
             input.form-control#search(placeholder="search" type="text")
-        .col-2
-            button.btn.btn-primary#search_btn(type="submit") Search
+        .d-grid.col-md-2.col-xs-12.mt-2
+            button.btn.btn-primary.btn-block#search_btn(type="submit") Search
     .row.mt-2
-        .col-4
+        .col-lg-4.col-md-6.col-xs-12.mb-2
             .accordion#KategorieAccordion
                 .accordion-item
                     h2.accordion-header#headingOne
@@ -43,7 +43,7 @@ block content
                             br
                             input.kategorie#E-Video(type="checkbox")
                             label.ps-1(for="E-Video")  E-Video
-        .col-4
+        .col-lg-4.col-md-6.col-xs-12.mb-2
             .accordion#SchlusselAccordion
                 .accordion-item
                     h2.accordion-header#headingTwo
@@ -62,7 +62,7 @@ block content
                             input.year#min(type="number" min="1000" value="1000")
                             label.pe-1(for="max") Max:
                             input.year.mt-1#max(type="number", min="1000")
-        .col-4
+        .col-lg-4.col-md-6.col-xs-12.mb-2
             .accordion#SortAccordion
                 .accordion-item
                     h2.accordion-header#headingFour
