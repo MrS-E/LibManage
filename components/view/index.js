@@ -40,7 +40,7 @@ exports.home = async function (req, res){
                 const skip = Math.floor(Math.random() * (count - 4));
                 books.push(await object.findOne({_id:skip}))
             }
-        /*}else{ //todo search bug
+        /*}else{ //fixme search bug
             console.log("console")
             let keywords = []
             for(let d of user.history){
