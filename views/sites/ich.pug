@@ -23,16 +23,14 @@ block content
                             //todo nutzer for admin
         .col-sm-12.d-block.d-sm-block.d-md-none
             select.form-select.mb-2#option_select
-                //todo better solution
-                option(value="/ich") -- Bitte Auswählen --
-                option(value="/ich") Ausgeliehen
-                option(value="/ich/history") Vergangenheit
-                option(value="/ich/settings") Einstellungen
+                option#op_ich(value="/ich" selected) Ausgeliehen
+                option#op_history(value="/ich/history") Vergangenheit
+                option#op_settings(value="/ich/settings") Einstellungen
                 if(role==='admin'||role==='worker')
-                    option(value="/ich/returns") Rückgaben
+                    option#op_returns(value="/ich/returns") Rückgaben
                     if role === 'admin'
-                        option(value="/admin") Objekte
-                        option(value="/admin/user") Nutzer
+                        option#op_admin(value="/admin") Objekte
+                        option#op_user(value="/admin/user") Nutzer
         .col-lg-10.col-md-8.col-sm-12
             if render==='lend'
                 +ausgeliehen(books)
