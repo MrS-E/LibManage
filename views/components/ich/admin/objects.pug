@@ -1,12 +1,15 @@
 mixin objects(books)
     h3 Objekt Verwaltung
-    .row-cols-5
-        .col-1
-            form(action="/admin/new" method="get")
-                button.btn.btn-primary(type="submit") Hinzufügen
-        .col-4
-            input#search(type="text" name="search" placeholder="Search")
-            button#search_btn.btn-primary.btn Suchen
+    .row
+        .col-md-9.col-sm-12
+            .row
+                .col-8
+                    input#search.form-control(type="text" name="search" placeholder="Search")
+                .col-4.d-grid
+                    button#search_btn.btn-primary.btn.btn-block Suchen
+        .col-md-3.col-sm-12.mt-2.mt-md-0
+            form.d-grid(action="/admin/new" method="get")
+                button.btn.btn-secondary.btn-block(type="submit") Hinzufügen
     .row
         table.table.table-hover.table-condensed.text-break.text-wrap
             thead
