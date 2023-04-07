@@ -3,16 +3,16 @@ mixin ausgeliehen(books)
     table.table.table-hover.table-condensed
         thead
             tr
-                th.d-none.d-lg-block Bild
+                th.d-none.d-lg-table-cell Bild
                 th Titel
                 th Autor
-                th.d-none.d-lg-block Verlag
-                th.d-none.d-md-block ISBN
+                th.d-none.d-lg-table-cell Verlag
+                th.d-none.d-md-table-cell ISBN
                 th Tools
         tbody
             each book in books
                 tr
-                    td.d-none.d-lg-block
+                    td.d-none.d-lg-table-cell
                         if book.img
                             img.img-rounded.img-thumbnail(src=book.img alt=book.img_desc style="height: 20vh")
                         else
@@ -21,9 +21,9 @@ mixin ausgeliehen(books)
                         span #{book.title}
                     td
                         span #{book.author}
-                    td.d-none.d-lg-block
+                    td.d-none.d-lg-table-cell
                         span #{book.publisher}
-                    td.d-none.d-md-block
+                    td.d-none.d-md-table-cell
                         span #{book.isbn}
                     td
                         //- span #{book.typ}

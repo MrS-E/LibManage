@@ -3,7 +3,7 @@ mixin settings(user)
     .row
         form(method="post" action="/api/user/update")
             h4 Profil:
-            .row.d-none.d-sm-block.d-md-none
+            .row.d-sm-block.d-md-none
                 .col-sm-12
                     span Anrede:
                     br
@@ -31,7 +31,7 @@ mixin settings(user)
                     input.form-control(value=user.firstName type="text" name="fist_name")
             hr.hr.mt-1
             h4 Authentifizierung:
-            .row.d-none.d-sm-block.d-md-none
+            .rowW.d-sm-block.d-md-none
                 .col-sm-12
                     span E-Mail:
                     br
