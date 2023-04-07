@@ -1,13 +1,13 @@
 mixin ausgeliehen(books)
     h3 Ausgeliehen
-    table.table.table-hover.table-condensed
+    table.table.table-hover.table-condensed.text-break.text-wrap
         thead
             tr
                 th.d-none.d-lg-table-cell Bild
                 th Titel
                 th Autor
                 th.d-none.d-lg-table-cell Verlag
-                th.d-none.d-md-table-cell ISBN
+                th.d-none.d-lg-table-cell ISBN
                 th Tools
         tbody
             each book in books
@@ -18,12 +18,12 @@ mixin ausgeliehen(books)
                         else
                             img.img-rounded.img-thumbnail(src="/image/no_img.png", alt = "kein bild verfügbar" style="height: 20vh")
                     td
-                        span #{book.title}
+                        span.text-wrap #{book.title}
                     td
-                        span #{book.author}
+                        span.text-wrap #{book.author}
                     td.d-none.d-lg-table-cell
                         span #{book.publisher}
-                    td.d-none.d-md-table-cell
+                    td.d-none.d-lg-table-cell
                         span #{book.isbn}
                     td
                         //- span #{book.typ}

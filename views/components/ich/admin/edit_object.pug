@@ -18,8 +18,9 @@ mixin edit_object(book)
             input.form-control(type="number" name="page" value=book.page)
             label.mt-1(for="blurb") Klappentext
             textarea.form-control(name="blurb" value=book.blurb)
-            if book.typ === 'Buch'|| book.typ === 'Zeitschrift'|| book.typ === 'CD'||book.typ === 'DVD'
+            if book.typ === 'Buch'|| book.typ === 'Zeitschrift'|| book.typ === 'CD'||book.typ === 'DVD' || book.typ === 'Kassette'
                 label.mt-1(for="position") Standort
                 input.form-control(type="text" name="position" value=book.position)
-            button#submit.form-control.btn.btn-primary.mt-2 Objekt speichern
+            a.form-control.btn.btn-secondary.mt-2(href="/admin") Änderungen Verwerfen
+            button#submit.form-control.btn.btn-primary.mt-2.mb-3 Objekt speichern
             script(src="/javascript/edit_object.js")

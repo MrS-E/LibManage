@@ -8,13 +8,13 @@ mixin objects(books)
             input#search(type="text" name="search" placeholder="Search")
             button#search_btn.btn-primary.btn Suchen
     .row
-        table.table.table-hover.table-condensed
+        table.table.table-hover.table-condensed.text-break.text-wrap
             thead
                 tr
                     th Titel
                     th Autor
-                    th Verlag
-                    th ISBN
+                    th.d-none.d-lg-table-cell Verlag
+                    th.d-none.d-md-table-cell ISBN
                     th Verwaltung
             tbody
                 each book in books
@@ -23,9 +23,9 @@ mixin objects(books)
                             span #{book.title}
                         td
                             span #{book.author}
-                        td
+                        td.d-none.d-lg-table-cell
                             span #{book.publisher}
-                        td
+                        td.d-none.d-md-table-cell
                             span #{book.isbn}
                         td
                             button.btn.delete_btn(id=book._id) Löschen
