@@ -16,7 +16,7 @@ exports.login = function (req, res) {
 }
 
 exports.home = async function (req, res){
-    function sorter(arr){
+    /*function sorter(arr){
         const c = {}
         const out = []
         for(let d of arr){
@@ -27,11 +27,11 @@ exports.home = async function (req, res){
             out.push([d, c[d]])
         }
         return out
-    }
+    }*/
 
     if(req.session.loggedin) {
         const book_number = 4
-        const user = await users.findOne({_id:req.session.userid})
+        //const user = await users.findOne({_id:req.session.userid})
         let books = []
         const count = await object.count()
         //if(user.history.length<=0){
