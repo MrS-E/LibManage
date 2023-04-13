@@ -37,8 +37,9 @@ exports.home = async function (req, res){
         //if(user.history.length<=0){
             console.log("random")
             for(let d = 0; d<book_number; d++) {
-                const skip = Math.floor(Math.random() * (count - 4));
-                books.push(await object.findOne({_id:skip}))
+                const skip = Math.abs(Math.floor(Math.random() * (count - 4)));
+                const obj = await object.findOne({_id:skip>=0?skip:0})
+                if(obj) books.push(obj)
             }
         /*}else{ //fixme search bug
             console.log("console")
