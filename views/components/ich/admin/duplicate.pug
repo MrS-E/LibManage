@@ -1,4 +1,14 @@
-mixin duplicate()
+mixin duplicate
+    link(rel='stylesheet', href='/stylesheets/loading-bar.css')
+    link(rel='stylesheet', href='/stylesheets/carousel.css')
+    h3 Duplikat Suche
     .row
-        h3 Duplikat Suche
-        script(src="/javascript/duplicate")
+        button.btn.btn-primary#search Duplikate suchen
+    .row.mt-2
+        #myProgress
+            #myBar
+    .row#duplicates
+
+
+
+    script(src="/javascript/duplicate.js")
