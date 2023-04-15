@@ -55,8 +55,33 @@ app.use(function(err, req, res) {
 
 schedule.scheduleJob('0 0 0 * * *', () => { //runs every 24h at 0:0
   console.log("SCHEDULE JOB STARTED");
+  const user = require('./src/db/models/user')
+  const object = require("./src/db/models/object")
+  const returns = require("./src/db/models/returns")
   console.log("SCANNING FOR OVERDUE BOOKS")
-  //todo scheduleJob
+  const date = new Date()
+  user.find({"history.end": null, "history.start": {$lt:new Date(date.getDate() - 30)}})
+      .then(doc=>{
+        for(let obj of doc){
+          for(let history in obj.history){
+            if(!history.end && new Date(history.start)<new Date(date.getDate()-30)){
+              object.findOne({_id: history.book}).then((book)=>{
+                if(book.typ.split('-')[0]==='E'){
+                  object.updateOne({_id: book._id, "history.book": history.book, "history.end": null}, {$set:{"history.$.end": date.toISOString()}})
+                }else{
+                  const remove = new returns({
+                    user_id: obj._id,
+                    book_id: book._id,
+                    returned: date
+                  })
+                  remove.save()
+                }
+              })
+              user.updateOne({_id: obj._id, "history.book": history.book, "history.end": null}, {$set:{"history.$.end": date.toISOString()}})
+            }
+          }
+        }
+      })
   console.log("SCHEDULE JOB FINISHED")
 });
 
