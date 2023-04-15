@@ -1,7 +1,7 @@
 mixin new_object
     .row
         h3 Neues Objekt
-        form(action='/api/admin', method="post")
+        form(action='/api/admin', method="post" )
             label.mt-1(for="title") Title
             input.form-control(type="text" name="title" required)
             label.mt-1(for="author") Autor
@@ -37,7 +37,7 @@ mixin new_object
             label.mt-1(for="img") Titelbild
             img.mb-1.img-fluid.img-thumbnail.rounded.form-control(id="image" src="" alt="noch kein Bild" style="max-height:45vh; width: auto")
             input(type="text" name="img_base64" style="display:none")
-            input.form-control(type="file" id="img" accept="image/*")
+            input.form-control(type="file" id="img" accept="image/*" data-max-file-size="3MB" data-max-files="1")
             label.mt-1(for="img_desc") Beschreibung Titelbild
             input.form-control(type="text" name="img_desc")
             label.mt-1(for="read" style="display: none") Medium

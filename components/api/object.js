@@ -1,7 +1,7 @@
-const objects = require("../../src/db/models/object");
+const objects = require("../../src/db/models/object")
 const user = require('../../src/db/models/user')
-const object = require("../../src/db/models/object");
-const returner = require("../../src/db/models/returns");
+const object = require("../../src/db/models/object")
+const returner = require("../../src/db/models/returns")
 const files = require("../../src/db/models/files")
 
 exports.all = function (req, res){
@@ -90,56 +90,62 @@ exports.return = function (req, res) {
 
 exports.add = function (req, res){
     if(req.session.loggedin && req.session.role==='admin'){
-        //objects.count()
         const keywords = []
         for(let d of req.body.keywords.split(', ')){
             if(d && d !== ""){
                 keywords.push(d)
             }
         }
-
         objects.findOne().sort({_id: -1})
             .then((count)=> {
-                console.log(count?count._id:0)
-                let object = new objects({
-                    _id: (parseInt(count?count._id:0)+1),
-                    title: req.body.title,
-                    author: req.body.author,
-                    publisher: req.body.publisher,
-                    isbn: req.body.isbn,
-                    keywords: keywords,
-                    typ: req.body.type,
-                    year: req.body.year,
-                    blurb: req.body.blurb,
-                    small_desc: req.body.small_desc,
-                    img: req.body.img_base64, //todo convert to webp for better storage usage
-                    img_desc: req.body.img_desc,
-                    history: [],
-                    read: !!req.body.read_base64,
-                    position: req.body.position?req.body.position:null
-                })
-                if(req.body.read_base64){
-                    console.log(object._id)
-                    let file = new files({
-                        book_id: object._id,
-                        file: req.body.read_base64
-                    })
-                    file.save()
-                        .then(doc => {
-                            console.log(doc)
+                require('sharp')(Buffer.from(req.body.img_base64.split(';base64,')[1], 'base64'))
+                    .resize(128, 195)
+                    .webp()
+                    .toBuffer()
+                    .catch(err=>console.log(err))
+                    .then((doc)=>{
+                        const img = 'data:image/webp;base64,'+doc.toString('base64')
+                        console.log(count?count._id:0)
+                        let object = new objects({
+                            _id: (parseInt(count?count._id:0)+1),
+                            title: req.body.title,
+                            author: req.body.author,
+                            publisher: req.body.publisher,
+                            isbn: req.body.isbn,
+                            keywords: keywords,
+                            typ: req.body.type,
+                            year: req.body.year,
+                            blurb: req.body.blurb,
+                            small_desc: req.body.small_desc,
+                            img: img,
+                            img_desc: req.body.img_desc,
+                            history: [],
+                            read: !!req.body.read_base64,
+                            position: req.body.position?req.body.position:null
                         })
-                        .catch(err => {
-                            console.error(err)
-                        })
-                }
-                object.save()
-                    .then(doc => {
-                        console.log(doc)
-                        res.redirect('/admin')
-                    })
-                    .catch(err => {
-                        console.error(err)
-                        res.sendStatus(500).redirect('/admin')
+                        if(req.body.read_base64){
+                            console.log(object._id)
+                            let file = new files({
+                                book_id: object._id,
+                                file: req.body.read_base64
+                            })
+                            file.save()
+                                .then(doc => {
+                                    console.log(doc)
+                                })
+                                .catch(err => {
+                                    console.error(err)
+                                })
+                        }
+                        object.save()
+                            .then(doc => {
+                                console.log(doc)
+                                res.redirect('/admin')
+                            })
+                            .catch(err => {
+                                console.error(err)
+                                res.sendStatus(500).redirect('/admin')
+                            })
                     })
             })
     }else if(req.session.loggedin){
