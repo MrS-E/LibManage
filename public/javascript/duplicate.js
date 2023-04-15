@@ -1,4 +1,3 @@
-main()
 async function main () {
     const books =await fetch_data()
     let data = 'duplicates'
@@ -9,11 +8,11 @@ async function main () {
 
     document.getElementById("search").addEventListener('click', () => {
         document.getElementById("myBar").style.width = "0%"
-        console.log(compare_date(books))
-        render(compare_date(books), books)
+        const dup = compare_date(books)
+        render(dup, books)
+        put(data, dup)
     })
 }
-
 async function fetch_data(){
     const res = await fetch('/api/object/')
     return await res.json()
@@ -70,8 +69,8 @@ function compare_date(data){
             checked.push(doc._id)
             for (let obj of data) {
                 if (!checked.includes(obj._id)) {
-                    let percent = (similarity(doc.title, obj.title) + similarity(doc.author, obj.author) + similarity(doc.isbn, obj.isbn)) / 3
-                    if (percent >= 0.6) {
+                    let percent = (similarity(doc.title, obj.title) + similarity(doc.author, obj.author)) / 2
+                    if (percent >= 0.8) {
                         checked.push(obj._id)
                         dup.simular.push({object: obj._id, percent:percent})
                     }
@@ -83,10 +82,14 @@ function compare_date(data){
     }
     return duplicates
 }
-function put_cache(data,files){
-    caches.open(data).then((cache) => {
-        cache.put(data, JSON.stringify(files))
-    })
+function put(data,files){
+    /*if('caches' in window) {
+        caches.open(data).then((cache) => {
+            cache.put(data, files)
+        })
+    }else{*/
+        window.sessionStorage.setItem(data, JSON.stringify(files))
+    //}
 }
 function move(percent){
     let bar = document.getElementById("myBar")
@@ -101,56 +104,66 @@ async function get(data){
         return await cache.match(data)
     }
 
-    if('caches' in window){
+    /*if('caches' in window){
         if(await get_cache(data)){ //duplicates already found
             console.log("cache")
             console.log(await get_cache(data))
             return await JSON.parse(get_cache(data))
         }
-    }else{
+    }else{*/
         if(window.sessionStorage.getItem(data)){ //duplicates already found
             console.log("storage")
-            return window.sessionStorage.getItem(data)
+            return JSON.parse(window.sessionStorage.getItem(data))
         }else{
             return null
         }
-    }
+    //}
 }
 function render(duplicates, books){
-    document.getElementById("duplicates")
+    function template(books, num) {
+        slider.push({class: ("mySlides"+num), index: 1})
+        let out ="<div class='slideshow-container mt-3'>"+
+            "<a class='prev' onclick='plusSlides(-1, "+(slider.length-1)+")'>&#10094;</a>" +
+            "<a class='next' onclick='plusSlides(1, "+(slider.length-1)+")'>&#10095;</a>"
+        for(let book of books){
+            out += "<div class='mySlides"+num+"'>" +
+                "<div class='row'>" +
+                "<div class='col-md-4 col-sm-6'>" +
+                "<img class='img-rounded img-thumbnail' src='"+(book.img?book.img:"/image/no_img.png")+"' alt='"+(book.img_desc?book.img_desc:"kein Bild verfügbar")+"' style='height: 100%'/>" +
+                "</div>" +
+                "<div class='col-md-4 col-sm-6'>" +
+                "<h6>"+book.title+"</h6>" +
+                "<p>"+book.author+"</p>" +
+                "<p>"+book.isbn+"</p>" +
+                "<p>"+(book.position?book.position:"")+"</p>" +
+                "</div>" +
+                "<div class='col-md-4 col-sm-12 d-grid'>" +
+                "<button class='btn btn-secondary mb-2 btn-block' id='"+book._id+"'>Löschen</button>" +
+                "<form class='d-grid' action='/admin/edit/"+book._id+"' method='get'>" +
+                "<button class='btn btn-primary btn-block' type='submit'>Bearbeiten</button>" +
+                "</form>" +
+                "</div>" +
+                "</div>" +
+                "</div>"
+        }
+        out += "</div>"
+
+        document.getElementById("duplicates").innerHTML += out
+        showSlides(1, slider.length-1);
+    }
+    document.getElementById("duplicates").innerHTML = ""
     for(let dop of duplicates){
         const book = []
-       book.push(books.find(obj=>{return obj._id===dop.object}))
+        book.push(books.find(obj=>{return obj._id===dop.object}))
         for(let x of dop.simular){
             book.push(books.find(obj=>{return obj._id===x.object}))
         }
+         template(book, dop.object)
     }
 }
 
-function template(books) {
-    out ="" +
-        "<div class='slideshow-container'>" +
-            "<a class='prev' onclick='plusSlides(-1, 0)'>&#10094;</a>" +
-            "<a class='next' onclick='plusSlides(1, 0)'>&#10095;</a>" +
-            "<div class='mySlides1'>" +
-                "<img src='img_nature_wide.jpg' style='width:100%' alt=''>" +
-            "</div>" +
-            "<div class='mySlides1'>" +
-                "<img src='img_snow_wide.jpg' style='width:100%' alt=''>" +
-            "</div>" +
-            "<div class='mySlides1'>" +
-                "<img src='img_mountains_wide.jpg' style='width:100%' alt=''>" +
-            "</div>" +
-        "</div>"
-}
-
-
-const slider =[
-    {class:"mySlides1", index:1},
-    {class:"mySlides2", index:1},
-]
-showSlides(1, 0);
-showSlides(1, 1);
+/*functions for carousel from https://www.w3schools.com/howto/howto_js_slideshow.asp*/
+const slider =[]
 
 function plusSlides(n, no) {
     showSlides(slider[no].index += n, no);
@@ -166,3 +179,18 @@ function showSlides(n, no) {
     }
     x[slider[no].index-1].style.display = "block";
 }
+
+/*entre point*/
+for(let x of document.querySelectorAll("button.delete_btn")){
+    x.addEventListener('click', (e)=>{
+        fetch('/api/admin/'+e.target.id, {method:'delete'})
+            .then(res => res.json())
+            .then(doc => {
+                if(doc.deletedCount > 0){
+                    document.getElementById("book_"+e.target.id).remove()
+                }
+            })
+    })
+}
+
+main()
