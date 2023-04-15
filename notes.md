@@ -30,3 +30,6 @@ Source: <br>
 [Stackoverflow](https://stackoverflow.com/questions/14678447/is-there-a-nodejs-equivalent-to-phps-mail-function)<br>
 [Nodemailer](https://nodemailer.com/about/)<br>
 [why smtp](https://nodemailer.com/usage/why-smtp/)<br>
+
+# Storage on Clientside
+[Possibility's](https://www.sitepoint.com/client-side-storage-options-comparison/)
