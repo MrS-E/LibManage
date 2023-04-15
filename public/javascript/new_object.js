@@ -24,41 +24,53 @@ form.isbn.addEventListener('change', (e)=>{
     const isbn_array = isbn.replaceAll('-','').split('')
     let out = ""
     //console.log(isbn_array)
-    for(let x = 0; x<isbn_array.length; x++){
-        if(x<=2) out += isbn_array[x]
-        else if(x<=3) out += "-"+isbn_array[x] + "-"
-        else if(x<=7) out += isbn_array[x]
-        else if(x===8) out += "-"+isbn_array[x]
-        else if(x<=11) out += isbn_array[x]
-        else out += "-" + isbn_array[x]
+    if(isbn_array.length<=10){
+        for (let x = 0; x < isbn_array.length; x++) {
+            if (x === 0) out += isbn_array[x] + "-"
+            else if (x <= 3) out += isbn_array[x]
+            else if (x === 4) out += isbn_array[x] + "-"
+            else if (x <= 8) out += isbn_array[x]
+            else if (x <= 9) out += "-" + isbn_array[x]
+        }
+    }else {
+        for (let x = 0; x < isbn_array.length; x++) {
+            if (x <= 2) out += isbn_array[x]
+            else if (x <= 3) out += "-" + isbn_array[x] + "-"
+            else if (x <= 7) out += isbn_array[x]
+            else if (x === 8) out += "-" + isbn_array[x]
+            else if (x <= 11) out += isbn_array[x]
+            else out += "-" + isbn_array[x]
+        }
     }
     e.target.value = out;
     if(isbn_array.length>=10){
         fetch("https://www.googleapis.com/books/v1/volumes?q=isbn:"+isbn.replaceAll('-',''),  {mode: 'cors'})
             .then((response) => response.json())
             .then((data) => {
-                form.title.value = data.items[0].volumeInfo.title?data.items[0].volumeInfo.title:""
-                //form.author.value = data.items[0].volumeInfo.authors[0]
-                form.author.value = ""
-                for(let d=0; d < data.items[0].volumeInfo.authors.length; d++){
-                    form.author.value += data.items[0].volumeInfo.authors[d]
-                    if(d+1 !== data.items[0].volumeInfo.authors.length){
-                        form.author.value += ", "
+                if(data.items) {
+                    form.title.value = data.items[0].volumeInfo.title ? data.items[0].volumeInfo.title : ""
+                    //form.author.value = data.items[0].volumeInfo.authors[0]
+                    form.author.value = ""
+                    for (let d = 0; d < data.items[0].volumeInfo.authors.length; d++) {
+                        form.author.value += data.items[0].volumeInfo.authors[d]
+                        if (d + 1 !== data.items[0].volumeInfo.authors.length) {
+                            form.author.value += ", "
+                        }
                     }
-                }
-                form.publisher.value = data.items[0].volumeInfo.publisher?data.items[0].volumeInfo.publisher:""
-                form.year.value = data.items[0].volumeInfo.publishedDate?data.items[0].volumeInfo.publishedDate.split('-')[0]:""
-                form.img_show.src = data.items[0].volumeInfo.imageLinks.thumbnail
-                form.img_base64.value = data.items[0].volumeInfo.imageLinks.thumbnail
-                form.blurb.value = data.items[0].volumeInfo.description?data.items[0].volumeInfo.description:""
-                form.img_desc.value = data.items[0].volumeInfo.title?data.items[0].volumeInfo.title + " Titelbild":""
-                //form.small_desc.value = data.items[0].searchInfo.textSnippet
-                form.page.value = data.items[0].volumeInfo.pageCount?data.items[0].volumeInfo.pageCount:""
-                form.keywords.value=""
-                for(let d=0; d < data.items[0].volumeInfo.categories.length; d++){
-                    form.keywords.value += data.items[0].volumeInfo.categories[d]
-                    if(d+1 !== data.items[0].volumeInfo.categories.length){
-                        form.keywords.value += ", "
+                    form.publisher.value = data.items[0].volumeInfo.publisher ? data.items[0].volumeInfo.publisher : ""
+                    form.year.value = data.items[0].volumeInfo.publishedDate ? data.items[0].volumeInfo.publishedDate.split('-')[0] : ""
+                    form.img_show.src = data.items[0].volumeInfo.imageLinks.thumbnail
+                    form.img_base64.value = data.items[0].volumeInfo.imageLinks.thumbnail
+                    form.blurb.value = data.items[0].volumeInfo.description ? data.items[0].volumeInfo.description : ""
+                    form.img_desc.value = data.items[0].volumeInfo.title ? data.items[0].volumeInfo.title + " Titelbild" : ""
+                    //form.small_desc.value = data.items[0].searchInfo.textSnippet
+                    form.page.value = data.items[0].volumeInfo.pageCount ? data.items[0].volumeInfo.pageCount : ""
+                    form.keywords.value = ""
+                    for (let d = 0; d < data.items[0].volumeInfo.categories.length; d++) {
+                        form.keywords.value += data.items[0].volumeInfo.categories[d]
+                        if (d + 1 !== data.items[0].volumeInfo.categories.length) {
+                            form.keywords.value += ", "
+                        }
                     }
                 }
             });
@@ -91,7 +103,7 @@ form.read.addEventListener('change', (e)=>{
     }
 })
 
-form.type.addEventListener('change', (e)=>{
+form.type.addEventListener('change', ()=>{
     if(form.type.options[form.type.selectedIndex].value.toString().split('-')[0] === 'E'){
         document.querySelector("label[for='read']").removeAttribute('style')
         form.read.removeAttribute('style')
