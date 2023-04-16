@@ -101,3 +101,13 @@ exports.duplicate = function (req, res){
         res.redirect('/login')
     }
 }
+
+exports.user = function(req, res){
+    if(req.session.loggedin && req.session.role==='admin'){
+        res.render('sites/ich', {user: req.session.username, role: req.session.role, render: 'user'})
+    }else if(req.session.loggedin){
+        res.sendStatus(401).send('Sie sind kein Administrator und so nicht genehmigt diesen Bereich der Webseite aufzusuchen.')
+    }else{
+        res.redirect('/login')
+    }
+}

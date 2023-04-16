@@ -1,12 +1,4 @@
 extends ../layout
-include ../components/ich/ausgeliehen
-include ../components/ich/history
-include ../components/ich/settings
-include ../components/ich/admin/objects
-include ../components/ich/admin/new_object
-include ../components/ich/admin/edit_object
-include ../components/ich/admin/return
-include ../components/ich/admin/duplicate
 
 block content
     h1 Ich
@@ -36,21 +28,31 @@ block content
         .col-lg-10.col-md-8.col-sm-12
             .container
                 if render==='lend'
+                    include ../components/ich/ausgeliehen
                     +ausgeliehen(books)
                 else if render==='history'
+                    include ../components/ich/history
                     +history(books)
                 else if render==='settings'
+                    include ../components/ich/settings
                     +settings(ich)
                 else if render==='user'
+                    include ../components/ich/admin/user
+                    +user(user)
                 else if render==='object'
+                    include ../components/ich/admin/objects
                     +objects(books)
                 else if render==='new'
+                    include ../components/ich/admin/new_object
                     +new_object
                 else if render==='edit'
+                    include ../components/ich/admin/edit_object
                     +edit_object(book)
                 else if render==='return'
+                    include ../components/ich/admin/return
                     +return(returns)
                 else if render==='duplicate'
+                    include ../components/ich/admin/duplicate
                     +duplicate
                 else
                     .row
