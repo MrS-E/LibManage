@@ -7,7 +7,7 @@ mixin return(returns)
                 span Ausgeliehen von: #{gabe.user.firstName} #{gabe.user.lastName}
                 br
                 span Zurück gegeben am #{gabe.returned_date[2]}.#{gabe.returned_date[1]}.#{gabe.returned_date[0]} um #{gabe.returned_time}
-            form(method="post" action="/api/object/confirm/"+gabe.book._id)
+            form(method="post" action="/api/object/return/"+gabe.book._id)
                 label(for="place") Standort
                 input.form-control(name="place" type="text" value=gabe.book.position)
                 button.mt-1.form-control.btn.btn-primary.mb-2(type="submit") Rückgabe bestätigen

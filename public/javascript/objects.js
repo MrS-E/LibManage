@@ -1,6 +1,6 @@
 for(let x of document.querySelectorAll("button.delete_btn")){
     x.addEventListener('click', (e)=>{
-        fetch('/api/admin/'+e.target.id, {method:'delete'})
+        fetch('/api/object/'+e.target.id, {method:'delete'})
             .then(res => res.json())
             .then(doc => {
                 if(doc.deletedCount > 0){
