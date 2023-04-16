@@ -33,7 +33,6 @@ app.use('/lend', require('./routes/view/lend'));
 app.use('/liste', require('./routes/view/liste'));
 app.use('/ich', require('./routes/view/ich'));
 //api
-app.use('/api/admin', require('./routes/api/admin'))
 app.use('/api/object', require('./routes/api/object'))
 app.use('/api/user', require('./routes/api/user'))
 
