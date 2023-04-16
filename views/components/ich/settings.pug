@@ -29,7 +29,7 @@ mixin settings(user)
                     input.form-control(value=user.lastName type="text" name="last_name")
                     br
                     input.form-control(value=user.firstName type="text" name="fist_name")
-            hr.hr.mt-1
+            hr.hr.mt-3
             h4 Authentifizierung:
             .rowW.d-sm-block.d-md-none
                 .col-sm-12
@@ -49,4 +49,11 @@ mixin settings(user)
                     span #{user.email}
                     br
                     input.form-control(type="text" name="passwd")
-            button.mt-2.btn.btn-outline-dark.mb-3#authentication(type="submit") Ändern
+            button.mt-2.btn.btn-outline-dark#authentication(type="submit") Ändern
+            hr.hr.mt-3
+        //todo add function
+        form(action="" method="")
+            button.mt-2.btn.btn-outline-dark#authentication(type="submit") Clean History
+        form(action="" method="")
+            button.mt-2.btn.btn-outline-dark#authentication(type="submit") Delete
+

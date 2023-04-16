@@ -1,3 +1,29 @@
-mixin user(user)
+mixin user(users)
     //todo user manage page for admin
     h3 Nutzerverwaltung
+    each user in users
+        .row.rounded.mt-2.border-dark.border
+            .col-md-4.col-sm-6
+                p #{user.salutation}
+                p #{user.firstName}
+                p #{user.lastName}
+            .col-md-4.col-sm-6.border-start.border-dark.mt-3.mb-3
+                p #{user.email}
+                select.form-control#role
+                    if user.role === 'worker'
+                        option(value="user") Nutzer
+                        option(value="worker" selected) Mitarbeiter
+                        option(value="admin") Admin
+                    else if user.role === 'admin'
+                        option(value="user") Nutzer
+                        option(value="worker") Mitarbeiter
+                        option(value="admin" selected) Admin
+                    else
+                        option(value="user" selected) Nutzer
+                        option(value="worker") Mitarbeiter
+                        option(value="admin") Admin
+            .col-md-4.col-sm-12.d-grid.gap-2.mt-2.mb-2
+                //todo add function
+                button.btn.btn-block.btn-outline-secondary Clean History
+                button.btn.btn-block.btn-secondary Löschen
+                button.btn.btn-block.btn-primary Updaten
