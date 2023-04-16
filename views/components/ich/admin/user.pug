@@ -1,12 +1,16 @@
 mixin user(users)
     //todo user manage page for admin
     h3 Nutzerverwaltung
+    .row
+        //todo searchbar
     each user in users
         .row.rounded.mt-2.border-dark.border
             .col-md-4.col-sm-6
                 p #{user.salutation}
-                p #{user.firstName}
-                p #{user.lastName}
+                p
+                    span #{user.firstName}
+                    br
+                    spam #{user.lastName}
             .col-md-4.col-sm-6.border-start.border-dark.mt-3.mb-3
                 p #{user.email}
                 select.form-control#role
