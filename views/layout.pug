@@ -4,20 +4,22 @@ block body
   body
     container-fluid
     nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
-      //a.navbar-brand(href="#")
-      button.navbar-toggler.ms-2(type="button"
-        data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup" aria-expanded="false"
-        aria-label="Toggle navigation")
-        span.navbar-toggler-icon
-      .collapse.navbar-collapse#navbarNavAltMarkup.ms-2
-        .navbar-nav
-          a.nav-link.active#home(aria-current="page" href="/") Home
-          a.nav-link#liste(href="/liste") Liste
-          a.nav-link#ich(href="/ich") Ich
-      form.form-inline.my-2.my-lg-0(method="post" action="/api/user/logout")
-        span.nav-text.text-white.d-none.d-sm-none.d-md-inline Angemeldet als #{user}
-        button.btn.btn-outline-success.my-2.my-sm-0.me-2(type="submit" value="Abmelden" style="margin-right: 1vw; margin-left: 10px;") Abmelden
+      .container
+        //- when removing container add .ms-2 to button.navbar-toggler and .collapse.navbar-collapse#navbarNavAltMarkup + add .me-2 to button.btn.btn-outline-success.my-2.my-sm-0 (+ maybe style="margin-right: 1vw; margin-left: 10px;")
+        //- a.navbar-brand(href="#")
+        button.navbar-toggler(type="button"
+          data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup" aria-expanded="false"
+          aria-label="Toggle navigation")
+          span.navbar-toggler-icon
+        .collapse.navbar-collapse#navbarNavAltMarkup
+          .navbar-nav
+            a.nav-link.active#home(aria-current="page" href="/") Home
+            a.nav-link#liste(href="/liste") Liste
+            a.nav-link#ich(href="/ich") Ich
+        form.form-inline.my-2.my-lg-0(method="post" action="/api/user/logout")
+          span.nav-text.text-white.d-none.d-sm-none.d-md-inline.me-3 Angemeldet als #{user}
+          button.btn.btn-outline-success.my-2.my-sm-0(type="submit" value="Abmelden" ) Abmelden
 
     script(src='/javascript/navbar.js')
     .container.mt-1
