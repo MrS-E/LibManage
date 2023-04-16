@@ -39,7 +39,11 @@ exports.home = async function (req, res){
             for(let d = 0; d<book_number; d++) {
                 const skip = Math.abs(Math.floor(Math.random() * (count - 4)));
                 const obj = await object.findOne({_id:skip>=0?skip:0})
-                if(obj) books.push(obj)
+                if(obj && !books.includes(obj)) {
+                    books.push(obj)
+                }else if(count >=4){
+                    d--;
+                }
             }
         /*}else{ //fixme search bug
             console.log("console")
