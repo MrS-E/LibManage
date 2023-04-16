@@ -44,20 +44,22 @@ exports.lend = async function (req, res){
 }
 
 exports.return = function (req, res) {
-    if(req.session.userid) {
+    if(req.session.loggedin) {
         console.log('return')
-        object.findOne({_id: req.body.id })
+        const book_id = parseInt(req.body.id)
+        const user_id = parseInt(req.session.userid)
+        object.findOne({_id: book_id })
             .then( (doc) => {
                 if (doc.typ.split('-')[0] !== 'E') {
                     console.log('book')
                     let _return = new returner({
-                        user_id: req.session.userid,
-                        book_id: req.body.id,
+                        user_id: user_id,
+                        book_id: book_id,
                         returned: new Date().toISOString()
                     })
                     _return.save()
                         .then(() => {
-                            user.updateOne({_id: req.session.userid, history: {$elemMatch:{$and:[{book: req.body.id}, {end: null}]}}}, {$set: {"history.$.end": new Date().toISOString()}})
+                            user.updateOne({_id: user_id, history: {$elemMatch:{$and:[{book: book_id}, {end: null}]}}}, {$set: {"history.$.end": new Date().toISOString()}})
                                 .then(doc=>console.log(doc))
                             res.send('return ticket submitted')
                         })
@@ -65,11 +67,12 @@ exports.return = function (req, res) {
                             console.log(err)
                             res.sendStatus(500).send('return ticket submit did not go well')
                         })
-                } else {
+                }
+                else {
                     console.log("e-medium")
-                    user.updateOne({_id: req.session.userid, history: {$elemMatch:{$and:[{book: req.body.id}, {end: null}]}}}, {$set: {"history.$.end": new Date().toISOString()}})
+                    user.updateOne({_id: user_id, history: {$elemMatch:{$and:[{book: book_id}, {end: null}]}}}, {$set: {"history.$.end": new Date().toISOString()}})
                         .then(()=>{
-                            object.updateOne({_id: req.body.id, history:{$elemMatch:{$and:[{user: req.session.userid},{end: null}]}}},{$set: {"history.$.end": new Date().toISOString()}})
+                            object.updateOne({_id:book_id, history:{$elemMatch:{$and:[{user: user_id},{end: null}]}}},{$set: {"history.$.end": new Date().toISOString()}})
                                 .then((doc) => {
                                     console.log(doc)
                                     res.send('e-medium returned')
@@ -85,6 +88,12 @@ exports.return = function (req, res) {
                         })
                 }
             })
+            .catch(err=>{
+                console.log(err)
+                res.sendStatus(500).send('return ticket submit did not go well')
+            })
+    }else{
+        res.redirect('/login')
     }
 }
 
