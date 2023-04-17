@@ -4,5 +4,5 @@ document.getElementById('clean').addEventListener('click', ()=>{
 
 document.getElementById('delete').addEventListener('click', ()=>{
     fetch("/api/user/", {method: "delete"}).catch(err=>err)
-        .then(doc=>window.location.reload())
+        .then(()=>window.location.reload())
 })

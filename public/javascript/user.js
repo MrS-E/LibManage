@@ -17,7 +17,7 @@ for(let d of document.querySelectorAll("button[name='delete']")) {
             method: "delete",
             body: JSON.stringify({user: user})
         }).catch(err => err)
-            .then(doc => window.location.reload())
+            .then(() => window.location.reload())
     })
 }
 
