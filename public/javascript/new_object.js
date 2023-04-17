@@ -78,28 +78,38 @@ form.isbn.addEventListener('change', (e)=>{
 })
 
 form.img.addEventListener('change', (e)=>{
-    let reader = new FileReader()
-    reader.readAsDataURL(e.target.files[0])
-    reader.onload = () => {
-        console.log(reader.result)
-        console.log(form.img)
-        form.img_show.src = reader.result
-        form.img_base64.value = reader.result
-    }
-    reader.onerror = (err) => {
-        console.error(err)
+    if(e.target.files[0].size > 1048576*5){
+        alert("Achtung! Dieses Bild ist zu gross");
+        e.target.value = "";
+    }else {
+        let reader = new FileReader()
+        reader.readAsDataURL(e.target.files[0])
+        reader.onload = () => {
+            console.log(reader.result)
+            console.log(form.img)
+            form.img_show.src = reader.result
+            form.img_base64.value = reader.result
+        }
+        reader.onerror = (err) => {
+            console.error(err)
+        }
     }
 })
 
 form.read.addEventListener('change', (e)=>{
-    let reader = new FileReader()
-    reader.readAsDataURL(e.target.files[0])
-    reader.onload = () => {
-        console.log(reader.result)
-        form.read_base64.value = reader.result
-    }
-    reader.onerror = (err) => {
-        console.error(err)
+    if(e.target.files[0].size > 1048576*15){
+        alert("Achtung! Dieses Datei ist zu gross");
+        e.target.value = "";
+    }else {
+        let reader = new FileReader()
+        reader.readAsDataURL(e.target.files[0])
+        reader.onload = () => {
+            console.log(reader.result)
+            form.read_base64.value = reader.result
+        }
+        reader.onerror = (err) => {
+            console.error(err)
+        }
     }
 })
 
