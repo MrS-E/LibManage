@@ -12,7 +12,7 @@ mixin user(users)
                     spam #{user.lastName}
             .col-md-4.col-sm-6.border-start.border-dark.mt-3.mb-3
                 p #{user.email}
-                select.form-control#role
+                select.form-control(id="select_"+user._id)
                     if user.role === 'worker'
                         option(value="user") Nutzer
                         option(value="worker" selected) Mitarbeiter

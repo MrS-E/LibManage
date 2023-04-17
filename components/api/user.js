@@ -163,17 +163,15 @@ exports.reset_password = function (req, res){
 
 exports.role = function(req, res){
     if(req.session.loggedin && req.session.role==='admin'){
-        user.updateOne({_id: req.body.id}, {$set:{role: req.body.role}})
+        console.log(req.body)
+        user.updateOne({_id: req.body.id}, {$set:{role: req.body.role}})//fixme acknowledged: false
             .catch(err=>console.log(err))
+            .then(doc=>console.log(doc))
         res.send(200)
     }
     else if(req.session.loggedin){
         res.sendStatus(401).send('Sie sind kein Administrator und so nicht genehmigt diesen Bereich der Webseite aufzusuchen.')
     }
-    else{
-        res.redirect('/login')
-    }
-
 }
 
 exports.delete = async function (req, res) {
@@ -194,11 +192,10 @@ exports.delete = async function (req, res) {
                                 history: {$elemMatch: {$and: [{book: book_id}, {end: null}]}}
                             }, {$set: {"history.$.end": new Date().toISOString()}})
                                 .then(doc => console.log(doc))
-                            res.send('return ticket submitted')
+
                         })
                         .catch(err => {
                             console.log(err)
-                            res.sendStatus(500).send('return ticket submit did not go well')
                         })
                 } else {
                     console.log("e-medium")
@@ -217,18 +214,15 @@ exports.delete = async function (req, res) {
                                 })
                                 .catch(err => {
                                     console.log(err)
-                                    res.sendStatus(500).send('return did not go well')
                                 })
                         })
                         .catch(err => {
                             console.log(err)
-                            res.sendStatus(500).send('return did not go well')
                         })
                 }
             })
             .catch(err => {
                 console.log(err)
-                res.sendStatus(500).send('return ticket submit did not go well')
             })
     }
 
@@ -256,10 +250,7 @@ exports.delete = async function (req, res) {
             })
         await user.deleteOne({_id: req.session.userid}).catch(err => console.log(err))
         req.session.destroy();
-        res.redirect('/');
         res.end();
-    } else {
-        res.redirect('/login')
     }
 }
 
@@ -281,11 +272,9 @@ exports.clean = async function (req, res) {
                                 history: {$elemMatch: {$and: [{book: book_id}, {end: null}]}}
                             }, {$set: {"history.$.end": new Date().toISOString()}})
                                 .then(doc => console.log(doc))
-                            res.send('return ticket submitted')
                         })
                         .catch(err => {
                             console.log(err)
-                            res.sendStatus(500).send('return ticket submit did not go well')
                         })
                 } else {
                     console.log("e-medium")
@@ -300,22 +289,18 @@ exports.clean = async function (req, res) {
                             }, {$set: {"history.$.end": new Date().toISOString()}})
                                 .then((doc) => {
                                     console.log(doc)
-                                    res.send('e-medium returned')
                                 })
                                 .catch(err => {
                                     console.log(err)
-                                    res.sendStatus(500).send('return did not go well')
                                 })
                         })
                         .catch(err => {
                             console.log(err)
-                            res.sendStatus(500).send('return did not go well')
                         })
                 }
             })
             .catch(err => {
                 console.log(err)
-                res.sendStatus(500).send('return ticket submit did not go well')
             })
     }
 
@@ -344,7 +329,5 @@ exports.clean = async function (req, res) {
             })
         await user.updateOne({_id: req.session.userid}, {$set: {history: []}})
         res.redirect('/ich/settings')
-    } else {
-        res.redirect('/login')
     }
 }
