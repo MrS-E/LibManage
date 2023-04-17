@@ -1,5 +1,4 @@
 mixin user(users)
-    //todo user manage page for admin
     h3 Nutzerverwaltung
     .row
         //todo searchbar
@@ -27,7 +26,7 @@ mixin user(users)
                         option(value="worker") Mitarbeiter
                         option(value="admin") Admin
             .col-md-4.col-sm-12.d-grid.gap-2.mt-2.mb-2
-                //todo add function
-                button.btn.btn-block.btn-outline-secondary Clean History
-                button.btn.btn-block.btn-secondary Löschen
-                button.btn.btn-block.btn-primary Updaten
+                button.btn.btn-block.btn-outline-secondary(id="clean_"+user._id name="clean") Clean History
+                button.btn.btn-block.btn-secondary(id="delete_"+user._id name="delete") Löschen
+                button.btn.btn-block.btn-primary(id="update_"+user._id name="update") Updaten
+    script(src="/javascript/user.js")

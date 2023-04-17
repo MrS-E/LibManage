@@ -2,6 +2,8 @@ const user = require('../../src/db/models/user');
 const request = require('../../src/db/models/password_request')
 const sha512 = require('crypto-js/sha512');
 const mail = require('../../src/mail/nodemailer/mail')
+const object = require("../../src/db/models/object");
+const returner = require("../../src/db/models/returns");
 
 exports.add = function (req, res){
     if(req.body.password === req.body.password2) {
@@ -76,8 +78,6 @@ exports.unverify = function (req, res){
         res.end();
     }
 }
-
-exports.delete = function (req,res){}
 
 exports.update = function(req, res){
     if(req.session.loggedin){
@@ -159,4 +159,192 @@ exports.reset_password = function (req, res){
         .catch((err)=>{
             console.log(err)
         })
+}
+
+exports.role = function(req, res){
+    if(req.session.loggedin && req.session.role==='admin'){
+        user.updateOne({_id: req.body.id}, {$set:{role: req.body.role}})
+            .catch(err=>console.log(err))
+        res.send(200)
+    }
+    else if(req.session.loggedin){
+        res.sendStatus(401).send('Sie sind kein Administrator und so nicht genehmigt diesen Bereich der Webseite aufzusuchen.')
+    }
+    else{
+        res.redirect('/login')
+    }
+
+}
+
+exports.delete = async function (req, res) {
+    function _return(user_id, book_id) {
+        object.findOne({_id: book_id})
+            .then((doc) => {
+                if (doc.typ.split('-')[0] !== 'E') {
+                    console.log('book')
+                    let _return = new returner({
+                        user_id: user_id,
+                        book_id: book_id,
+                        returned: new Date().toISOString()
+                    })
+                    _return.save()
+                        .then(() => {
+                            user.updateOne({
+                                _id: user_id,
+                                history: {$elemMatch: {$and: [{book: book_id}, {end: null}]}}
+                            }, {$set: {"history.$.end": new Date().toISOString()}})
+                                .then(doc => console.log(doc))
+                            res.send('return ticket submitted')
+                        })
+                        .catch(err => {
+                            console.log(err)
+                            res.sendStatus(500).send('return ticket submit did not go well')
+                        })
+                } else {
+                    console.log("e-medium")
+                    user.updateOne({
+                        _id: user_id,
+                        history: {$elemMatch: {$and: [{book: book_id}, {end: null}]}}
+                    }, {$set: {"history.$.end": new Date().toISOString()}})
+                        .then(() => {
+                            object.updateOne({
+                                _id: book_id,
+                                history: {$elemMatch: {$and: [{user: user_id}, {end: null}]}}
+                            }, {$set: {"history.$.end": new Date().toISOString()}})
+                                .then((doc) => {
+                                    console.log(doc)
+                                    res.send('e-medium returned')
+                                })
+                                .catch(err => {
+                                    console.log(err)
+                                    res.sendStatus(500).send('return did not go well')
+                                })
+                        })
+                        .catch(err => {
+                            console.log(err)
+                            res.sendStatus(500).send('return did not go well')
+                        })
+                }
+            })
+            .catch(err => {
+                console.log(err)
+                res.sendStatus(500).send('return ticket submit did not go well')
+            })
+    }
+
+    if (req.session.loggedin && req.session.role === 'admin' && req.body.user) {
+        await user.findOne({_id: req.body.user})
+            .catch(err => console.log(err))
+            .then(doc => {
+                for (let history of doc.history) {
+                    if (!history.end) {
+                        _return(req.body.user, history.book)
+                    }
+                }
+            })
+        await user.deleteOne({_id: req.body.user}).catch(err => console.log(err))
+        res.send(200)
+    } else if (req.session.loggedin) {
+        await user.findOne({_id: req.session.userid})
+            .catch(err => console.log(err))
+            .then(doc => {
+                for (let history of doc.history) {
+                    if (!history.end) {
+                        _return(req.body.user, history.book)
+                    }
+                }
+            })
+        await user.deleteOne({_id: req.session.userid}).catch(err => console.log(err))
+        req.session.destroy();
+        res.redirect('/');
+        res.end();
+    } else {
+        res.redirect('/login')
+    }
+}
+
+exports.clean = async function (req, res) {
+    function _return(user_id, book_id) {
+        object.findOne({_id: book_id})
+            .then((doc) => {
+                if (doc.typ.split('-')[0] !== 'E') {
+                    console.log('book')
+                    let _return = new returner({
+                        user_id: user_id,
+                        book_id: book_id,
+                        returned: new Date().toISOString()
+                    })
+                    _return.save()
+                        .then(() => {
+                            user.updateOne({
+                                _id: user_id,
+                                history: {$elemMatch: {$and: [{book: book_id}, {end: null}]}}
+                            }, {$set: {"history.$.end": new Date().toISOString()}})
+                                .then(doc => console.log(doc))
+                            res.send('return ticket submitted')
+                        })
+                        .catch(err => {
+                            console.log(err)
+                            res.sendStatus(500).send('return ticket submit did not go well')
+                        })
+                } else {
+                    console.log("e-medium")
+                    user.updateOne({
+                        _id: user_id,
+                        history: {$elemMatch: {$and: [{book: book_id}, {end: null}]}}
+                    }, {$set: {"history.$.end": new Date().toISOString()}})
+                        .then(() => {
+                            object.updateOne({
+                                _id: book_id,
+                                history: {$elemMatch: {$and: [{user: user_id}, {end: null}]}}
+                            }, {$set: {"history.$.end": new Date().toISOString()}})
+                                .then((doc) => {
+                                    console.log(doc)
+                                    res.send('e-medium returned')
+                                })
+                                .catch(err => {
+                                    console.log(err)
+                                    res.sendStatus(500).send('return did not go well')
+                                })
+                        })
+                        .catch(err => {
+                            console.log(err)
+                            res.sendStatus(500).send('return did not go well')
+                        })
+                }
+            })
+            .catch(err => {
+                console.log(err)
+                res.sendStatus(500).send('return ticket submit did not go well')
+            })
+    }
+
+    if (req.session.loggedin && req.session.role === 'admin' && req.body.user) {
+        await user.findOne({_id: req.body.user})
+            .catch(err => console.log(err))
+            .then(doc => {
+                console.log(doc)
+                for (let history of doc.history) {
+                    if (!history.end) {
+                        _return(req.body.user, history.book)
+                    }
+                }
+            })
+        await user.updateOne({_id: req.body.user}, {$set: {history: []}})
+        res.send(200)
+    } else if (req.session.loggedin) {
+        await user.findOne({_id: req.session.userid})
+            .catch(err => console.log(err))
+            .then(doc => {
+                for (let history of doc.history) {
+                    if (!history.end) {
+                        _return(req.body.user, history.book)
+                    }
+                }
+            })
+        await user.updateOne({_id: req.session.userid}, {$set: {history: []}})
+        res.redirect('/ich/settings')
+    } else {
+        res.redirect('/login')
+    }
 }

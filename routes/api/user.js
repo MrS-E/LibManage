@@ -9,6 +9,7 @@ router.post('/logout', user.unverify)
 router.post('/update', user.update)
 router.post('/request', user.request_password)
 router.post('/request/:token', user.reset_password)
-
-
+router.put('/update', user.role)
+router.delete('/', user.delete)
+router.delete('/clean', user.clean)
 module.exports = router;

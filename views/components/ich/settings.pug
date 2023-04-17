@@ -51,9 +51,8 @@ mixin settings(user)
                     input.form-control(type="text" name="passwd")
             button.mt-2.btn.btn-outline-dark#authentication(type="submit") Ändern
             hr.hr.mt-3
-        //todo add function
-        form(action="" method="")
-            button.mt-2.btn.btn-outline-dark#authentication(type="submit") Clean History
-        form(action="" method="")
-            button.mt-2.btn.btn-outline-dark#authentication(type="submit") Delete
+        .d-grid.gap-2
+            button.mt-2.btn.btn-outline-dark#clean(type="submit") Clean History
+            button.mt-2.btn.btn-outline-dark#delete(type="submit") Delete
+    script(src="/javascript/settings.js")
 
