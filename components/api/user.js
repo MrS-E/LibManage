@@ -164,7 +164,7 @@ exports.reset_password = function (req, res){
 exports.role = function(req, res){
     if(req.session.loggedin && req.session.role==='admin'){
         console.log(req.body)
-        user.updateOne({_id: req.body.id}, {$set:{role: req.body.role}})//fixme acknowledged: false
+        user.updateOne({_id: req.body.id}, {$set:{role: req.body.role}})
             .catch(err=>console.log(err))
             .then(doc=>console.log(doc))
         res.send(200)
