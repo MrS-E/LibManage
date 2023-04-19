@@ -24,8 +24,6 @@ app.use(express.urlencoded({ extended: false, limit: "100mb" }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-console.log(express.static(path.join(__dirname, 'public')))
-
 //view
 app.use('/', require('./routes/view/index'));
 app.use('/admin', require('./routes/view/admin'));
