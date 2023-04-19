@@ -1,8 +1,6 @@
 //This code was copied from https://www.freecodecamp.org/news/introduction-to-mongoose-for-mongodb-d2a7aa593c57/
 const mongoose = require('mongoose');
-
-const server = '127.0.0.1:27017'; // REPLACE WITH YOUR DB SERVER
-const database = 'bibliothek';      // REPLACE WITH YOUR DB NAME
+//const config = require('config')
 
 class Database {
     constructor() {
@@ -11,7 +9,7 @@ class Database {
 
     _connect() {
         mongoose.set('strictQuery', false)
-        mongoose.connect(`mongodb://${server}/${database}`)
+        mongoose.connect('mongodb://127.0.0.1:27017/bibliothek')
             .then(() => {
                 console.log('Database connection successful')
             })

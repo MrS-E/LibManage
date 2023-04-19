@@ -96,7 +96,7 @@ form.img.addEventListener('change', (e)=>{
     }
 })
 
-form.read.addEventListener('change', (e)=>{
+/*form.read.addEventListener('change', (e)=>{
     if(e.target.files[0].size > 1048576*15){
         alert("Achtung! Dieses Datei ist zu gross");
         e.target.value = "";
@@ -111,7 +111,7 @@ form.read.addEventListener('change', (e)=>{
             console.error(err)
         }
     }
-})
+})*/
 
 form.type.addEventListener('change', ()=>{
     if(form.type.options[form.type.selectedIndex].value.toString().split('-')[0] === 'E'){
@@ -123,7 +123,8 @@ form.type.addEventListener('change', ()=>{
     }else{
         document.querySelector("label[for='read']").setAttribute('style', 'display:none;"')
         form.read.setAttribute('style', 'display:none;"')
-        form.read_base64.value=null
+        form.read.value = ""
+        //form.read_base64.value=null
         document.querySelector("label[for='position']").removeAttribute('style')
         form.position.removeAttribute('style')
     }

@@ -5,6 +5,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const schedule = require("node-schedule");
+const methodOverride = require('method-override');
 require('./src/db/datebase');
 
 var app = express();
@@ -22,6 +23,7 @@ app.use(session({
 app.use(express.json({limit: "100mb"}));
 app.use(express.urlencoded({ extended: false, limit: "100mb" }));
 app.use(cookieParser());
+app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 //view

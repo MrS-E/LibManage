@@ -2,7 +2,7 @@ const objects = require("../../src/db/models/object")
 const user = require('../../src/db/models/user')
 const object = require("../../src/db/models/object")
 const returner = require("../../src/db/models/returns")
-const files = require("../../src/db/models/files")
+//const files = require("../../src/db/models/files")
 
 exports.all = function (req, res){
     objects.find()
@@ -130,7 +130,7 @@ exports.add = function (req, res){
                 })
                 if (req.body.read_base64) {
                     console.log(object._id)
-                    let file = new files({
+                    let file = new files({ //todo
                         book_id: object._id,
                         file: req.body.read_base64
                     })
@@ -180,13 +180,13 @@ exports.edit = function (req, res) {
 }
 
 exports.read = function (req, res){
-    if(req.session.loggedin) {
+    /*if(req.session.loggedin) {
         const book = req.params.id
         user.findOne({_id: req.session.userid})
             .then((doc) => {
                 for (let d of doc.history) {
                     if (!d.end && d.book === book) {
-                        files.findOne({book_id:book})
+                        files.findOne({book_id:book}) //todo
                             .then((doc)=>{
                             object.findOne({_id:book})
                                 .then((obj)=>{
@@ -202,7 +202,7 @@ exports.read = function (req, res){
             })
     } else {
         res.sendStatus(401)
-    }
+    }*/
 }
 
 exports.return_confirmation = function (req, res){

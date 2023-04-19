@@ -1,7 +1,7 @@
 mixin new_object
     .row
         h3 Neues Objekt
-        form(action='/api/object/', method="post" )
+        form(action='/api/object/' method="post" enctype="multipart/form-data")
             label.mt-1(for="title") Title
             input.form-control(type="text" name="title" required)
             label.mt-1(for="author") Autor
@@ -41,8 +41,8 @@ mixin new_object
             label.mt-1(for="img_desc") Beschreibung Titelbild
             input.form-control(type="text" name="img_desc")
             label.mt-1(for="read" style="display: none") Medium
-            input.form-control(type="file" id="read" style="display: none")
-            input(type="text" name="read_base64" style="display:none")
+            input.form-control(type="file" name="read" id="read" style="display: none")
+            //input(type="text" name="read_base64" style="display:none")
             label.mt-1(for="position") Standort
             input.form-control(type="text" name="position")
             button.form-control.btn.btn-primary.mt-2.mb-3(type="submit") Objekt hinzufügen

@@ -17,7 +17,8 @@ const object = new mongoose.Schema(
         history: {type: [{user: {type: String, required: true}, start:{type: Date, required: true}, end:{type: Date, default:null}}]},
         read: {type: Boolean},
         page: {type: Number},
-        position: {type: String}
+        position: {type: String},
+        file: {type: String}
     },
     { collection: 'object' }
 )
