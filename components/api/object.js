@@ -148,7 +148,7 @@ exports.delete = function (req, res){
     if(req.session.loggedin && req.session.role==='admin') {
         object.findOne({_id: req.params.id}).then(doc => {
             objects.deleteOne({_id: req.params.id})
-            gfs.delete(doc.file)
+            if(doc.file) gfs.delete(doc.file)
             res.send("deleted")
         })
     }
