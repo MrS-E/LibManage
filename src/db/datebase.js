@@ -1,6 +1,6 @@
 //This code was copied from https://www.freecodecamp.org/news/introduction-to-mongoose-for-mongodb-d2a7aa593c57/
 const mongoose = require('mongoose');
-//const config = require('config')
+const config = require('./config')
 
 class Database {
     constructor() {
@@ -9,7 +9,7 @@ class Database {
 
     _connect() {
         mongoose.set('strictQuery', false)
-        mongoose.connect('mongodb://127.0.0.1:27017/bibliothek') //todo config file
+        mongoose.connect(config.mogodbUri)
             .then(() => {
                 console.log('Database connection successful')
             })
