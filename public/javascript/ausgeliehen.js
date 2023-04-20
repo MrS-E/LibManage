@@ -15,6 +15,7 @@ for(let d of document.getElementsByClassName('read')){
                     a.download = res.book[0].filename
                     a.click()
                     e.target.innerText = "Heruntergeladen"
+                    a.remove()
                 }else{
                     e.target.innerText = "Wurde nicht gefunden"
                 }
