@@ -3,7 +3,6 @@ const user = require('../../src/db/models/user')
 const object = require("../../src/db/models/object")
 const returner = require("../../src/db/models/returns")
 const gfs = require("../../src/db/buckets/gfs")
-//const files = require("../../src/db/models/files")
 
 exports.all = function (req, res){
     objects.find()
@@ -145,9 +144,13 @@ exports.add = function (req, res){
     }
 }
 
-exports.delete = async function (req, res){
+exports.delete = function (req, res){
     if(req.session.loggedin && req.session.role==='admin') {
-        res.send(await objects.deleteOne({_id: req.params.id})) //todo add deletion of e-objects
+        object.findOne({_id: req.params.id}).then(doc => {
+            objects.deleteOne({_id: req.params.id})
+            gfs.delete(doc.file)
+            res.send("deleted")
+        })
     }
     else{
         res.sendStatus(401).send({error: "You are not an admin", deletedCount: 0})
