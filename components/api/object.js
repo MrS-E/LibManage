@@ -41,7 +41,7 @@ exports.lend = async function (req, res){
             console.error(err)
             res.sendStatus(500).redirect('/liste')
         })
-    res.redirect("/home")
+    res.redirect("/liste")
 }
 
 exports.return = function (req, res) {
