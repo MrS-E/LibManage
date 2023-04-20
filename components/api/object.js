@@ -144,7 +144,7 @@ exports.add = function (req, res){
     }
 }
 
-exports.delete = function (req, res){
+exports.delete = function (req, res){ //fixme
     if(req.session.loggedin && req.session.role==='admin') {
         object.findOne({_id: req.params.id}).then(doc => {
             objects.deleteOne({_id: req.params.id})
@@ -158,7 +158,7 @@ exports.delete = function (req, res){
 }
 
 exports.edit = function (req, res) {
-    if (req.session.loggedin && req.session.role === 'admin') {
+    if (req.session.loggedin && req.session.role === 'admin') { //todo edit body so that there ist not an empty keyword (keyword put no text)
         console.log(req.params.id)
         console.log(req.body)
         objects.updateOne({_id:req.params.id}, {$set: req.body})
