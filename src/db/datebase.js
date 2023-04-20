@@ -9,7 +9,7 @@ class Database {
 
     _connect() {
         mongoose.set('strictQuery', false)
-        mongoose.connect('mongodb://127.0.0.1:27017/bibliothek')
+        mongoose.connect('mongodb://127.0.0.1:27017/bibliothek') //todo config file
             .then(() => {
                 console.log('Database connection successful')
             })

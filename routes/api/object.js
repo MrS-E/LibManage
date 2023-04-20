@@ -14,6 +14,6 @@ router.post('/return/:id', object.return_confirmation)
 router.get('/', object.all);
 router.delete('/:id', object.delete)
 router.put('/:id', object.edit)
-router.post('/', upload.single('read'), object.add); //todo
+router.post('/', upload.single('read'), object.add);
 
 module.exports = router;

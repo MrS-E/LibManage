@@ -2,6 +2,7 @@ const objects = require("../../src/db/models/object")
 const user = require('../../src/db/models/user')
 const object = require("../../src/db/models/object")
 const returner = require("../../src/db/models/returns")
+const gfs = require("../../src/db/buckets/gfs")
 //const files = require("../../src/db/models/files")
 
 exports.all = function (req, res){
@@ -126,22 +127,9 @@ exports.add = function (req, res){
                     img_desc: req.body.img_desc,
                     history: [],
                     read: !!req.body.read_base64,
-                    position: req.body.position ? req.body.position : null
+                    position: req.body.position ? req.body.position : null,
+                    file: req.file?req.file.originalname:null
                 })
-                if (req.body.read_base64) {
-                    console.log(object._id)
-                    let file = new files({ //todo
-                        book_id: object._id,
-                        file: req.body.read_base64
-                    })
-                    file.save()
-                        .then(doc => {
-                            console.log(doc)
-                        })
-                        .catch(err => {
-                            console.error(err)
-                        })
-                }
                 object.save()
                     .then(doc => {
                         console.log(doc)
@@ -159,7 +147,7 @@ exports.add = function (req, res){
 
 exports.delete = async function (req, res){
     if(req.session.loggedin && req.session.role==='admin') {
-        res.send(await objects.deleteOne({_id: req.params.id}))
+        res.send(await objects.deleteOne({_id: req.params.id})) //todo add deletion of e-objects
     }
     else{
         res.sendStatus(401).send({error: "You are not an admin", deletedCount: 0})
@@ -180,29 +168,39 @@ exports.edit = function (req, res) {
 }
 
 exports.read = function (req, res){
-    /*if(req.session.loggedin) {
+    console.log("here")
+    if(req.session.loggedin) {
+        console.log(req.session.userid)
         const book = req.params.id
         user.findOne({_id: req.session.userid})
             .then((doc) => {
                 for (let d of doc.history) {
-                    if (!d.end && d.book === book) {
-                        files.findOne({book_id:book}) //todo
-                            .then((doc)=>{
-                            object.findOne({_id:book})
-                                .then((obj)=>{
-                                    const author = obj.author.split(',')[0].split(' ')
-                                    res.send({file:doc.file, name: obj.author.split(',')[0].split(' ').length===2?(author[1]+", " + author[0] + " - " + obj.title):(obj.author?(author[0] + " - " + obj.title):obj.title )})
-                                })
-                                .catch((err)=>{console.log(err);res.sendStatus(500).send({file:null, error: "Internal Server Error"})})
+                    console.log(d)
+                    if (!d.end && d.book == book) {
+                        object.findOne({_id:book})
+                            .then((obj)=> {
+                                if(obj.file) {
+                                    gfs.search({filename: obj.file}).then(doc => {
+                                        console.log(doc)
+                                        if(doc || doc.length !== 0){
+                                            gfs.get(obj.file).then(file=>{
+                                                //console.log(file)
+                                                res.send({book: doc, file: file})
+                                            })
+                                        }
+                                    })
+                                }else{
+                                    res.send({file:null, error:"object has no file"})
+                                }
                             })
-                            .catch((err)=>{console.log(err);res.sendStatus(500).send({file:null, error: "Internal Server Error"})})
+                            .catch((err)=>{console.log(err);res.send({file:null, error: "Internal Server Error"})})
                         break;
                     }
                 }
             })
     } else {
         res.sendStatus(401)
-    }*/
+    }
 }
 
 exports.return_confirmation = function (req, res){

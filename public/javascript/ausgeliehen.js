@@ -1,15 +1,23 @@
 for(let d of document.getElementsByClassName('read')){
     d.addEventListener('click', (e)=>{
         const book = e.target.id
+        e.target.disabled = true
+        e.target.innerText = "Bitte warten"
         fetch('/api/object/read/'+book, {method:"get"})
             .then((response)=>response.json())
             .then((res)=>{
-                console.log(res.file)
+                console.log(res)
                 //window.open(res.file+(res.file.split('/')[1].split(';')[0].split('+')[0], '_blank').focus();
-                const a = document.createElement("a")
-                a.href = res.file
-                a.download = res.name +"."+ res.file.split('/')[1].split(';')[0].split('+')[0]
-                a.click()
+                if(res.file) {
+                    e.target.innerText = "Download started in kürze"
+                    const a = document.createElement("a")
+                    a.href = "data:"+res.book[0].contentType+";base64," + res.file
+                    a.download = res.book[0].filename
+                    a.click()
+                    e.target.innerText = "Heruntergeladen"
+                }else{
+                    e.target.innerText = "Wurde nicht gefunden"
+                }
             })
     })
 }
