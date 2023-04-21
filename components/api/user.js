@@ -98,7 +98,7 @@ exports.request_password = function (req, res){
     const email = req.body.email
     user.findOne({email: email})
         .then((us)=>{
-            const token = us.password + new Date().toString()
+            const token = us.password + new Date().toString().split(' ')[0]
             let reset = new request({
                 user_id: us._id,
                 token: token
@@ -134,30 +134,42 @@ exports.request_password = function (req, res){
 }
 
 exports.reset_password = function (req, res){
-    const token = res.params.token
+    const token = req.params.token
+    console.log(token)
     request.findOne({token: token})
         .then((doc)=>{
-            if(req.body.passwd1 === req.body.passwd2) {
-                user.updateOne({_id: doc.passwd1}, {$set: {password: sha512(req.body.passwd1).toString()}})
-                    .then(()=>{
-                        mail({
-                            from: "noreply@bibliothek.ch",
-                            to: doc.email,
-                            subject: "Passwort wurde zurückgesetzt",
-                            text: "" +
-                                "<div>" +
-                                "<h1>Passwort wurde geändert</h1>" +
-                                "<p>Ihr Passwort wurde geändert, wenn Sie dies nicht veranlasst haben kontaktieren Sie uns.</p>" +
-                                "</div>"
+            console.log(req.body)
+            console.log(doc)
+            if(doc) {
+                if (req.body["passwd1"] === req.body["passwd2"]) {
+                    user.updateOne({_id: doc.user_id}, {$set: {password: sha512(req.body.passwd1).toString()}})
+                        .then((doc) => {
+                            console.log(doc)
+                            request.deleteOne({token: token}).then(doc => console.log(doc)).catch(err => console.log(err))
+                            mail({
+                                from: "noreply@bibliothek.ch",
+                                to: doc.email,
+                                subject: "Passwort wurde zurückgesetzt",
+                                text: "" +
+                                    "<div>" +
+                                    "<h1>Passwort wurde geändert</h1>" +
+                                    "<p>Ihr Passwort wurde geändert, wenn Sie dies nicht veranlasst haben kontaktieren Sie uns.</p>" +
+                                    "</div>"
+                            })
+                            res.send(200)
                         })
-                    })
-                    .catch((err)=>{
-                        console.log(err)
-                    })
+                        .catch((err) => {
+                            console.log(err)
+                            res.send(500)
+                        })
+                }
+            }else{
+                res.send(401)
             }
         })
         .catch((err)=>{
             console.log(err)
+            res.send(500)
         })
 }
 
