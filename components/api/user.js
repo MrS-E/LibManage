@@ -60,14 +60,14 @@ exports.verify = function (req, res){
                 req.session.userid = doc._id;
                 req.session.name = doc.salutation?doc.salutation:"" +" "+doc.firstName?doc.firstName:"" + " " + doc.lastName?doc.lastName:"";
                 req.session.role = doc.role;
-                res.redirect('/home');
+                res.redirect('/');
             }else{
-                res.redirect('/login?error=Anmeldedaten waren inkorrekt. Bitte versuchen Sie es noch einmal.')
+                res.redirect('/?error=Anmeldedaten waren inkorrekt. Bitte versuchen Sie es noch einmal.')
             }
         })
         .catch(err => {
             console.error(err)
-            res.redirect('/login?error=Etwas ist schiefgelaufen');
+            res.redirect('/?error=Etwas ist schiefgelaufen');
         })
 }
 

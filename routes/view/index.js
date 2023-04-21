@@ -5,13 +5,13 @@ const index = require('../../components/view/index');
 /* GET home page. */
 router.get('/', function(req, res){
     if(!req.session.loggedin) {
-        res.redirect('/login');
+        index.login(req, res)
+        //res.redirect('/login');
     }else{
-        res.redirect('/home');
+        index.home(req, res)
+        //res.redirect('/home');
     }
 });
-router.get('/home', index.home);
-router.get('/login', index.login);
 router.get('/register', index.register);
 router.get('/forgotten', index.forgotten)
 
