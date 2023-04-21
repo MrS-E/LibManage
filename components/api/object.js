@@ -162,7 +162,7 @@ exports.delete = function (req, res){
 }
 
 exports.edit = function (req, res) {
-    if (req.session.loggedin && req.session.role === 'admin') { //todo edit body so that there ist not an empty keyword (keyword put no text)
+    if (req.session.loggedin && req.session.role === 'admin') {
         console.log(req.params.id)
         console.log(req.body)
         objects.updateOne({_id:req.params.id}, {$set: req.body})
