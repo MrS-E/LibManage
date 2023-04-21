@@ -3,7 +3,7 @@ const nodemailer = require('nodemailer')
 let transporter = nodemailer.createTransport({
     sendmail: true,
     newline: 'unix',
-    path: '../sendmail/win/SendMail.exe'
+    path: '../sendmail/sendmail'
 });
 
 module.exports = function (mailOptions) {
