@@ -4,7 +4,7 @@ exports.view = function (req, res) {
     if (req.session.loggedin) {
             res.render('sites/liste', {user: req.session.username, book_list: {}})
     }else{
-        res.redirect('/login')
+        res.redirect('/')
     }
 }
 
@@ -15,7 +15,7 @@ exports.object = function (req, res){
                 res.render('sites/object', {user: req.session.username, book: doc})
             })
     }else{
-        res.redirect('/login')
+        res.redirect('/')
     }
 }
 
@@ -46,6 +46,6 @@ exports.lend = function(req, res){
             })
     }
     else{
-        res.redirect('/login')
+        res.redirect('/')
     }
 }

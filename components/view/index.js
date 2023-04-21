@@ -70,7 +70,7 @@ exports.home = async function (req, res){
         console.log(books)
         res.render('sites/index', {user: req.session.username, name:req.session.name, books: books})
     }else{+
-        res.redirect('/login')
+        res.redirect('/')
     }
 }
 

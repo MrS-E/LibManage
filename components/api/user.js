@@ -24,7 +24,7 @@ exports.add = function (req, res){
                             nutzer.save()
                                 .then(doc => {
                                     console.log(doc)
-                                    res.redirect('/login');
+                                    res.redirect('/');
                                 })
                                 .catch(err => {
                                     console.error(err)

@@ -11,7 +11,7 @@ exports.object = function(req, res){
     }else if(req.session.loggedin){
         res.sendStatus(401).send('Sie sind kein Administrator und so nicht genehmigt diesen Bereich der Webseite aufzusuchen.')
     }else{
-        res.redirect('/login')
+        res.redirect('/')
     }
 }
 
@@ -25,7 +25,7 @@ exports.search = function (req, res){
     }else if(req.session.loggedin){
         res.sendStatus(401).send('Sie sind kein Administrator und so nicht genehmigt diesen Bereich der Webseite aufzusuchen.')
     }else{
-        res.redirect('/login')
+        res.redirect('/')
     }
 }
 
@@ -35,7 +35,7 @@ exports.new = function (req, res){
     }else if(req.session.loggedin){
         res.sendStatus(401).send('Sie sind kein Administrator und so nicht genehmigt diesen Bereich der Webseite aufzusuchen.')
     }else{
-        res.redirect('/login')
+        res.redirect('/')
     }
 }
 
@@ -68,7 +68,7 @@ exports.edit = function(req, res){
     } else if(req.session.loggedin){
         res.sendStatus(401).send('Sie sind kein Administrator und so nicht genehmigt diesen Bereich der Webseite aufzusuchen.')
     } else{
-        res.redirect('/login')
+        res.redirect('/')
     }
 }
 
@@ -88,7 +88,7 @@ exports.returns = function (req, res){
     }else if(req.session.loggedin){
         res.sendStatus(401).send('Sie sind kein Mitarbeiter/Administrator und so nicht genehmigt diesen Bereich der Webseite aufzusuchen.')
     }else{
-        res.redirect('/login')
+        res.redirect('/')
     }
 }
 
@@ -98,7 +98,7 @@ exports.duplicate = function (req, res){
     }else if(req.session.loggedin){
         res.sendStatus(401).send('Sie sind kein Administrator und so nicht genehmigt diesen Bereich der Webseite aufzusuchen.')
     }else{
-        res.redirect('/login')
+        res.redirect('/')
     }
 }
 
@@ -113,6 +113,6 @@ exports.user = function(req, res){
     }else if(req.session.loggedin){
         res.sendStatus(401).send('Sie sind kein Administrator und so nicht genehmigt diesen Bereich der Webseite aufzusuchen.')
     }else{
-        res.redirect('/login')
+        res.redirect('/')
     }
 }

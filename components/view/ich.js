@@ -16,7 +16,7 @@ exports.view = function (req, res){
                 })
             })
     }else{
-        res.redirect('/login')
+        res.redirect('/')
     }
 }
 
@@ -26,7 +26,7 @@ exports.settings = function (req, res){
             res.render('sites/ich', {user: req.session.username, role: req.session.role, render: 'settings', ich: doc})
         })
     }else{
-        res.redirect('/login')
+        res.redirect('/')
     }
 }
 
@@ -42,6 +42,6 @@ exports.history = function (req, res){
                 res.render('sites/ich', {user: req.session.username, role: req.session.role, render: 'history', books: books})
             })
     }else{
-        res.redirect('/login')
+        res.redirect('/')
     }
 }
