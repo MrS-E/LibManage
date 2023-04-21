@@ -33,7 +33,7 @@ class gridfs {
     }
 
     delete(filename){
-        search(filename).then(doc => {
+        this.search({filename: filename}).then(doc => {
             this.gfs.delete(mongoose.Types.ObjectId(doc[0]._id))
         })
     }

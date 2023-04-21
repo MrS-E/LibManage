@@ -93,7 +93,7 @@ exports.return = function (req, res) {
                 res.sendStatus(500).send('return ticket submit did not go well')
             })
     }else{
-        res.redirect('/login')
+        res.redirect('/')
     }
 }
 
@@ -144,12 +144,16 @@ exports.add = function (req, res){
     }
 }
 
-exports.delete = function (req, res){ //fixme
+exports.delete = function (req, res){
     if(req.session.loggedin && req.session.role==='admin') {
         object.findOne({_id: req.params.id}).then(doc => {
             objects.deleteOne({_id: req.params.id})
-            if(doc.file) gfs.delete(doc.file)
-            res.send("deleted")
+                .then(del=>{
+                    console.log(del)
+                    if(doc.file) gfs.delete(doc.file)
+                    res.send(del)
+                })
+                .catch(err=>{console.log(err);res.sendStatus(500).send({error: "Internal Server Error", deletedCount: 0})})
         })
     }
     else{
