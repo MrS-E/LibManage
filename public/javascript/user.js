@@ -1,3 +1,5 @@
+const user = []
+
 for(let d of document.querySelectorAll("button[name='clean']")) {
     d.addEventListener('click', (e) => {
         const user = e.target.id.split('_')[1]
@@ -32,4 +34,27 @@ for(let d of document.querySelectorAll("button[name='update']")) {
         }).catch(err => err)
         //.then(doc=>window.location.reload())
     })
+}
+
+for(let d of document.querySelectorAll(".user")){
+    user.push({
+        salutation: d.querySelector(".salutation").innerText,
+        firstName: d.querySelector(".firstName").innerText,
+        lastName: d.querySelector(".lastName").innerText,
+        role: d.querySelector(".role").value,
+    })
+}
+
+document.getElementById('search').addEventListener("click", (e)=>{
+    e.target.value = "";
+})
+document.getElementById('search').addEventListener("keydown", (e)=>{
+    if(e.keyCode===13){
+        search()
+    }
+})
+document.getElementById('search_btn').addEventListener('click', search())
+
+function search(){
+    const search = document.getElementById('search').value
 }

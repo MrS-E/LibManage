@@ -1,18 +1,21 @@
 mixin user(users)
     h3 Nutzerverwaltung
     .row
-        //todo searchbar
+        .col-md-10.col-xs-12.mt-2
+            input.form-control#search(placeholder="search" type="text")
+        .d-grid.col-md-2.col-sm-12.mt-2
+            button.btn.btn-primary.btn-block#search_btn(type="submit") Search
     each user in users
-        .row.rounded.mt-2.border-dark.border
+        .row.rounded.mt-2.border-dark.border.user(id=user._id)
             .col-md-4.col-sm-6
-                p #{user.salutation}
+                p.salutation #{user.salutation}
                 p
-                    span #{user.firstName}
+                    span.firstName #{user.firstName}
                     br
-                    spam #{user.lastName}
+                    span.lastName #{user.lastName}
             .col-md-4.col-sm-6.border-start.border-dark.mt-3.mb-3
                 p #{user.email}
-                select.form-control(id="select_"+user._id)
+                select.form-control.role(id="select_"+user._id)
                     if user.role === 'worker'
                         option(value="user") Nutzer
                         option(value="worker" selected) Mitarbeiter
