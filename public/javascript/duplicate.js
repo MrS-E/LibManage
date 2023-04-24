@@ -7,10 +7,14 @@ async function main () {
     if(duplicates && books) render(duplicates, books)
 
     document.getElementById("search").addEventListener('click', () => {
+        document.getElementById("search").disabled = true
+        document.getElementById("percent").disabled = true
         document.getElementById("myBar").style.width = "0%"
         const dup = compare_date(books)
         render(dup, books)
         put(data, dup)
+        document.getElementById("percent").disabled = false
+        document.getElementById("search").disabled = false
     })
 }
 async function fetch_data(){
@@ -70,7 +74,7 @@ function compare_date(data){
             for (let obj of data) {
                 if (!checked.includes(obj._id)) {
                     let percent = (similarity(doc.title, obj.title) + similarity(doc.author, obj.author)) / 2
-                    if (percent >= 0.8) {
+                    if (percent >= (document.getElementById('percent').value/100)) {
                         checked.push(obj._id)
                         dup.simular.push({object: obj._id, percent:percent})
                     }
@@ -158,17 +162,26 @@ function render(duplicates, books){
         for(let x of dop.simular){
             book.push(books.find(obj=>{return obj._id===x.object}))
         }
-         template(book, dop.object)
+        template(book, dop.object)
+    }
+    for(let x of document.querySelectorAll("button.delete_btn")){
+        x.addEventListener('click', (e)=>{
+            fetch('/api/admin/'+e.target.id, {method:'delete'})
+                .then(res => res.json())
+                .then(doc => {
+                    if(doc.deletedCount > 0){
+                        document.getElementById("book_"+e.target.id).remove()
+                    }
+                })
+        })
     }
 }
 
 /*functions for carousel from https://www.w3schools.com/howto/howto_js_slideshow.asp*/
 const slider =[]
-
 function plusSlides(n, no) {
     showSlides(slider[no].index += n, no);
 }
-
 function showSlides(n, no) {
     let i;
     let x = document.getElementsByClassName(slider[no].class);
@@ -181,16 +194,4 @@ function showSlides(n, no) {
 }
 
 /*entre point*/
-for(let x of document.querySelectorAll("button.delete_btn")){
-    x.addEventListener('click', (e)=>{
-        fetch('/api/admin/'+e.target.id, {method:'delete'})
-            .then(res => res.json())
-            .then(doc => {
-                if(doc.deletedCount > 0){
-                    document.getElementById("book_"+e.target.id).remove()
-                }
-            })
-    })
-}
-
 main()
