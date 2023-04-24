@@ -28,31 +28,31 @@ block content
         .col-lg-10.col-md-8.col-sm-12
             .container
                 if render==='lend'
-                    include ../components/ich/ausgeliehen
+                    include ich/ausgeliehen
                     +ausgeliehen(books)
                 else if render==='history'
-                    include ../components/ich/history
+                    include ich/history
                     +history(books)
                 else if render==='settings'
-                    include ../components/ich/settings
+                    include ich/settings
                     +settings(ich)
                 else if render==='user'
-                    include ../components/ich/admin/user
+                    include ich/admin/user
                     +user(data)
                 else if render==='object'
-                    include ../components/ich/admin/objects
+                    include ich/admin/objects
                     +objects(books)
                 else if render==='new'
-                    include ../components/ich/admin/new_object
+                    include ich/admin/new_object
                     +new_object
                 else if render==='edit'
-                    include ../components/ich/admin/edit_object
+                    include ich/admin/edit_object
                     +edit_object(book)
                 else if render==='return'
-                    include ../components/ich/admin/return
+                    include ich/admin/return
                     +return(returns)
                 else if render==='duplicate'
-                    include ../components/ich/admin/duplicate
+                    include ich/admin/duplicate
                     +duplicate
                 else
                     .row
