@@ -9,7 +9,7 @@ class Database {
 
     _connect() {
         mongoose.set('strictQuery', false)
-        mongoose.connect(config.mogodbUri)
+        mongoose.connect(config.mongodbUri)
             .then(() => {
                 console.log('Database connection successful')
             })
