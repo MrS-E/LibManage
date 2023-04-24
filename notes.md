@@ -26,11 +26,14 @@ Source: <br>
 [Buch Haus](https://www.buchhaus.ch/de/buecher) -> best but bad to use <br>
 [Google Books](https://www.googleapis.com/books/v1/volumes?q=isbn:) -> good for use (api), not as good as buch haus (more or less data about books, not good with specialized data)
 
-# Email
+## Email
 [Stackoverflow](https://stackoverflow.com/questions/14678447/is-there-a-nodejs-equivalent-to-phps-mail-function)<br>
 [Nodemailer](https://nodemailer.com/about/)<br>
 [why smtp](https://nodemailer.com/usage/why-smtp/)<br>
 
-# Storage
+## Storage
 [Possibility's](https://www.sitepoint.com/client-side-storage-options-comparison/)
 https://www.freecodecamp.org/news/gridfs-making-file-uploading-to-mongodb/
+
+## Docker
+https://medium.com/zenofai/how-to-build-a-node-js-and-mongodb-application-with-docker-containers-15e535baabf5
