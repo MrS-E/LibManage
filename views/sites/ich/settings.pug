@@ -17,17 +17,18 @@ mixin settings(user)
                     br
                     input.form-control(value=user.firstName type="text" name="fist_name")
             .row.d-none.d-md-block
-                span Anrede:
-                br
-                span #{user.salutation}
-                br
-                span Name:
-                br
-                input.form-control(value=user.lastName type="text" name="last_name")
-                br
-                span Vorname:
-                br
-                input.form-control(value=user.firstName type="text" name="fist_name")
+                .col-12
+                    span Anrede:
+                    br
+                    span #{user.salutation}
+                    br
+                    span Name:
+                    br
+                    input.form-control(value=user.lastName type="text" name="last_name")
+                    br
+                    span Vorname:
+                    br
+                    input.form-control(value=user.firstName type="text" name="fist_name")
             hr.hr.mt-3
             h4 Authentifizierung:
             .row.d-sm-block.d-md-none
@@ -40,13 +41,14 @@ mixin settings(user)
                     br
                     input.form-control(type="text" name="passwd")
             .row.d-none.d-md-block
-                span E-Mail:
-                br
-                span #{user.email}
-                br
-                span Passwort:
-                br
-                input.form-control(type="text" name="passwd")
+                .col-12
+                    span E-Mail:
+                    br
+                    span #{user.email}
+                    br
+                    span Passwort:
+                    br
+                    input.form-control(type="text" name="passwd")
             button.mt-2.btn.btn-outline-dark#authentication(type="submit") Ändern
             hr.hr.mt-3
         .d-grid.gap-2

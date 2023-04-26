@@ -1,6 +1,6 @@
 document.querySelector('.active').classList.toggle("active")
 switch(window.location.href.split('/')[3]){
-    case 'home':
+    case '':
         document.getElementById("home").classList.toggle("active")
         break;
     case 'liste':
