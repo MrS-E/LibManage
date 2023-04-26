@@ -8,7 +8,7 @@ block body
                 li.nav-item
                     a.nav-link(href="/") Login
                 li.nav-item
-                    a.nav-link.active(href="") Register
+                    a.nav-link.active(href="") Registrierung
 
             .row
                 form(method="post" action="/api/user/add")
@@ -19,31 +19,31 @@ block body
                         select.form-select(name="anrede")
                             option(value="Herr") Herr
                             option(value="Frau") Frau
-                            option(value="") Andere/Keine Angabe
+                            option(value="" selected) Andere/Keine Angabe
 
                     //- Username input
                     .form-outline.mb-4.row
                         .col-6
-                            input.form-control#firstname(type="text" name="firstname" placeholder="Vorname" required)
                             label.form-label(for="firstname") Vorname
+                            input.form-control#firstname(type="text" name="firstname" placeholder="Vorname" required)
                         .col-6
-                            input.form-control#lastname(type="text" name="lastname" placeholder="Nachname" required)
                             label.form-label(for="lastname") Nachname
+                            input.form-control#lastname(type="text" name="lastname" placeholder="Nachname" required)
 
                     //- Email input
                     .form-outline.mb-4
-                        input.form-control#email(type="email" name="email" placeholder="E-Mail Adresse" required)
                         label.form-label(for="email") Email
+                        input.form-control#email(type="email" name="email" placeholder="E-Mail Adresse" required)
 
                     //- Password input
                     .form-outline.mb-4
-                        input.form-control#password(type="password" name="password" required)
                         label.form-label(for="password") Passwort
+                        input.form-control#password(type="password" name="password" required)
 
                     //- Repeat Password input
                     .form-outline.mb-4
-                        input.form-control#password2(type="password" name="password2" required)
                         label.form-label(for="password2") Passwort wiederholen
+                        input.form-control#password2(type="password" name="password2" required)
 
                     //- Submit button
                     .d-grid.text-center.mb-3

@@ -8,7 +8,7 @@ block body
                 li.nav-item
                     a.nav-link.active(href="") Login
                 li.nav-item
-                    a.nav-link(href="/register") Register
+                    a.nav-link(href="/register") Registrierung
 
             .row
                 form(method="post" action="/api/user/verify")
@@ -17,13 +17,13 @@ block body
 
                     //- Email input
                     .form-outline.mb-4
-                        input.form-control#email(type="email" name="email" placeholder="E-Mail Adresse" autofocus required)
                         label.form-label(for="email") Email
+                        input.form-control#email(type="email" name="email" placeholder="E-Mail Adresse" autofocus required)
 
                     //- Password input
                     .form-outline.mb-4
-                        input#password.form-control(type="password" name="password" placeholder="Passwort" required)
                         label.form-label(for="password") Passwort
+                        input#password.form-control(type="password" name="password" placeholder="Passwort" required)
 
                     .row.mb-4
                         .col-md-12.d-flex.justify-content-center
