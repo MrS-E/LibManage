@@ -58,8 +58,8 @@ function show_sort(books){
 
     //sorting
      books.sort((a, b) => {
-         let textA = a?a[sort.sort].toUpperCase().replace(' ', ''):''
-         let textB = b?b[sort.sort].toUpperCase().replace(' ', ''):''
+         let textA = a[sort.sort]?a[sort.sort].toUpperCase().replace(' ', ''):''
+         let textB = b[sort.sort]?b[sort.sort].toUpperCase().replace(' ', ''):''
          return (!sort.reverse) ? (textA < textB) ? -1 : (textA > textB) ? 1 : 0 : (textA < textB) ? 1 : (textA > textB) ? -1 : 0
      })
 
