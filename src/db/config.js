@@ -3,4 +3,4 @@ const database = 'bibliothek'
 const username = undefined //'web'
 const password = undefined
 
-exports.mongodbUri = username?`mongodb://${username}:${password}@${server}/${database}`:`mongodb://${server}/${database}`
+exports.mongodbUri = username?`mongodb+srv://${username}:${password}@${server}/${database}`:`mongodb://${server}/${database}`
