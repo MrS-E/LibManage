@@ -29,8 +29,7 @@ exports.home = async function (req, res){
         return out
     }
 
-    if(req.session.loggedin) {
-        const book_number = 4
+    async function get_books(book_number){
         const user = await users.findOne({_id:req.session.userid})
         let books = []
         const count = await object.count()
@@ -67,7 +66,15 @@ exports.home = async function (req, res){
             }
 
         }
-        console.log(books)
+        return books
+    }
+    if(req.session.loggedin) {
+        const book_number = 4
+        let books
+        do{
+            books = await get_books(book_number)
+        }while(!books.every((element) => element !== null && element !== undefined))
+
         res.render('sites/index', {user: req.session.username, name:req.session.name, books: books})
     }else{+
         res.redirect('/')
