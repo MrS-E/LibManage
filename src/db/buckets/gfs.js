@@ -32,6 +32,10 @@ class gridfs {
         });
     }
 
+    stream(filename){
+         return this.gfs.createReadStream({filename: filename})
+    }
+
     delete(filename){
         this.search({filename: filename}).then(doc => {
             this.gfs.delete(mongoose.Types.ObjectId(doc[0]._id))
