@@ -1,10 +1,12 @@
 const mongoose = require("mongoose")
+const Grid = require('gridfs-stream');
 
 class gridfs {
 
     constructor() {
         const db = mongoose.connection;
         this.gfs = new mongoose.mongo.GridFSBucket(db, { bucketName: 'uploads' })
+        this.gfs_stream = Grid(db, mongoose)
     }
 
     async search(option){
@@ -33,7 +35,7 @@ class gridfs {
     }
 
     stream(filename){
-         return this.gfs.createReadStream({filename: filename})
+        return this.gfs.openDownloadStreamByName(filename)
     }
 
     delete(filename){

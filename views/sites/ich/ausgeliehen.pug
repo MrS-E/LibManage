@@ -28,10 +28,10 @@ mixin ausgeliehen(books)
                     td
                         //- span #{book.typ}
                         if book.typ === 'E-Paper' || book.typ === 'E-Book'
-                            button.btn(class="read" id=book._id) Lesen
+                            button.btn(class="read" id=book._id name=(book.file+"/"+book.typ)) Lesen
                             br
                         else if book.typ === 'E-Video' || book.typ ===  'E-Audio'
-                            button.btn(class="read" id=book._id) Abspielen
+                            button.btn(class="read" id=book._id name=(book.file+"/"+book.typ)) Abspielen
                             br
                         else
                             p #{book.position}

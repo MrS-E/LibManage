@@ -20,8 +20,8 @@ app.use(session({
   resave: true,
   saveUninitialized: true
 }));
-app.use(express.json({limit: "100mb"}));
-app.use(express.urlencoded({ extended: false, limit: "100mb" }));
+app.use(express.json({limit: "100gb"}));
+app.use(express.urlencoded({ extended: false, limit: "100gb" }));
 app.use(cookieParser());
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));

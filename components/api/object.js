@@ -175,7 +175,6 @@ exports.edit = function (req, res) {
 }
 
 exports.read = function (req, res){
-    console.log("here")
     if(req.session.loggedin) {
         console.log(req.session.userid)
         const book = req.params.id
@@ -194,6 +193,38 @@ exports.read = function (req, res){
                                                 //console.log(file)
                                                 res.send({book: doc, file: file})
                                             })
+                                        }
+                                    })
+                                }else{
+                                    res.send({file:null, error:"object has no file"})
+                                }
+                            })
+                            .catch((err)=>{console.log(err);res.send({file:null, error: "Internal Server Error"})})
+                        break;
+                    }
+                }
+            })
+    } else {
+        res.sendStatus(401)
+    }
+}
+
+exports.stream = function (req, res){ //more or less same as read except with other return value
+    if(req.session.loggedin) {
+        console.log(req.session.userid)
+        const book = req.params.id
+        user.findOne({_id: req.session.userid})
+            .then((doc) => {
+                for (let d of doc.history) {
+                    console.log(d)
+                    if (!d.end && d.book == book) {
+                        object.findOne({_id:book})
+                            .then((obj)=> {
+                                if(obj.file) {
+                                    gfs.search({filename: obj.file}).then(doc => {
+                                        console.log(doc)
+                                        if(doc || doc.length !== 0){
+                                            gfs.stream(obj.file).pipe(res)
                                         }
                                     })
                                 }else{

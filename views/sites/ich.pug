@@ -1,4 +1,5 @@
 extends ../layout
+include ../components/popup
 
 block content
     h1 Ich
@@ -57,4 +58,7 @@ block content
                 else
                     .row
                         h3 Die Seite wurde nicht gefunden
+    +popup
+    script(src="/javascript/jszip.min.js")
+    script(src="/javascript/epub.min.js")
     script(src="/javascript/ich.js")

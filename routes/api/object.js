@@ -9,6 +9,7 @@ const upload = require('multer')({storage})
 router.post('/lend/:id', object.lend)
 router.put('/return', object.return)
 router.get('/read/:id', object.read)
+router.get('/stream/:id', object.stream)
 router.post('/return/:id', object.return_confirmation)
 
 router.get('/', object.all);

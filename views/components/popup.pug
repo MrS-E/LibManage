@@ -1,0 +1,7 @@
+mixin popup()
+    link(rel='stylesheet', href='/stylesheets/popup.css')
+    .popup
+        .popup-inner
+            .button-div
+                button.btn-close.close-btn(onclick='document.querySelector(\'.popup\').style.display = \'none\';document.querySelector(\'.popup-inner .container\').innerHTML="";')
+            .container
