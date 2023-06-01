@@ -13,23 +13,14 @@ WORKDIR /app
 ENV NODE_ENV=production
 
 
-# Throw-away build stage to reduce size of final image
-FROM base as build
-
-# Install packages needed to build node modules
+# Throw-away build stage to reduce size of final imaged
 
 # Install node modules
-COPY --link package.json package-lock.json .
+COPY package.json /app
 RUN npm install
 
 # Copy application code
-COPY --link . .
-
-# Final stage for app image
-FROM base
-
-# Copy built application
-COPY --from=build /app /app
+COPY . /app
 
 # Start the server by default, this can be overwritten at runtime
 CMD [ "npm", "run", "start" ]
