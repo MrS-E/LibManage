@@ -2,4 +2,9 @@ fly.toml
 Dockerfile
 .dockerignore
 node_modules
+package-lock.json
+API test.http
+README.md
+docker
+.idea
 .git
