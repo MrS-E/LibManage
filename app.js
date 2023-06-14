@@ -58,7 +58,6 @@ schedule.scheduleJob('0 0 0 * * *', () => { //runs every 24h at 0:0
   const object = require("./src/db/models/object")
   const returns = require("./src/db/models/returns")
   console.log("SCANNING FOR OVERDUE BOOKS")
-  //todo schedule job needs to be tested
   const date = new Date()
   user.find({"history.end": null, "history.start": {$lt:new Date(date.getDate() - 30)}})
       .then(doc=>{
