@@ -251,3 +251,10 @@ exports.return_confirmation = function (req, res){
         res.sendStatus(401).send('Sie sind kein Mitarbeiter/Administrator und so nicht genehmigt diesen Bereich der Webseite aufzusuchen.')
     }
 }
+
+exports.get = function (req, res){
+    object.findOne({_id: req.params.id})
+        .then((doc)=>{
+            res.send(doc)
+        })
+}

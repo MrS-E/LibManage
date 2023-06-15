@@ -5,10 +5,14 @@ for(let d of document.getElementsByClassName('read')){
         const file = e.target.name
         switch (file.split('/')[file.split('/').length-1]){
             case "E-Video":
-                document.querySelector('.popup').style.display = 'flex'
-                document.querySelector('.popup-inner .container').innerHTML = ("<video height='50%' width='auto' controls>" +
-                    "<source src='/api/object/stream/"+book+"'/>" +
-                    "</video>")
+                fetch('/api/object/'+book)
+                    .then((response)=>response.json())
+                    .then((res)=> {
+                        document.querySelector('.popup').style.display = 'flex'
+                        document.querySelector('.popup-inner .container').innerHTML = ("<video poster='"+res.img+"' controls>" +
+                            "<source src='/api/object/stream/" + book + "'/>" +
+                            "</video>")
+                    })
                 break
             case "E-Audio":
                 document.querySelector('.popup').style.display = 'flex'

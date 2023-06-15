@@ -13,6 +13,7 @@ router.get('/stream/:id', object.stream)
 router.post('/return/:id', object.return_confirmation)
 
 router.get('/', object.all);
+router.get('/:id', object.get)
 router.delete('/:id', object.delete)
 router.put('/:id', object.edit)
 router.post('/', upload.single('read'), object.add);
